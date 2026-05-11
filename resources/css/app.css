@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+@layer components {
+    .dotted-background {
+        background-image: radial-gradient(#e0e7ff 1px, transparent 1px);
+        background-size: 1.5rem 1.5rem;
+        background-position: 0 0, 1.5rem 1.5rem;
+    }
+
+    .ripple-anim {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 220px;
+        height: 220px;
+        background: radial-gradient(circle, #4fd1c5 40%, #fff0 100%);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        animation: ripple 2.5s linear infinite;
+        z-index: -10;
+        opacity: 0.7;
+    }
+}
+
+@theme {
+    --color-teal-50: #f0fdfa;
+    --color-teal-100: #ccfbf1;
+    --color-teal-200: #99f6e4;
+    --color-teal-300: #5eead4;
+    --color-teal-400: #2dd4bf;
+    --color-teal-500: #14b8a6;
+    --color-teal-600: #0d9488;
+    --color-teal-700: #0f766e;
+    --color-teal-800: #115e59;
+    --color-teal-900: #134e4a;
+    --color-teal-950: #042f2e;
+
+    --font-sans: "Public Sans", sans-serif;
+    --font-poppins: "Poppins", sans-serif;
+
+    --animate-float-y: floatY 3.2s ease-in-out infinite;
+    --animate-float-x: floatX 4s ease-in-out infinite;
+    --animate-float-badge: floatBadge 3s ease-in-out infinite;
+}
+
+@keyframes ripple {
+    0% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0.7;
+    }
+    70% {
+        transform: translate(-50%, -50%) scale(1.7);
+        opacity: 0.2;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(2);
+        opacity: 0;
+    }
+}
+
+@keyframes floatY {
+    0%, 100% { transform: translateY(0);}
+    50% { transform: translateY(-18px);}
+}
+
+@keyframes floatX {
+    0%, 100% { transform: translateX(0);}
+    50% { transform: translateX(18px);}
+}
+
+@keyframes floatBadge {
+    0%, 100% { transform: translateY(0);}
+    50% { transform: translateY(-10px);}
+}
