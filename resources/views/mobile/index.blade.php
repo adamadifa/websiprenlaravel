@@ -53,7 +53,7 @@
         </div>
 
         <!-- Alumni Slider Mobile (Menempel Model) -->
-        <div class="relative z-20 -mt-6 mb-12">
+        <div class="relative z-20 -mt-12 mb-12">
             <div class="bg-white/80 backdrop-blur-md rounded-3xl p-6 border border-white shadow-xl shadow-teal-900/5">
                 <div class="flex flex-col items-center gap-4">
                     <div class="text-center">
