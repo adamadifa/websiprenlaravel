@@ -15,6 +15,7 @@ class PembayaranController extends Controller
     {
         $agent = new Agent();
         $user = Auth::user();
+        $pengaturan = \App\Models\PengaturanUmum::first();
         $pendaftaran = Pendaftaranonline::where('no_register', $user->username)
             ->join('unit', 'unit.kode_unit', 'pendaftaran_online.kode_unit')
             ->select('pendaftaran_online.*', 'unit.nama_unit')
@@ -23,10 +24,10 @@ class PembayaranController extends Controller
         $pembayaran = Pendaftaranonlinebayar::where('no_register', $user->username)->orderBy('created_at', 'desc')->get();
 
         if ($agent->isMobile()) {
-            return view('mobile.pembayaran.index', compact('pendaftaran', 'pembayaran'));
+            return view('mobile.pembayaran.index', compact('pendaftaran', 'pembayaran', 'pengaturan'));
         }
 
-        return view('pages.dashboard.pembayaran', compact('pendaftaran', 'pembayaran'));
+        return view('pages.dashboard.pembayaran', compact('pendaftaran', 'pembayaran', 'pengaturan'));
     }
 
     public function store(Request $request)

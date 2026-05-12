@@ -22,6 +22,7 @@ class BiodataController extends Controller
     {
         $agent = new Agent();
         $user = Auth::user();
+        $pengaturan = \App\Models\PengaturanUmum::first();
         $pendaftaran = Pendaftaranonline::where('no_register', $user->username)->first();
         
         if (!$pendaftaran) {
@@ -34,10 +35,10 @@ class BiodataController extends Controller
         $pendidikan = ['SD', 'SMP', 'SMA', 'D1', 'D2', 'D3', 'S1', 'S2', 'S3'];
 
         if ($agent->isMobile()) {
-            return view('mobile.biodata.index', compact('pendaftaran', 'provinsi', 'penghasilan_ortu', 'units', 'pendidikan'));
+            return view('mobile.biodata.index', compact('pendaftaran', 'provinsi', 'penghasilan_ortu', 'units', 'pendidikan', 'pengaturan'));
         }
 
-        return view('pages.dashboard.biodata', compact('pendaftaran', 'provinsi', 'penghasilan_ortu', 'units', 'pendidikan'));
+        return view('pages.dashboard.biodata', compact('pendaftaran', 'provinsi', 'penghasilan_ortu', 'units', 'pendidikan', 'pengaturan'));
     }
 
     public function update(Request $request)

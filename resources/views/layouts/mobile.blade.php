@@ -26,12 +26,19 @@
     </style>
 </head>
 <body class="antialiased bg-slate-50">
-    @include('layouts.partials.header-mobile')
-    <main class="pt-[88px] pb-24">
+    @php
+        $isAuthPage = request()->is('dashboard*', 'biodata*', 'pembayaran*', 'password*', 'login*', 'register*');
+    @endphp
+
+    @if(!$isAuthPage)
+        @include('layouts.partials.header-mobile')
+    @endif
+
+    <main class="{{ !$isAuthPage ? 'pt-[88px]' : '' }} pb-24">
         @yield('content')
     </main>
 
-    @if(!request()->is('dashboard*', 'biodata*', 'pembayaran*', 'password*', 'login*', 'register*'))
+    @if(!$isAuthPage)
         @include('layouts.partials.bottom-nav-mobile')
     @endif
 

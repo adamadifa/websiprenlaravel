@@ -13,10 +13,11 @@ class PasswordController extends Controller
     public function index()
     {
         $agent = new Agent();
+        $pengaturan = \App\Models\PengaturanUmum::first();
         if ($agent->isMobile()) {
-            return view('mobile.password.index');
+            return view('mobile.password.index', compact('pengaturan'));
         }
-        return view('pages.dashboard.password');
+        return view('pages.dashboard.password', compact('pengaturan'));
     }
 
     public function update(Request $request)
