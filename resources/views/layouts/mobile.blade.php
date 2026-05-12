@@ -27,9 +27,13 @@
 </head>
 <body class="antialiased bg-slate-50">
     @include('layouts.partials.header-mobile')
-    <main class="pt-[88px]">
+    <main class="pt-[88px] pb-24">
         @yield('content')
     </main>
+
+    @if(!request()->is('dashboard*', 'biodata*', 'pembayaran*', 'password*', 'login*', 'register*'))
+        @include('layouts.partials.bottom-nav-mobile')
+    @endif
 
     <!-- AOS (Animate On Scroll) -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>

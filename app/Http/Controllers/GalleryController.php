@@ -12,19 +12,23 @@ class GalleryController extends Controller
 {
     public function index()
     {
+        $agent = new \Jenssegers\Agent\Agent();
         $pengaturan = PengaturanUmum::first();
         $units = Unit::where('status', 1)->get();
         $albums = GalleryAlbum::withCount('photos')->latest()->paginate(12);
 
-        return view('pages.gallery.index', compact('pengaturan', 'units', 'albums'));
+        $view = $agent->isMobile() ? 'mobile.gallery.index' : 'pages.gallery.index';
+        return view($view, compact('pengaturan', 'units', 'albums'));
     }
 
     public function show($id)
     {
+        $agent = new \Jenssegers\Agent\Agent();
         $pengaturan = PengaturanUmum::first();
         $units = Unit::where('status', 1)->get();
         $album = GalleryAlbum::with('photos')->findOrFail($id);
 
-        return view('pages.gallery.show', compact('pengaturan', 'units', 'album'));
+        $view = $agent->isMobile() ? 'mobile.gallery.show' : 'pages.gallery.show';
+        return view($view, compact('pengaturan', 'units', 'album'));
     }
 }

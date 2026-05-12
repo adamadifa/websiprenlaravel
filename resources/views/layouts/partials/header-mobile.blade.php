@@ -1,7 +1,13 @@
+@php
+    $isDarkPage = request()->is('berita*', 'gallery-kegiatan*', 'tentang-pesantren*', 'guru-tendik*');
+@endphp
+
 <header 
     x-data="{ scrolled: false, sidebarOpen: false }" 
     x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY > 10 })"
-    :class="scrolled ? 'bg-white/95 backdrop-blur-md shadow-xl py-3' : 'bg-white shadow-sm py-4'"
+    :class="scrolled 
+        ? ({{ $isDarkPage ? 'true' : 'false' }} ? 'bg-teal-900/95 backdrop-blur-md shadow-xl py-3' : 'bg-white/95 backdrop-blur-md shadow-xl py-3') 
+        : ({{ $isDarkPage ? 'true' : 'false' }} ? 'bg-teal-900 py-4' : 'bg-white shadow-sm py-4')"
     class="fixed top-0 left-0 right-0 z-[100] transition-all duration-300 px-6"
 >
     <div class="flex justify-between items-center max-w-lg mx-auto">
@@ -15,7 +21,10 @@
         <!-- Mobile Menu Toggle -->
         <button 
             @click="sidebarOpen = true"
-            class="w-10 h-10 rounded-xl flex items-center justify-center text-teal-900 bg-teal-50 border border-teal-100 active:scale-90 transition-all shadow-sm"
+            class="w-10 h-10 rounded-xl flex items-center justify-center transition-all shadow-sm border active:scale-90"
+            :class="scrolled 
+                ? ({{ $isDarkPage ? 'true' : 'false' }} ? 'text-white bg-white/10 border-white/10' : 'text-teal-900 bg-teal-50 border-teal-100') 
+                : ({{ $isDarkPage ? 'true' : 'false' }} ? 'text-white bg-white/10 border-white/10' : 'text-teal-900 bg-teal-50 border-teal-100')"
         >
             <i class="ti ti-menu-2 text-2xl"></i>
         </button>
@@ -72,6 +81,10 @@
                     <a href="/gallery-kegiatan" class="flex items-center gap-4 p-4 rounded-2xl {{ request()->is('gallery-kegiatan*') ? 'bg-teal-50 text-teal-700 font-bold' : 'text-gray-600 font-medium' }}">
                         <i class="ti ti-photo text-xl"></i>
                         <span>Galeri Kegiatan</span>
+                    </a>
+                    <a href="/guru-tendik" class="flex items-center gap-4 p-4 rounded-2xl {{ request()->is('guru-tendik*') ? 'bg-teal-50 text-teal-700 font-bold' : 'text-gray-600 font-medium' }}">
+                        <i class="ti ti-users text-xl"></i>
+                        <span>Guru & Tendik</span>
                     </a>
                     <a href="/berita" class="flex items-center gap-4 p-4 rounded-2xl {{ request()->is('berita*') ? 'bg-teal-50 text-teal-700 font-bold' : 'text-gray-600 font-medium' }}">
                         <i class="ti ti-news text-xl"></i>
