@@ -3,10 +3,10 @@
 @section('title', 'Daftar - SPMB Al Amin')
 
 @section('content')
-<div class="min-h-screen bg-white flex flex-col font-sans selection:bg-teal-100">
+<div class="min-h-screen bg-white flex flex-col font-sans selection:bg-teal-100 overflow-x-hidden">
     
     <!-- TOP SECTION: Branding (Fixed Height) -->
-    <div class="h-[32vh] bg-gradient-to-br from-teal-900 via-teal-800 to-teal-900 relative flex flex-col items-center justify-center px-6">
+    <div class="h-[32vh] bg-gradient-to-br from-teal-900 via-teal-800 to-teal-900 relative flex flex-col items-center justify-center px-6 overflow-hidden">
         <!-- Abstract Background Elements -->
         <div class="absolute top-0 right-0 w-64 h-64 bg-teal-500 rounded-full blur-[80px] opacity-20 -translate-y-1/2 translate-x-1/4"></div>
         <div class="absolute inset-0 opacity-[0.03]" style="background-image: url('https://www.transparenttextures.com/patterns/cubes.png');"></div>

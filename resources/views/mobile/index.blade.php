@@ -5,7 +5,7 @@
 
 @section('content')
 <!-- Hero Mobile -->
-<section class="relative pt-6 pb-4 overflow-hidden dotted-background bg-white">
+<section class="relative pt-2 pb-4 overflow-hidden dotted-background bg-white">
     <div class="container mx-auto px-6 relative z-10 text-center">
 
         <h1 class="text-3xl font-black text-teal-950 leading-[1.1] mb-6 font-poppins" data-aos="fade-up">

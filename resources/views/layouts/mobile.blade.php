@@ -26,7 +26,8 @@
     </style>
 </head>
 <body class="antialiased bg-slate-50">
-    <main>
+    @include('layouts.partials.header-mobile')
+    <main class="pt-[88px]">
         @yield('content')
     </main>
 

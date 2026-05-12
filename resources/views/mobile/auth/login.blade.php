@@ -3,10 +3,10 @@
 @section('title', 'Masuk - SPMB Al Amin')
 
 @section('content')
-<div class="min-h-[100dvh] bg-white flex flex-col font-sans selection:bg-teal-100">
+<div class="min-h-[100dvh] bg-white flex flex-col font-sans selection:bg-teal-100 overflow-x-hidden">
     
     <!-- TOP SECTION: Branding (Fixed Height) -->
-    <div class="h-[42vh] bg-gradient-to-br from-teal-900 via-teal-800 to-teal-900 relative flex flex-col items-center justify-center px-6">
+    <div class="h-[42vh] bg-gradient-to-br from-teal-900 via-teal-800 to-teal-900 relative flex flex-col items-center justify-center px-6 overflow-hidden">
         <!-- Abstract Background Elements -->
         <div class="absolute top-0 right-0 w-64 h-64 bg-teal-500 rounded-full blur-[80px] opacity-20 -translate-y-1/2 translate-x-1/4"></div>
         <div class="absolute bottom-0 left-0 w-48 h-48 bg-teal-400 rounded-full blur-[60px] opacity-20 translate-y-1/4 -translate-x-1/4"></div>
