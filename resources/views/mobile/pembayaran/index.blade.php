@@ -56,10 +56,10 @@
                 <div class="flex items-center gap-4">
                     <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center font-black text-teal-800 shadow-lg shadow-black/10">BSI</div>
                     <div>
-                        <p class="text-white text-base font-black tracking-wider leading-none mb-1.5">711 711 8080</p>
-                        <p class="text-teal-50 text-[10px] font-bold">A.N Al Amin Persis 80</p>
+                        <p class="text-white text-base font-black tracking-wider leading-none mb-1.5">7085588887</p>
+                        <p class="text-teal-50 text-[10px] font-bold">A.N Pesantren Persis 80 Ciamis</p>
                     </div>
-                    <button @click="copyToClipboard('7117118080')" class="ml-auto w-9 h-9 bg-white/20 rounded-lg flex items-center justify-center text-white active:scale-90 transition-all border border-white/10">
+                    <button @click="copyToClipboard('7085588887')" class="ml-auto w-9 h-9 bg-white/20 rounded-lg flex items-center justify-center text-white active:scale-90 transition-all border border-white/10">
                         <i class="ti ti-copy text-lg"></i>
                     </button>
                 </div>

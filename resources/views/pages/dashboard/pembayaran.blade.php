@@ -230,8 +230,8 @@
                         <div class="w-10 h-10 bg-white rounded flex items-center justify-center font-bold text-teal-700 shadow-sm border border-slate-100">BSI</div>
                         <div class="min-w-0">
                             <p class="text-[10px] font-bold text-slate-400 uppercase tracking-tighter mb-0.5">Bank Syariah Indonesia</p>
-                            <p class="text-sm font-black text-slate-800">711 711 8080</p>
-                            <p class="text-[10px] font-bold text-slate-500">A.N Al Amin Persis 80</p>
+                            <p class="text-sm font-black text-slate-800">7085588887</p>
+                            <p class="text-[10px] font-bold text-slate-500">A.N Pesantren Persis 80 Ciamis</p>
                         </div>
                     </div>
                 </div>
