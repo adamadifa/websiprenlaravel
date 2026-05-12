@@ -3,7 +3,7 @@
 @section('title', 'Lengkapi Biodata')
 
 @section('content')
-<div x-data="biodataForm()" class="min-h-[100dvh] bg-slate-50 flex flex-col font-sans selection:bg-teal-100 pb-32">
+<div x-data="biodataForm()" class="min-h-[100dvh] bg-slate-50 flex flex-col font-sans selection:bg-teal-100 pb-16">
     
     <!-- TOP HEADER: Teal Branding -->
     <div class="bg-teal-900 pt-8 pb-12 px-6 relative overflow-hidden">
@@ -276,7 +276,7 @@
     </form>
 
     <!-- BOTTOM NAVIGATION (Glassmorphism) -->
-    <div class="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-2xl border-t border-slate-200/60 p-4 pb-[env(safe-area-inset-bottom,16px)] z-[60]">
+    <div class="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-2xl border-t border-slate-200/60 px-4 pt-3 pb-8 z-[60]">
         <div class="flex gap-3">
             <template x-if="step > 1">
                 <button type="button" @click="step--" class="w-14 h-14 bg-white text-slate-600 rounded-xl flex items-center justify-center border border-slate-200 shadow-sm active:scale-90 transition-all hover:bg-slate-50">

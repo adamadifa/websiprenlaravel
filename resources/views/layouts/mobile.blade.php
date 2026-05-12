@@ -34,7 +34,7 @@
         @include('layouts.partials.header-mobile')
     @endif
 
-    <main class="{{ !$isAuthPage ? 'pt-[88px]' : '' }} pb-24">
+    <main class="{{ !$isAuthPage ? 'pt-[88px]' : '' }} {{ !$isAuthPage ? 'pb-24' : 'pb-10' }}">
         @yield('content')
     </main>
 
