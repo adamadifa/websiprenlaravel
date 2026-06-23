@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/tentang-pesantren', [HomeController::class, 'about'])->name('about');
+Route::get('/spmb', [HomeController::class, 'spmb'])->name('spmb');
 Route::get('/gallery-kegiatan', [GalleryController::class, 'index'])->name('gallery.index');
 Route::get('/gallery-kegiatan/{id}', [GalleryController::class, 'show'])->name('gallery.show');
 Route::get('/guru-tendik', [StaffController::class, 'index'])->name('staff.index');

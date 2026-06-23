@@ -1,5 +1,5 @@
 @php
-    $isDarkPage = request()->is('berita*', 'gallery-kegiatan*', 'tentang-pesantren*', 'guru-tendik*');
+    $isDarkPage = request()->is('berita*', 'gallery-kegiatan*', 'tentang-pesantren*', 'guru-tendik*', 'spmb*');
 @endphp
 
 <header 
@@ -85,6 +85,10 @@
                     <a href="/guru-tendik" class="flex items-center gap-4 p-4 rounded-2xl {{ request()->is('guru-tendik*') ? 'bg-teal-50 text-teal-700 font-bold' : 'text-gray-600 font-medium' }}">
                         <i class="ti ti-users text-xl"></i>
                         <span>Guru & Tendik</span>
+                    </a>
+                    <a href="/spmb" class="flex items-center gap-4 p-4 rounded-2xl {{ request()->is('spmb*') ? 'bg-teal-50 text-teal-700 font-bold' : 'text-gray-600 font-medium' }}">
+                        <i class="ti ti-file-text text-xl"></i>
+                        <span>SPMB</span>
                     </a>
                     <a href="/berita" class="flex items-center gap-4 p-4 rounded-2xl {{ request()->is('berita*') ? 'bg-teal-50 text-teal-700 font-bold' : 'text-gray-600 font-medium' }}">
                         <i class="ti ti-news text-xl"></i>

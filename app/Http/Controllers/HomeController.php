@@ -59,4 +59,17 @@ class HomeController extends Controller
 
         return view('pages.about', compact('pengaturan', 'about', 'visi', 'misi', 'units'));
     }
+
+    public function spmb()
+    {
+        $agent = new Agent();
+        $pengaturan = PengaturanUmum::first();
+        $units = Unit::where('status', 1)->get();
+
+        if ($agent->isMobile()) {
+            return view('mobile.spmb', compact('pengaturan', 'units'));
+        }
+
+        return view('pages.spmb', compact('pengaturan', 'units'));
+    }
 }
