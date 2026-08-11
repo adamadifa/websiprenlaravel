@@ -4,6 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', 'Al Amin Pesantren')</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ $pengaturan ? $pengaturan->getAdminImageUrl($pengaturan->logo) : asset('favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ $pengaturan ? $pengaturan->getAdminImageUrl($pengaturan->logo) : asset('favicon.ico') }}" type="image/x-icon">
+    
     @include('layouts.partials.seo')
 
     <!-- Fonts -->

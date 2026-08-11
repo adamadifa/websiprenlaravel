@@ -25,19 +25,19 @@
 <!-- Schema Markup / Structured Data untuk Google Search -->
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "EducationalOrganization",
+  "@@context": "https://schema.org",
+  "@@type": "EducationalOrganization",
   "name": "Pesantren Persis Al-Amin",
   "alternateName": "PPI 80 Al Amin",
   "url": "{{ url('/') }}",
-  "logo": "@yield('meta_image', $pengaturan ? $pengaturan->getAdminImageUrl($pengaturan->logo) : asset('favicon.ico'))",
+  "logo": "{{ $pengaturan ? $pengaturan->getAdminImageUrl($pengaturan->logo) : asset('favicon.ico') }}",
   "contactPoint": {
-    "@type": "ContactPoint",
+    "@@type": "ContactPoint",
     "telephone": "{{ $pengaturan->telepon ?? '' }}",
     "contactType": "customer service"
   },
   "address": {
-    "@type": "PostalAddress",
+    "@@type": "PostalAddress",
     "addressLocality": "Tasikmalaya",
     "addressRegion": "Jawa Barat",
     "addressCountry": "ID"

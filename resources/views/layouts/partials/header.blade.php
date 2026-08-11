@@ -10,14 +10,14 @@
             <img src="{{ $pengaturan ? $pengaturan->getAdminImageUrl($pengaturan->logo) : 'https://placehold.co/64?text=Logo' }}" alt="Logo" class="h-16 w-auto">
         </a>
 
+        @php
+            $isDarkHeroPage = request()->is('tentang-pesantren*', 'gallery-kegiatan*', 'guru-tendik*', 'berita*', 'spmb*');
+        @endphp
         <!-- Desktop Navigation -->
         <nav 
-            class="hidden md:flex items-center space-x-8 font-medium transition-colors duration-300"
-            :class="(scrolled || {{ request()->is('tentang-pesantren*', 'gallery-kegiatan*', 'guru-tendik*', 'berita*', 'spmb*') ? 'false' : 'true' }}) ? 'text-gray-600' : 'text-white'"
+            class="hidden md:flex items-center space-x-8 font-semibold transition-colors duration-300"
+            :class="(scrolled || {{ $isDarkHeroPage ? 'false' : 'true' }}) ? 'text-gray-600' : 'text-white'"
         >
-            @php
-                $isDarkHeroPage = request()->is('tentang-pesantren*', 'gallery-kegiatan*', 'guru-tendik*', 'berita*', 'spmb*');
-            @endphp
             <a href="/" class="hover:text-teal-600 transition-colors {{ request()->is('/') ? 'text-teal-600 font-semibold border-b-2 border-teal-600 pb-1' : '' }}">Home</a>
             <a href="/tentang-pesantren" class="hover:text-yellow-400 transition-colors {{ request()->is('tentang-pesantren*') ? 'text-yellow-400 font-semibold border-b-2 border-yellow-400 pb-1' : '' }}">Tentang Pesantren</a>
             <a href="/gallery-kegiatan" class="hover:text-yellow-400 transition-colors {{ request()->is('gallery-kegiatan*') ? 'text-yellow-400 font-semibold border-b-2 border-yellow-400 pb-1' : '' }}">Galery Kegiatan</a>
