@@ -63,7 +63,9 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/sitemap.xml', function() {
     $posts = \App\Models\Post::latest()->get();
     
-    return response()->view('pages.sitemap', compact('posts'))
+    $content = '<?xml version="1.0" encoding="UTF-8"?>' . view('pages.sitemap', compact('posts'))->render();
+    
+    return response($content)
         ->header('Content-Type', 'text/xml');
 });
 
