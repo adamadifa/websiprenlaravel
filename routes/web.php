@@ -58,3 +58,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/password', [PasswordController::class, 'index'])->name('password');
     Route::put('/password', [PasswordController::class, 'update']);
 });
+
+// Route Dynamic XML Sitemap untuk SEO Google
+Route::get('/sitemap.xml', function() {
+    $posts = \App\Models\Post::latest()->get();
+    
+    return response()->view('pages.sitemap', compact('posts'))
+        ->header('Content-Type', 'text/xml');
+});
+
