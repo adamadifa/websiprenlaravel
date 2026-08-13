@@ -50,12 +50,17 @@
     <!-- AOS (Animate On Scroll) -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            AOS.init({
-                duration: 1000,
-                once: true,
-                offset: 50,
-                easing: 'ease-out-cubic'
+        window.addEventListener('load', function() {
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    AOS.init({
+                        duration: 1000,
+                        once: true,
+                        offset: 50,
+                        easing: 'ease-out-cubic',
+                        disableMutationObserver: true
+                    });
+                }, 100);
             });
         });
     </script>

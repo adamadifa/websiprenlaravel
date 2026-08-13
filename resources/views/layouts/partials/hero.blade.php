@@ -1,5 +1,14 @@
 <section class="relative pt-32 pb-12 overflow-hidden dotted-background">
-    <div class="container mx-auto px-6 lg:px-12">
+    <!-- Grid Ornament Overlay -->
+    <div class="absolute inset-0 pointer-events-none z-0 opacity-75" style="
+        background-image: 
+            linear-gradient(to right, rgba(13, 148, 136, 0.08) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(13, 148, 136, 0.08) 1px, transparent 1px);
+        background-size: 40px 40px;
+        mask-image: radial-gradient(ellipse 60% 50% at 50% 50%, #000 70%, transparent 100%);
+        -webkit-mask-image: radial-gradient(ellipse 60% 50% at 50% 50%, #000 70%, transparent 100%);
+    "></div>
+    <div class="container mx-auto px-6 lg:px-12 relative z-10">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <!-- Left Model (Desktop) -->
             <div class="hidden lg:block lg:col-span-3 relative">

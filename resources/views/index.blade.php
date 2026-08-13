@@ -11,9 +11,16 @@
 
     <!-- Unit Section -->
     <section class="pt-12 pb-24 bg-white relative overflow-hidden">
-        <!-- Decorative Background Element -->
-        <div class="absolute top-0 right-0 w-64 h-64 bg-teal-50 rounded-full -mr-32 -mt-32 opacity-50"></div>
-        
+        <!-- Grid Ornament Overlay -->
+        <div class="absolute inset-0 pointer-events-none z-0 opacity-50" style="
+            background-image: 
+                linear-gradient(to right, rgba(13, 148, 136, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(13, 148, 136, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: radial-gradient(ellipse 80% 50% at 50% 50%, #000 60%, transparent 100%);
+            -webkit-mask-image: radial-gradient(ellipse 80% 50% at 50% 50%, #000 60%, transparent 100%);
+        "></div>
+
         <div class="container mx-auto px-6 lg:px-12 relative z-10">
             <div class="text-center max-w-2xl mx-auto mb-16">
                 <span class="text-teal-600 font-bold text-xs uppercase tracking-[0.2em] mb-3 block">Academic Programs</span>
@@ -24,24 +31,17 @@
 
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-6">
                 @forelse($units as $index => $unit)
-                <a href="#" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}" class="group relative bg-white p-5 rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl hover:shadow-teal-900/5 transition-all duration-500 transform hover:-translate-y-1.5 flex flex-col items-center text-center">
+                <a href="#" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}" class="group bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center">
                     <!-- Unit Logo Container -->
-                    <div class="relative mb-3">
-                        <div class="absolute inset-0 bg-teal-500 scale-0 group-hover:scale-110 transition-transform duration-500 rounded-2xl opacity-5"></div>
-                        <div class="w-24 h-24 bg-gray-50 rounded-2xl shadow-inner flex items-center justify-center p-2 group-hover:bg-white transition-colors duration-500 relative z-10">
-                            <img src="{{ $unit->getAdminImageUrl($unit->logo) }}" alt="{{ $unit->nama_unit }}" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500">
-                        </div>
+                    <div class="w-24 h-24 bg-gray-50/50 rounded-full border border-gray-100 flex items-center justify-center p-3 mb-4 group-hover:bg-white transition-colors duration-300">
+                        <img src="{{ $unit->getAdminImageUrl($unit->logo) }}" alt="{{ $unit->nama_unit }}" class="w-16 h-16 object-contain">
                     </div>
                     
-                    <h3 class="text-lg font-bold text-gray-800 group-hover:text-teal-700 transition-colors">{{ $unit->nama_unit }}</h3>
+                    <h3 class="text-base font-bold text-gray-800 group-hover:text-teal-600 transition-colors duration-300 font-poppins">{{ $unit->nama_unit }}</h3>
+                    
                     @if($unit->keterangan)
-                    <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-1">{{ $unit->keterangan }}</p>
+                    <p class="text-xs text-gray-500 mt-1.5 font-medium">{{ $unit->keterangan }}</p>
                     @endif
-                    
-                    <!-- Subtle Arrow Link -->
-                    <div class="mt-4 text-teal-400 group-hover:text-teal-600 transition-colors">
-                        <i class="ti ti-arrow-right text-xl transform group-hover:translate-x-1 transition-transform"></i>
-                    </div>
                 </a>
                 @empty
                     <div class="col-span-full py-20 text-center bg-gray-50 rounded-3xl border-2 border-dashed border-gray-200">
@@ -57,6 +57,16 @@
         <!-- Background Decorations -->
         <div class="absolute top-0 left-0 w-[500px] h-[500px] bg-teal-800 rounded-full -ml-64 -mt-64 opacity-20 blur-3xl"></div>
         <div class="absolute bottom-0 right-0 w-[400px] h-[400px] bg-yellow-500 rounded-full -mr-48 -mb-48 opacity-10 blur-3xl"></div>
+        
+        <!-- Grid Ornament Overlay -->
+        <div class="absolute inset-0 pointer-events-none z-0 opacity-15" style="
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: radial-gradient(circle at 50% 50%, #000 50%, transparent 100%);
+            -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 50%, transparent 100%);
+        "></div>
         
         <div class="container mx-auto px-6 lg:px-12 relative z-10" data-aos="fade-up">
             <div class="text-center max-w-2xl mx-auto mb-16">
@@ -125,7 +135,7 @@
         <div class="container mx-auto px-6 lg:px-12 relative z-10" data-aos="fade-up">
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4 border-b border-gray-100 pb-8">
                 <div>
-                    <h2 class="text-3xl font-black text-teal-950 font-poppins tracking-tight mb-2">Berita & Informasi Terkini</h2>
+                    <h2 class="text-3xl font-extrabold text-teal-950 font-poppins mb-2">Berita & Informasi Terkini</h2>
                     <p class="text-gray-500 text-sm max-w-xl">Ikuti perkembangan terbaru kegiatan pesantren dan pencapaian prestasi santri Al Amin.</p>
                 </div>
                 <div>
@@ -139,7 +149,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
                 <!-- News Column -->
                 <div class="lg:col-span-8">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         @forelse($news as $item)
                         <div class="group bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col relative">
                             <a href="{{ route('news.show', $item->slug) }}" class="absolute inset-0 z-10"></a>
@@ -163,7 +173,7 @@
                             </div>
                         </div>
                         @empty
-                            <div class="col-span-2 text-center py-20 bg-white rounded-3xl border border-gray-100">
+                            <div class="col-span-3 text-center py-20 bg-white rounded-3xl border border-gray-100">
                                 <p class="text-gray-400 italic">Belum ada berita terbaru.</p>
                             </div>
                         @endforelse
@@ -175,7 +185,7 @@
                     <div class="bg-white rounded-[2rem] p-8 border border-gray-100 shadow-sm flex flex-col relative overflow-hidden group">
                         <div class="flex items-center justify-between mb-8 relative z-20 bg-white">
                             <div>
-                                <h2 class="text-xl font-bold text-teal-900">Wall of Fame</h2>
+                                <h2 class="text-xl font-bold text-teal-900 font-poppins">Daftar Prestasi</h2>
                                 <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Prestasi Santri Al Amin</p>
                             </div>
                             <div class="w-10 h-10 bg-yellow-50 rounded-xl flex items-center justify-center text-yellow-600 shadow-inner">
@@ -285,7 +295,7 @@
                 <div class="relative">
                     <div class="flex items-center justify-between mb-10 border-b border-gray-200 pb-6 relative z-10">
                         <div>
-                            <h2 class="text-2xl font-black text-teal-950 font-poppins tracking-tight">Pengumuman</h2>
+                            <h2 class="text-2xl font-extrabold text-teal-950 font-poppins">Pengumuman</h2>
                             <p class="text-gray-400 text-xs font-bold uppercase tracking-widest mt-1">Informasi Akademik & Kegiatan</p>
                         </div>
                         <a href="/pengumuman" class="group flex items-center gap-2 bg-teal-50 text-teal-700 font-bold text-[10px] uppercase tracking-widest px-4 py-2 rounded-full hover:bg-teal-600 hover:text-white transition-all duration-300">
@@ -349,7 +359,7 @@
                 }" x-init="autoPlay()">
                     <div class="flex items-center justify-between mb-10 border-b border-gray-200 pb-6">
                         <div>
-                            <h2 class="text-2xl font-black text-teal-950 font-poppins tracking-tight">Apa Kata Mereka?</h2>
+                            <h2 class="text-2xl font-extrabold text-teal-950 font-poppins">Apa Kata Mereka?</h2>
                             <p class="text-gray-400 text-xs font-bold uppercase tracking-widest mt-1">Testimoni Wali & Alumni</p>
                         </div>
                         <div class="flex gap-2">

@@ -6,6 +6,15 @@
 @section('content')
 <!-- Hero Mobile -->
 <section class="relative pt-2 pb-4 overflow-hidden dotted-background bg-white">
+    <!-- Grid Ornament Overlay -->
+    <div class="absolute inset-0 pointer-events-none z-0 opacity-75" style="
+        background-image: 
+            linear-gradient(to right, rgba(13, 148, 136, 0.08) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(13, 148, 136, 0.08) 1px, transparent 1px);
+        background-size: 30px 30px;
+        mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, #000 70%, transparent 100%);
+        -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, #000 70%, transparent 100%);
+    "></div>
     <div class="container mx-auto px-6 relative z-10 text-center">
 
         <h1 class="text-3xl font-black text-teal-950 leading-[1.1] mb-6 font-poppins" data-aos="fade-up">
@@ -118,22 +127,34 @@
     </div>
 
     <!-- Unit Pendidikan (Grid) -->
-    <div class="mb-12">
-        <h2 class="text-lg font-black text-teal-950 font-poppins mb-6">Unit Pendidikan</h2>
-        <div class="grid grid-cols-2 gap-4">
+    <div class="mb-12 relative overflow-hidden">
+        <!-- Grid Ornament Overlay Mobile -->
+        <div class="absolute inset-0 pointer-events-none z-0 opacity-50" style="
+            background-image: 
+                linear-gradient(to right, rgba(13, 148, 136, 0.04) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(13, 148, 136, 0.04) 1px, transparent 1px);
+            background-size: 30px 30px;
+            mask-image: radial-gradient(ellipse 90% 70% at 50% 50%, #000 60%, transparent 100%);
+            -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 50%, #000 60%, transparent 100%);
+        "></div>
+
+        <h2 class="text-lg font-black text-teal-950 font-poppins mb-6 relative z-10">Unit Pendidikan</h2>
+        <div class="grid grid-cols-2 gap-4 relative z-10">
             @foreach($units as $unit)
-            <div class="bg-white p-5 rounded-3xl border border-gray-100 flex flex-col items-center text-center shadow-sm" data-aos="fade-up">
-                <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-4">
+            <div class="bg-white p-5 rounded-2xl border border-gray-100 flex flex-col items-center text-center shadow-sm" data-aos="fade-up">
+                <div class="w-20 h-20 bg-gray-50/50 rounded-full border border-gray-100 flex items-center justify-center p-3 mb-3">
                     @if($unit->logo)
-                        <img src="{{ $unit->getAdminImageUrl($unit->logo) }}" alt="{{ $unit->nama_unit }}" class="w-full h-full object-contain">
+                        <img src="{{ $unit->getAdminImageUrl($unit->logo) }}" alt="{{ $unit->nama_unit }}" class="w-14 h-14 object-contain">
                     @else
-                        <div class="w-full h-full bg-teal-50 rounded-2xl flex items-center justify-center text-teal-600">
-                            <i class="ti ti-building-mosque text-3xl"></i>
+                        <div class="w-full h-full bg-teal-50 rounded-full flex items-center justify-center text-teal-600">
+                            <i class="ti ti-building-mosque text-xl"></i>
                         </div>
                     @endif
                 </div>
-                <h4 class="text-xs font-black text-teal-950 uppercase tracking-wider mb-1">{{ $unit->nama_unit }}</h4>
-                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Al Amin</p>
+                <h4 class="text-sm font-bold text-gray-800 font-poppins mb-1">{{ $unit->nama_unit }}</h4>
+                @if($unit->keterangan)
+                <p class="text-xs text-gray-500 font-medium">{{ $unit->keterangan }}</p>
+                @endif
             </div>
             @endforeach
         </div>
@@ -145,6 +166,13 @@
         <div class="space-y-4">
             @foreach($unggulan as $item)
             <div class="bg-teal-900 p-6 rounded-3xl text-white relative overflow-hidden shadow-xl shadow-teal-950/20" data-aos="fade-up">
+                <!-- Grid Overlay Mobile Card -->
+                <div class="absolute inset-0 pointer-events-none z-0 opacity-10" style="
+                    background-image: 
+                        linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+                    background-size: 20px 20px;
+                "></div>
                 <div class="absolute top-0 right-0 w-24 h-24 bg-white/5 rounded-full -mr-12 -mt-12"></div>
                 <div class="flex gap-5 relative z-10">
                     <div class="shrink-0 w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center text-teal-300">
@@ -215,7 +243,7 @@
     <!-- Wall of Fame (Vertical Slider) -->
     <div class="mb-12">
         <div class="flex items-center justify-between mb-6">
-            <h2 class="text-lg font-black text-teal-950 font-poppins">Wall of Fame</h2>
+            <h2 class="text-lg font-black text-teal-950 font-poppins">Daftar Prestasi</h2>
             <div class="flex items-center gap-2">
                 <span class="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></span>
                 <span class="text-[10px] font-black text-yellow-600 uppercase">Prestasi Siswa</span>
