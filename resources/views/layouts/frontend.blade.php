@@ -45,7 +45,7 @@
     </div>
 
     <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/{{ $pengaturan->telepon ?? '' }}" target="_blank" class="fixed bottom-10 right-10 z-50 w-16 h-16 bg-[#25D366] text-white rounded-2xl flex items-center justify-center shadow-2xl shadow-[#25D366]/30 hover:-translate-y-2 active:scale-95 transition-all duration-300">
+    <a href="https://wa.me/{{ $pengaturan->telepon ?? '' }}" target="_blank" class="fixed bottom-10 right-10 z-50 w-16 h-16 bg-[#25D366] text-white rounded-2xl flex items-center justify-center shadow-2xl shadow-[#25D366]/30 hover:-translate-y-2 active:scale-95 transition-all duration-300" aria-label="Hubungi Kami melalui WhatsApp">
         <i class="ti ti-brand-whatsapp text-4xl"></i>
     </a>
 

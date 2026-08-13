@@ -210,7 +210,7 @@
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <div class="text-[9px] font-black text-teal-600 uppercase tracking-[0.15em] mb-0.5">{{ $item->tingkat }}</div>
-                                        <h4 class="font-bold text-gray-800 text-sm line-clamp-1 leading-tight mb-0.5">{{ $item->prestasi }}</h4>
+                                        <h3 class="font-bold text-gray-800 text-sm line-clamp-1 leading-tight mb-0.5">{{ $item->prestasi }}</h3>
                                         <p class="text-[10px] text-gray-400 font-medium truncate">{{ $item->nama_siswa }}</p>
                                     </div>
                                     <div class="shrink-0 text-yellow-500">
@@ -401,7 +401,7 @@
                                             @endif
                                         </div>
                                         <div>
-                                            <h4 class="font-bold text-teal-900 text-base mb-0.5">{{ $testi->nama }}</h4>
+                                            <h3 class="font-bold text-teal-900 text-base mb-0.5">{{ $testi->nama }}</h3>
                                             <p class="text-xs text-gray-400 font-bold uppercase tracking-widest">Wali Santri / Alumni</p>
                                         </div>
                                     </div>

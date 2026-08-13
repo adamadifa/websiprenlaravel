@@ -268,7 +268,7 @@
                         @endif
                     </div>
                     <div class="flex-1 min-w-0">
-                        <h4 class="text-xs font-black text-teal-950 truncate">{{ $item->prestasi }}</h4>
+                        <h3 class="text-xs font-black text-teal-950 truncate">{{ $item->prestasi }}</h3>
                         <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mt-0.5">{{ $item->nama_siswa }}</p>
                     </div>
                     <div class="text-yellow-500">
@@ -289,7 +289,7 @@
                         @endif
                     </div>
                     <div class="flex-1 min-w-0">
-                        <h4 class="text-xs font-black text-teal-950 truncate">{{ $item->prestasi }}</h4>
+                        <h3 class="text-xs font-black text-teal-950 truncate">{{ $item->prestasi }}</h3>
                         <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mt-0.5">{{ $item->nama_siswa }}</p>
                     </div>
                     <div class="text-yellow-500">
