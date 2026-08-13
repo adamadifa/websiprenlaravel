@@ -44,7 +44,7 @@
                     </div> {{ $pilar[3]->nama_pilar }}
                 </div>
                 @endif
-                <img src="{{ $pengaturan ? $pengaturan->getAdminImageUrl($pengaturan->model_1) : 'https://placehold.co/400x500?text=Model+1' }}" alt="Model 1" class="relative z-0 w-full h-auto drop-shadow-2xl">
+                <img src="{{ $pengaturan ? $pengaturan->getAdminImageUrl($pengaturan->model_1) : 'https://placehold.co/400x500?text=Model+1' }}" alt="Model 1" class="relative z-0 w-full h-auto drop-shadow-2xl" fetchpriority="high">
             </div>
 
             <!-- Center Content -->
@@ -104,7 +104,7 @@
 
             <!-- Mobile Models -->
             <div class="lg:hidden grid grid-cols-2 gap-4 mt-8">
-                <img src="{{ $pengaturan ? $pengaturan->getAdminImageUrl($pengaturan->model_1) : 'https://placehold.co/200x250?text=Model+1' }}" alt="Model 1" class="w-full h-auto drop-shadow-lg">
+                <img src="{{ $pengaturan ? $pengaturan->getAdminImageUrl($pengaturan->model_1) : 'https://placehold.co/200x250?text=Model+1' }}" alt="Model 1" class="w-full h-auto drop-shadow-lg" fetchpriority="high">
                 <img src="{{ $pengaturan ? $pengaturan->getAdminImageUrl($pengaturan->model_2) : 'https://placehold.co/200x250?text=Model+2' }}" alt="Model 2" class="w-full h-auto drop-shadow-lg">
             </div>
         </div>
