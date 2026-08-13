@@ -1,6 +1,6 @@
 <!-- SEO Meta Tags -->
-<meta name="description" content="@yield('meta_description', $pengaturan->tentang_kami_singkat ?? 'Pesantren Persatuan Islam 80 Al Amin - Lembaga Pendidikan Islam Terpadu dan Kaderisasi Miniatur Masyarakat Rabbani.')">
-<meta name="keywords" content="Al Amin, Pesantren, Persatuan Islam, Persis 80, Sekolah Islam, Tasikmalaya, Pendidikan Islam, Tahfizh Al-Quran">
+<meta name="description" content="@yield('meta_description', 'Pesantren Persis Al Amin Sindangkasih Ciamis (PPI 80 Al Amin). Lembaga Pendidikan Islam Terpadu, Tahfizh Al-Quran, dan Kaderisasi Miniatur Masyarakat Rabbani.')">
+<meta name="keywords" content="pesantren persis, pesantren persis al amin, ppi 80 al amin, pesantren persis ciamis, pesantren persatuan islam, sekolah islam ciamis, tahfizh al-quran">
 <meta name="author" content="Al Amin Pesantren">
 <link rel="canonical" href="{{ url()->current() }}">
 
