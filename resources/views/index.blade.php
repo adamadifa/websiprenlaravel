@@ -364,10 +364,11 @@
                         </div>
                         <div class="flex gap-2">
                             <template x-for="(i, index) in slidesCount" :key="index">
-                                <button 
+                            <button 
                                     @click="activeSlide = index"
                                     :class="activeSlide === index ? 'w-8 bg-teal-500' : 'w-2 bg-teal-200 hover:bg-teal-300'"
                                     class="h-1 rounded-full transition-all duration-300"
+                                    :aria-label="`Go to slide ${index + 1}`"
                                 ></button>
                             </template>
                         </div>
