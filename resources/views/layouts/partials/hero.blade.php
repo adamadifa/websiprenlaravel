@@ -70,7 +70,7 @@
                     </svg>
                 </div>
                 <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-                    <a href="/register" class="w-full sm:w-auto bg-teal-600 text-white font-bold px-8 py-4 rounded-xl shadow-xl hover:bg-teal-700 transition-all transform hover:scale-105 flex items-center justify-center gap-2">
+                    <a href="/register" class="w-full sm:w-auto bg-teal-700 text-white font-bold px-8 py-4 rounded-xl shadow-xl hover:bg-teal-800 transition-all transform hover:scale-105 flex items-center justify-center gap-2">
                         Daftar Sekarang
                         <i class="ti ti-arrow-right text-lg"></i>
                     </a>

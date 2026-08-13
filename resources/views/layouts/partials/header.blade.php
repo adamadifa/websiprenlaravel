@@ -35,7 +35,7 @@
             >
                 Masuk
             </a>
-            <a href="/register" class="bg-teal-600 text-white font-semibold px-4 py-2 rounded-lg hover:bg-teal-700 shadow-md">Daftar Sekarang</a>
+            <a href="/register" class="bg-teal-700 text-white font-semibold px-4 py-2 rounded-lg hover:bg-teal-850 shadow-md">Daftar Sekarang</a>
         </div>
 
         <!-- Mobile Menu Toggle -->

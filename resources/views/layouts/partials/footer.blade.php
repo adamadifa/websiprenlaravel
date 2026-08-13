@@ -42,53 +42,53 @@
                     <img src="{{ $pengaturan ? $pengaturan->getAdminImageUrl($pengaturan->logo) : 'https://placehold.co/64?text=Logo' }}" alt="Logo" class="w-14 h-14 object-contain">
                     <div>
                         <div class="font-black text-xl text-teal-900 leading-none">{{ $pengaturan->nama_sekolah ?? 'Al Amin' }}</div>
-                        <div class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Pesantren Persatuan Islam 80</div>
+                        <div class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mt-1">Pesantren Persatuan Islam 80</div>
                     </div>
                 </div>
-                <p class="text-gray-500 text-sm mb-8 leading-relaxed">
+                <p class="text-gray-600 text-sm mb-8 leading-relaxed">
                     {{ $pengaturan->alamat_sekolah ?? 'Sindangkasih - Ciamis, Jawa Barat' }}
                 </p>
                 <div class="flex gap-4">
-                    <a href="#" class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-400 hover:bg-teal-500 hover:text-white transition-all shadow-sm">
+                    <a href="#" class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-500 hover:bg-teal-500 hover:text-white transition-all shadow-sm">
                         <i class="ti ti-brand-facebook text-xl"></i>
                     </a>
-                    <a href="#" class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-400 hover:bg-teal-500 hover:text-white transition-all shadow-sm">
+                    <a href="#" class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-500 hover:bg-teal-500 hover:text-white transition-all shadow-sm">
                         <i class="ti ti-brand-instagram text-xl"></i>
                     </a>
-                    <a href="#" class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-400 hover:bg-teal-500 hover:text-white transition-all shadow-sm">
+                    <a href="#" class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-500 hover:bg-teal-500 hover:text-white transition-all shadow-sm">
                         <i class="ti ti-brand-youtube text-xl"></i>
                     </a>
-                    <a href="#" class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-400 hover:bg-teal-500 hover:text-white transition-all shadow-sm">
+                    <a href="#" class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-500 hover:bg-teal-500 hover:text-white transition-all shadow-sm">
                         <i class="ti ti-brand-tiktok text-xl"></i>
                     </a>
                 </div>
             </div>
 
             <!-- Links -->
-            <div>
-                <h4 class="font-bold text-gray-800 mb-6">Jenjang Pendidikan</h4>
-                <ul class="text-gray-500 text-sm space-y-3">
-                    @forelse($units as $unit)
-                        <li><a href="#" class="hover:text-teal-700 transition-colors">{{ $unit->keterangan ?? $unit->nama_unit }}</a></li>
-                    @empty
-                        <li><a href="#" class="hover:text-teal-700 transition-colors">TK Calisa Rabbani</a></li>
-                    @endforelse
+            <div class="md:col-span-1">
+                <h4 class="font-bold text-gray-800 mb-6">Quick Links</h4>
+                <ul class="text-gray-600 text-sm space-y-3">
+                    <li><a href="#" class="hover:text-teal-700">Home</a></li>
+                    <li><a href="#" class="hover:text-teal-700">About Us</a></li>
+                    <li><a href="#" class="hover:text-teal-700">Admission</a></li>
+                    <li><a href="#" class="hover:text-teal-700">News</a></li>
                 </ul>
             </div>
 
-            <div>
-                <h4 class="font-bold text-gray-800 mb-6">Links</h4>
-                <ul class="text-gray-500 text-sm space-y-3">
-                    <li><a href="#" class="hover:text-teal-700 transition-colors">SPMB</a></li>
-                    <li><a href="#" class="hover:text-teal-700 transition-colors">Fintren</a></li>
-                    <li><a href="#" class="hover:text-teal-700 transition-colors">Privacy Policy</a></li>
-                    <li><a href="#" class="hover:text-teal-700 transition-colors">Terms of Use</a></li>
+            <!-- Links -->
+            <div class="md:col-span-1">
+                <h4 class="font-bold text-gray-800 mb-6">Academic</h4>
+                <ul class="text-gray-600 text-sm space-y-3">
+                    <li><a href="#" class="hover:text-teal-700">Curriculum</a></li>
+                    <li><a href="#" class="hover:text-teal-700">Facility</a></li>
+                    <li><a href="#" class="hover:text-teal-700">Gallery</a></li>
                 </ul>
             </div>
 
-            <div>
+            <!-- Contact -->
+            <div class="md:col-span-1">
                 <h4 class="font-bold text-gray-800 mb-6">Contact Us</h4>
-                <ul class="text-gray-500 text-sm space-y-3">
+                <ul class="text-gray-600 text-sm space-y-3">
                     <li class="flex items-center gap-2">
                         <span class="text-teal-700 font-semibold">T:</span> {{ $pengaturan->telepon ?? '081322058570' }}
                     </li>
@@ -102,7 +102,7 @@
             </div>
         </div>
 
-        <div class="border-t border-gray-200 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center text-gray-400 text-xs">
+        <div class="border-t border-gray-200 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center text-gray-600 text-xs">
             <span>© 2024 Pesantren Al Amin. All rights reserved.</span>
             <div class="flex gap-6 mt-4 md:mt-0">
                 <a href="#" class="hover:text-teal-700">Legal</a>
