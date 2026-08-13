@@ -152,7 +152,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         @forelse($news as $item)
                         <div class="group bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col relative">
-                            <a href="{{ route('news.show', $item->slug) }}" class="absolute inset-0 z-10"></a>
+                            <a href="{{ route('news.show', $item->slug) }}" class="absolute inset-0 z-10" aria-label="Baca selengkapnya tentang {{ $item->title }}"></a>
                             <div class="aspect-[16/10] overflow-hidden relative">
                                 <img src="{{ $item->getAdminImageUrl($item->image, 'posts') }}" alt="{{ $item->title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                                 <div class="absolute top-4 left-4 z-20">

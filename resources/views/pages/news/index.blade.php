@@ -40,7 +40,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             @forelse($posts as $post)
             <div class="group flex flex-col bg-white rounded-[2rem] border border-gray-100 overflow-hidden hover:shadow-2xl hover:shadow-teal-900/10 transition-all duration-500 relative" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-                <a href="{{ route('news.show', $post->slug) }}" class="absolute inset-0 z-10"></a>
+                <a href="{{ route('news.show', $post->slug) }}" class="absolute inset-0 z-10" aria-label="Baca berita: {{ $post->title }}"></a>
                 <!-- Thumbnail -->
                 <div class="relative h-64 overflow-hidden">
                     @if($post->image)
