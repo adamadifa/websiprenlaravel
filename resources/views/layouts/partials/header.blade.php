@@ -11,7 +11,7 @@
         </a>
 
         @php
-            $isDarkHeroPage = request()->is('tentang-pesantren*', 'gallery-kegiatan*', 'guru-tendik*', 'berita*', 'spmb*');
+            $isDarkHeroPage = request()->is('tentang-pesantren*', 'gallery-kegiatan*', 'guru-tendik*', 'berita', 'spmb*');
         @endphp
         <!-- Desktop Navigation -->
         <nav 

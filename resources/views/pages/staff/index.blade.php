@@ -11,7 +11,7 @@
         <div class="absolute bottom-0 right-0 w-96 h-96 bg-yellow-400 rounded-full blur-3xl -mr-48 -mb-48"></div>
     </div>
     <div class="container mx-auto px-6 lg:px-12 relative z-10 text-center">
-        <h1 class="text-4xl md:text-5xl font-black text-white mb-4 font-poppins" data-aos="fade-up">
+        <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-4 font-poppins" data-aos="fade-up">
             Guru & <span class="text-yellow-400">Tendik</span>
         </h1>
         <p class="text-teal-100 text-lg max-w-2xl mx-auto opacity-80" data-aos="fade-up" data-aos-delay="100">

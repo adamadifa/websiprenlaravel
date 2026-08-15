@@ -159,7 +159,7 @@
                             @php $firstNews = $news->first(); @endphp
                             <div class="relative rounded-[2rem] overflow-hidden group h-[300px] md:h-[480px] shadow-sm hover:shadow-xl transition-all duration-500">
                                 <a href="{{ route('news.show', $firstNews->slug) }}" class="absolute inset-0 z-20" aria-label="Baca selengkapnya tentang {{ $firstNews->title }}"></a>
-                                <img src="{{ $firstNews->getAdminImageUrl($firstNews->image, 'posts') }}" alt="{{ $firstNews->title }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 z-0">
+                                <img src="{{ $firstNews->getAdminImageUrl($firstNews->image, 'posts') }}" alt="{{ $firstNews->title }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 z-0" onerror="this.onerror=null; this.outerHTML='<div class=\'absolute inset-0 bg-gray-900 flex items-center justify-center text-gray-600 z-0\'><i class=\'ti ti-photo text-6xl\'></i></div>';">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent z-10"></div>
                                 
                                 <div class="absolute inset-x-0 bottom-0 p-6 md:p-8 z-15 flex flex-col justify-end h-full pointer-events-none">
@@ -179,7 +179,7 @@
                                 @foreach($news->skip(1) as $item)
                                     <div class="relative rounded-2xl overflow-hidden group h-[232px] shadow-sm hover:shadow-xl transition-all duration-500">
                                         <a href="{{ route('news.show', $item->slug) }}" class="absolute inset-0 z-20" aria-label="Baca selengkapnya tentang {{ $item->title }}"></a>
-                                        <img src="{{ $item->getAdminImageUrl($item->image, 'posts') }}" alt="{{ $item->title }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 z-0">
+                                        <img src="{{ $item->getAdminImageUrl($item->image, 'posts') }}" alt="{{ $item->title }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 z-0" onerror="this.onerror=null; this.outerHTML='<div class=\'absolute inset-0 bg-gray-900 flex items-center justify-center text-gray-600 z-0\'><i class=\'ti ti-photo text-4xl\'></i></div>';">
                                         <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/35 to-transparent z-10"></div>
                                         
                                         <div class="absolute inset-x-0 bottom-0 p-4 md:p-5 z-15 flex flex-col justify-end h-full pointer-events-none">
