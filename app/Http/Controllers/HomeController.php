@@ -21,7 +21,7 @@ class HomeController extends Controller
         $agent = new Agent();
         $pengaturan = PengaturanUmum::first();
         $units = Unit::where('status', 1)->get();
-        $news = Post::latest()->take(3)->get();
+        $news = Post::latest()->take(5)->get();
         $pengumuman = Pengumuman::latest()->take(5)->get();
         $prestasi = PrestasiSiswa::latest()->take(20)->get();
         $pilar = PilarPendidikan::orderBy('urutan')->get();

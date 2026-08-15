@@ -85,20 +85,35 @@
                 </ul>
             </div>
 
-            <!-- Contact -->
+            <!-- Fast Response CTA Card -->
             <div class="md:col-span-1">
-                <h4 class="font-bold text-gray-800 mb-6">Contact Us</h4>
-                <ul class="text-gray-600 text-sm space-y-3">
-                    <li class="flex items-center gap-2">
-                        <span class="text-teal-700 font-semibold">T:</span> {{ $pengaturan->telepon ?? '081322058570' }}
-                    </li>
-                    <li class="flex items-center gap-2">
-                        <span class="text-teal-700 font-semibold">E:</span> {{ $pengaturan->email ?? 'persis.alamin80@mail.com' }}
-                    </li>
-                    <li class="flex items-center gap-2">
-                        <span class="text-teal-700 font-semibold">W:</span> {{ $pengaturan->website ?? 'pesantren-alamin80.sch.id' }}
-                    </li>
-                </ul>
+                <div class="relative group/cta overflow-hidden rounded-[2rem] bg-[#063b34] p-6 text-white shadow-xl">
+                    <!-- Animated Background Gradients -->
+                    <div class="absolute inset-0 bg-gradient-to-br from-teal-900 via-[#063b34] to-[#042d27] z-0"></div>
+                    <div class="absolute -top-24 -right-24 w-48 h-48 bg-teal-500/10 rounded-full blur-2xl group-hover/cta:bg-teal-500/20 transition-all duration-700"></div>
+                    
+                    <div class="relative z-10">
+                        <div class="flex items-center gap-2 mb-4">
+                            <div class="w-10 h-10 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center border border-white/10 shadow-inner group-hover/cta:scale-110 transition-transform duration-500">
+                                <i class="ti ti-messages text-xl text-yellow-400"></i>
+                            </div>
+                            <span class="text-[9px] font-black uppercase tracking-[0.2em] text-teal-300">Fast Response</span>
+                        </div>
+                        
+                        <h4 class="text-lg font-black mb-2 leading-tight font-poppins">Butuh Bantuan <br><span class="text-yellow-400">Pendaftaran?</span></h4>
+                        <p class="text-teal-100/75 text-[11px] leading-relaxed mb-6 font-medium">
+                            Hubungi admin kami untuk informasi program belajar dan pendaftaran.
+                        </p>
+                        
+                        <div class="relative group/btn">
+                            <div class="absolute -inset-1 bg-gradient-to-r from-[#25D366] to-teal-400 rounded-xl blur opacity-25 group-hover/btn:opacity-60 transition duration-500"></div>
+                            <a href="https://wa.me/{{ $pengaturan->telepon ?? '' }}" class="relative flex items-center justify-center gap-2 w-full bg-white text-teal-950 font-black py-3.5 rounded-xl text-[10px] hover:bg-teal-50 transition-all shadow-md uppercase tracking-wider overflow-hidden">
+                                <i class="ti ti-brand-whatsapp text-lg text-[#25D366]"></i>
+                                Chat via WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 

@@ -131,7 +131,7 @@
     </section>
 
     <!-- News & Achievement Section -->
-    <section class="pt-12 pb-24 bg-white relative overflow-hidden" data-aos="fade-up">
+    <section class="pt-12 pb-10 bg-white relative overflow-hidden" data-aos="fade-up">
         <div class="container mx-auto px-6 lg:px-12 relative z-10" data-aos="fade-up">
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4 border-b border-gray-100 pb-8">
                 <div>
@@ -149,41 +149,61 @@
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
                 <!-- News Column -->
                 <div class="lg:col-span-8">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        @forelse($news as $item)
-                        <div class="group bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col relative">
-                            <a href="{{ route('news.show', $item->slug) }}" class="absolute inset-0 z-10" aria-label="Baca selengkapnya tentang {{ $item->title }}"></a>
-                            <div class="aspect-[16/10] overflow-hidden relative">
-                                <img src="{{ $item->getAdminImageUrl($item->image, 'posts') }}" alt="{{ $item->title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                                <div class="absolute top-4 left-4 z-20">
-                                    <span class="bg-teal-600 text-white text-[9px] font-bold px-3 py-1 rounded-full uppercase tracking-widest shadow-lg">{{ $item->category->name ?? 'Berita' }}</span>
+                    @if($news->isEmpty())
+                        <div class="text-center py-20 bg-white rounded-3xl border border-gray-100">
+                            <p class="text-gray-400 italic">Belum ada berita terbaru.</p>
+                        </div>
+                    @else
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Left Column: Featured/Big News Card -->
+                            @php $firstNews = $news->first(); @endphp
+                            <div class="relative rounded-[2rem] overflow-hidden group h-[300px] md:h-[480px] shadow-sm hover:shadow-xl transition-all duration-500">
+                                <a href="{{ route('news.show', $firstNews->slug) }}" class="absolute inset-0 z-20" aria-label="Baca selengkapnya tentang {{ $firstNews->title }}"></a>
+                                <img src="{{ $firstNews->getAdminImageUrl($firstNews->image, 'posts') }}" alt="{{ $firstNews->title }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 z-0">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent z-10"></div>
+                                
+                                <div class="absolute inset-x-0 bottom-0 p-6 md:p-8 z-15 flex flex-col justify-end h-full pointer-events-none">
+                                    <h3 class="text-lg md:text-2xl font-bold text-white font-poppins leading-snug line-clamp-3">
+                                        {{ $firstNews->title }}
+                                    </h3>
+                                    <div class="w-full border-t border-white/20 my-3"></div>
+                                    <div class="flex items-center gap-2 text-white/80 text-xs font-medium">
+                                        <i class="ti ti-calendar-event"></i>
+                                        <span>{{ $firstNews->created_at->translatedFormat('d F Y') }}</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="p-6 flex flex-col flex-1">
-                                <div class="flex items-center gap-2 mb-3">
-                                    <i class="ti ti-calendar-event text-gray-400 text-sm"></i>
-                                    <span class="text-gray-400 text-[11px] font-bold">{{ $item->created_at->format('d M Y') }}</span>
-                                </div>
-                                <h3 class="text-lg font-bold text-gray-800 group-hover:text-teal-700 transition-colors line-clamp-2 leading-tight mb-4">{{ $item->title }}</h3>
-                                <p class="text-gray-500 text-xs line-clamp-2 leading-relaxed mb-6">{{ Str::limit(strip_tags($item->content), 120) }}</p>
-                                <div class="mt-auto flex items-center gap-2 text-teal-600 font-bold text-[11px] uppercase tracking-wider group/link relative z-20">
-                                    Baca Selengkapnya
-                                    <i class="ti ti-arrow-right text-sm group-hover/link:translate-x-1 transition-transform"></i>
-                                </div>
+
+                            <!-- Right Column: 2x2 Grid of Smaller Cards -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                @foreach($news->skip(1) as $item)
+                                    <div class="relative rounded-2xl overflow-hidden group h-[232px] shadow-sm hover:shadow-xl transition-all duration-500">
+                                        <a href="{{ route('news.show', $item->slug) }}" class="absolute inset-0 z-20" aria-label="Baca selengkapnya tentang {{ $item->title }}"></a>
+                                        <img src="{{ $item->getAdminImageUrl($item->image, 'posts') }}" alt="{{ $item->title }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 z-0">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/35 to-transparent z-10"></div>
+                                        
+                                        <div class="absolute inset-x-0 bottom-0 p-4 md:p-5 z-15 flex flex-col justify-end h-full pointer-events-none">
+                                            <h3 class="text-xs md:text-sm font-bold text-white font-poppins leading-snug line-clamp-3">
+                                                {{ $item->title }}
+                                            </h3>
+                                            <div class="w-full border-t border-white/20 my-2"></div>
+                                            <div class="flex items-center gap-1.5 text-white/80 text-[10px] font-medium">
+                                                <i class="ti ti-calendar-event"></i>
+                                                <span>{{ $item->created_at->translatedFormat('d F Y') }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
-                        @empty
-                            <div class="col-span-3 text-center py-20 bg-white rounded-3xl border border-gray-100">
-                                <p class="text-gray-400 italic">Belum ada berita terbaru.</p>
-                            </div>
-                        @endforelse
-                    </div>
+                    @endif
                 </div>
 
                 <!-- Achievements Column (Sidebar) -->
-                <div class="lg:col-span-4">
-                    <div class="bg-white rounded-[2rem] p-8 border border-gray-100 shadow-sm flex flex-col relative overflow-hidden group">
-                        <div class="flex items-center justify-between mb-8 relative z-20 bg-white">
+                <div class="lg:col-span-4 flex flex-col gap-6">
+                    <!-- Daftar Prestasi Card -->
+                    <div class="bg-white rounded-[2rem] p-8 border border-gray-100 shadow-sm flex flex-col relative overflow-hidden group h-[480px]">
+                        <div class="flex items-center justify-between mb-6 relative z-20 bg-white">
                             <div>
                                 <h2 class="text-xl font-bold text-teal-900 font-poppins">Daftar Prestasi</h2>
                                 <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Prestasi Santri Al Amin</p>
@@ -193,8 +213,8 @@
                             </div>
                         </div>
 
-                        <!-- Vertical Slider Container with fixed height -->
-                        <div class="h-[550px] relative overflow-hidden -mx-2 mb-4">
+                        <!-- Vertical Slider Container with adjusted height -->
+                        <div class="h-[300px] relative overflow-hidden -mx-2 mb-4">
                             <div class="animate-vertical-marquee space-y-4 px-2">
                                 @php $displayPrestasi = $prestasi->concat($prestasi); @endphp
                                 @forelse($displayPrestasi as $item)
@@ -224,49 +244,6 @@
                             <!-- Gradient Fade Effects -->
                             <div class="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white via-white/40 to-transparent pointer-events-none z-10"></div>
                         </div>
-                        
-                        <!-- Premium CTA Card -->
-                        <div class="relative group/cta overflow-hidden rounded-[2.5rem] bg-[#063b34] p-8 text-white shadow-2xl shadow-teal-950/40">
-                            <!-- Animated Background Gradients -->
-                            <div class="absolute inset-0 bg-gradient-to-br from-teal-900 via-[#063b34] to-[#042d27] z-0"></div>
-                            <div class="absolute -top-24 -right-24 w-64 h-64 bg-teal-500/10 rounded-full blur-3xl group-hover/cta:bg-teal-500/20 transition-all duration-700"></div>
-                            <div class="absolute -bottom-12 -left-12 w-48 h-48 bg-yellow-500/5 rounded-full blur-2xl group-hover/cta:bg-yellow-500/10 transition-all duration-700"></div>
-                            
-                            <div class="relative z-10">
-                                <div class="flex items-center gap-3 mb-6">
-                                    <div class="w-12 h-12 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/10 shadow-inner group-hover/cta:scale-110 transition-transform duration-500">
-                                        <i class="ti ti-messages text-2xl text-yellow-400"></i>
-                                    </div>
-                                    <div class="h-px w-12 bg-gradient-to-r from-yellow-400/50 to-transparent"></div>
-                                    <span class="text-[10px] font-black uppercase tracking-[0.3em] text-teal-300">Fast Response</span>
-                                </div>
-                                
-                                <h3 class="text-2xl font-black mb-4 leading-tight font-poppins">Butuh Bantuan <br><span class="text-yellow-400">Pendaftaran?</span></h3>
-                                <p class="text-teal-100/60 text-xs leading-relaxed mb-8 pr-4 font-medium">
-                                    Tim admin kami siap membantu menjelaskan program belajar dan prosedur pendaftaran santri baru.
-                                </p>
-                                
-                                <div class="relative group/btn">
-                                    <div class="absolute -inset-1 bg-gradient-to-r from-[#25D366] to-teal-400 rounded-2xl blur opacity-25 group-hover/btn:opacity-60 transition duration-500"></div>
-                                    <a href="https://wa.me/{{ $pengaturan->telepon ?? '' }}" class="relative flex items-center justify-center gap-3 w-full bg-white text-teal-950 font-black py-4 rounded-2xl text-xs hover:bg-teal-50 transition-all shadow-xl uppercase tracking-widest overflow-hidden">
-                                        <!-- Subtle Glow Overlay -->
-                                        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000"></div>
-                                        
-                                        <i class="ti ti-brand-whatsapp text-xl text-[#25D366]"></i>
-                                        Chat via WhatsApp
-                                    </a>
-                                </div>
-                                
-                                <div class="mt-6 flex items-center justify-center gap-4">
-                                    <div class="flex -space-x-2">
-                                        <div class="w-6 h-6 rounded-full border-2 border-[#063b34] bg-teal-800 flex items-center justify-center text-[8px] font-bold">A</div>
-                                        <div class="w-6 h-6 rounded-full border-2 border-[#063b34] bg-teal-700 flex items-center justify-center text-[8px] font-bold">M</div>
-                                        <div class="w-6 h-6 rounded-full border-2 border-[#063b34] bg-teal-600 flex items-center justify-center text-[8px] font-bold">N</div>
-                                    </div>
-                                    <span class="text-[9px] font-bold text-teal-400 uppercase tracking-widest">Admin Al Amin</span>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -287,7 +264,7 @@
     </style>
 
     <!-- Announcements & Testimonials Section -->
-    <section class="py-24 bg-white" data-aos="fade-up">
+    <section class="pt-10 pb-24 bg-white" data-aos="fade-up">
         <div class="container mx-auto px-6 lg:px-12" data-aos="fade-up">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
                 
@@ -296,48 +273,47 @@
                     <div class="flex items-center justify-between mb-10 border-b border-gray-200 pb-6 relative z-10">
                         <div>
                             <h2 class="text-2xl font-extrabold text-teal-950 font-poppins">Pengumuman</h2>
-                            <p class="text-gray-400 text-xs font-bold uppercase tracking-widest mt-1">Informasi Akademik & Kegiatan</p>
+                            <p class="text-gray-500 text-sm mt-1">Informasi akademik & kegiatan.</p>
                         </div>
                         <a href="/pengumuman" class="group flex items-center gap-2 bg-teal-50 text-teal-700 font-bold text-[10px] uppercase tracking-widest px-4 py-2 rounded-full hover:bg-teal-600 hover:text-white transition-all duration-300">
                             Semua <i class="ti ti-arrow-right group-hover:translate-x-1 transition-transform"></i>
                         </a>
                     </div>
 
-                    <!-- Vertical Timeline Line -->
-                    <div class="absolute left-7 top-24 bottom-0 w-px bg-gradient-to-b from-teal-100 via-gray-100 to-transparent z-0"></div>
-
-                    <div class="space-y-6 relative z-10">
+                    <div class="space-y-4 relative z-10">
                         @forelse($pengumuman as $item)
-                        <div class="group relative transition-all duration-500">
-                            <div class="flex gap-6 items-start">
-                                <!-- Calendar Badge -->
-                                <div class="shrink-0 w-14 h-14 bg-white rounded-2xl border border-gray-100 shadow-sm flex flex-col items-center justify-center relative z-10 group-hover:border-teal-500 group-hover:shadow-lg group-hover:shadow-teal-900/5 transition-all duration-500">
-                                    <div class="text-lg font-black text-teal-900 leading-none">{{ $item->created_at->format('d') }}</div>
-                                    <div class="text-[9px] font-black text-teal-500 uppercase tracking-widest mt-0.5">{{ $item->created_at->format('M') }}</div>
-                                    <!-- Decorative dot on line -->
-                                    <div class="absolute -left-[11px] top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-gray-200 group-hover:bg-teal-500 transition-colors"></div>
+                        <a href="#" class="group block bg-white p-4 rounded-2xl border border-gray-100/80 shadow-sm hover:shadow-md hover:border-teal-500/20 hover:-translate-y-0.5 transition-all duration-300 relative">
+                            <div class="flex items-center gap-4">
+                                <!-- Date Badge (Compact) -->
+                                <div class="shrink-0 flex flex-col items-center justify-center w-12 h-12 bg-teal-50 rounded-xl border border-teal-100/50 group-hover:bg-teal-600 group-hover:border-teal-600 transition-colors duration-300">
+                                    <span class="text-base font-black text-teal-900 group-hover:text-white leading-none transition-colors duration-300">{{ $item->created_at->format('d') }}</span>
+                                    <span class="text-[8px] font-bold text-teal-600 group-hover:text-yellow-300 uppercase tracking-wider mt-0.5 transition-colors duration-300">{{ $item->created_at->format('M') }}</span>
                                 </div>
                                 
-                                <!-- Content Card -->
-                                <div class="flex-1 bg-white p-6 rounded-[2rem] border border-gray-100 shadow-sm hover:shadow-xl hover:shadow-teal-900/5 transition-all duration-500 relative">
-                                    <div class="flex items-center gap-3 mb-2">
+                                <!-- Content Info -->
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center gap-2 mb-1">
                                         @if($loop->first)
-                                            <span class="px-2 py-0.5 bg-yellow-400 text-white text-[8px] font-black rounded uppercase tracking-widest">New</span>
+                                            <span class="inline-flex items-center gap-1 px-1.5 py-0.5 bg-yellow-400 text-teal-950 text-[8px] font-black rounded-full uppercase tracking-wider">
+                                                New
+                                            </span>
                                         @endif
-                                        <div class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-                                            {{ $item->created_at->format('Y') }}
-                                        </div>
+                                        <span class="text-[9px] font-bold text-gray-400 uppercase tracking-widest">{{ $item->created_at->format('Y') }}</span>
                                     </div>
-                                    <h3 class="font-bold text-gray-800 group-hover:text-teal-700 transition-colors mb-2 leading-tight text-lg">{{ $item->judul }}</h3>
-                                    <p class="text-gray-500 text-sm line-clamp-2 leading-relaxed">{{ Str::limit($item->isi, 120) }}</p>
-                                    
-                                    <a href="#" class="mt-4 inline-flex items-center gap-2 text-[10px] font-black text-teal-600 uppercase tracking-widest group/link">
-                                        Baca Selengkapnya
-                                        <i class="ti ti-chevron-right transform group-hover/link:translate-x-1 transition-transform"></i>
-                                    </a>
+                                    <h3 class="font-bold text-gray-800 group-hover:text-teal-700 transition-colors text-sm md:text-base truncate leading-tight font-poppins">
+                                        {{ $item->judul }}
+                                    </h3>
+                                    <p class="text-gray-400 text-xs truncate mt-0.5 font-medium">
+                                        {{ strip_tags($item->isi) }}
+                                    </p>
+                                </div>
+
+                                <!-- Arrow Indicator -->
+                                <div class="shrink-0 w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 group-hover:bg-teal-50 group-hover:text-teal-600 transition-all duration-300">
+                                    <i class="ti ti-chevron-right text-sm transform group-hover:translate-x-0.5 transition-transform"></i>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                         @empty
                             <div class="text-center py-12 bg-white rounded-3xl border border-dashed border-gray-200">
                                 <i class="ti ti-bell-off text-4xl text-gray-200 mb-3 block"></i>
@@ -360,7 +336,7 @@
                     <div class="flex items-center justify-between mb-10 border-b border-gray-200 pb-6">
                         <div>
                             <h2 class="text-2xl font-extrabold text-teal-950 font-poppins">Apa Kata Mereka?</h2>
-                            <p class="text-gray-400 text-xs font-bold uppercase tracking-widest mt-1">Testimoni Wali & Alumni</p>
+                            <p class="text-gray-500 text-sm mt-1">Testimoni wali santri & alumni.</p>
                         </div>
                         <div class="flex gap-2">
                             <template x-for="(i, index) in slidesCount" :key="index">
