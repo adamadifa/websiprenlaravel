@@ -49,16 +49,16 @@
                     {{ $pengaturan->alamat_sekolah ?? 'Sindangkasih - Ciamis, Jawa Barat' }}
                 </p>
                 <div class="flex gap-4">
-                    <a href="#" class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-500 hover:bg-teal-500 hover:text-white transition-all shadow-sm" aria-label="Facebook Pesantren Al Amin">
+                    <a href="{{ $pengaturan->facebook ?? '#' }}" class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-500 hover:bg-teal-500 hover:text-white transition-all shadow-sm" aria-label="Facebook Pesantren Al Amin">
                         <i class="ti ti-brand-facebook text-xl"></i>
                     </a>
-                    <a href="#" class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-500 hover:bg-teal-500 hover:text-white transition-all shadow-sm" aria-label="Instagram Pesantren Al Amin">
+                    <a href="{{ $pengaturan->instagram ?? '#' }}" class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-500 hover:bg-teal-500 hover:text-white transition-all shadow-sm" aria-label="Instagram Pesantren Al Amin">
                         <i class="ti ti-brand-instagram text-xl"></i>
                     </a>
-                    <a href="#" class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-500 hover:bg-teal-500 hover:text-white transition-all shadow-sm" aria-label="YouTube Pesantren Al Amin">
+                    <a href="{{ $pengaturan->youtube ?? '#' }}" class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-500 hover:bg-teal-500 hover:text-white transition-all shadow-sm" aria-label="YouTube Pesantren Al Amin">
                         <i class="ti ti-brand-youtube text-xl"></i>
                     </a>
-                    <a href="#" class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-500 hover:bg-teal-500 hover:text-white transition-all shadow-sm" aria-label="TikTok Pesantren Al Amin">
+                    <a href="{{ $pengaturan->tiktok ?? '#' }}" class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-500 hover:bg-teal-500 hover:text-white transition-all shadow-sm" aria-label="TikTok Pesantren Al Amin">
                         <i class="ti ti-brand-tiktok text-xl"></i>
                     </a>
                 </div>
