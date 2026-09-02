@@ -5,125 +5,199 @@
 @section('meta_image', $post->getAdminImageUrl($post->image, 'posts'))
 
 @section('content')
-<div class="pt-32 pb-24 bg-white relative">
-    <!-- Aurora background accents -->
-    <div class="absolute top-24 left-0 w-[400px] h-[400px] bg-teal-500/5 rounded-full blur-[100px] pointer-events-none z-0"></div>
-    <div class="absolute top-[60%] right-0 w-[300px] h-[300px] bg-yellow-400/5 rounded-full blur-[80px] pointer-events-none z-0"></div>
+<div class="bg-white min-h-screen pt-28 pb-20 border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Breadcrumbs -->
+        <nav class="flex items-center gap-2 text-xs text-slate-500 font-medium mb-6">
+            <a href="/" class="hover:text-teal-700 transition-colors">Beranda</a>
+            <i class="ti ti-chevron-right text-[10px] text-slate-400"></i>
+            <a href="{{ route('news.index') }}" class="hover:text-teal-700 transition-colors">Berita & Artikel</a>
+            <i class="ti ti-chevron-right text-[10px] text-slate-400"></i>
+            <span class="text-slate-800 font-semibold truncate max-w-xs sm:max-w-md">{{ Str::limit($post->title, 40) }}</span>
+        </nav>
 
-    <div class="container mx-auto px-6 lg:px-12 relative z-10">
-        <!-- Breadcrumb & Tag -->
-        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8" data-aos="fade-up">
-            <div class="flex items-center gap-2">
-                <span class="bg-teal-50 text-teal-700 text-[10px] font-black uppercase px-3.5 py-1.5 rounded-full tracking-wider shadow-sm border border-teal-100/50">
-                    {{ $post->category->name ?? 'Berita' }}
-                </span>
-            </div>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
             
-            <nav class="flex items-center gap-2 text-gray-400 text-[10px] font-bold uppercase">
-                <a href="/" class="hover:text-teal-600 transition-colors">Home</a>
-                <i class="ti ti-chevron-right text-[8px]"></i>
-                <a href="{{ route('news.index') }}" class="hover:text-teal-600 transition-colors">Berita</a>
-                <i class="ti ti-chevron-right text-[8px]"></i>
-                <span class="text-teal-700">Detail</span>
-            </nav>
-        </div>
+            <!-- Main Content (8 cols) -->
+            <main class="lg:col-span-8">
+                <article>
+                    <!-- Category Badge -->
+                    <div class="mb-3">
+                        <span class="inline-flex items-center px-3 py-1 rounded text-xs font-semibold bg-teal-50 text-teal-800 border border-teal-200/60">
+                            {{ $post->category->name ?? 'Warta Berita' }}
+                        </span>
+                    </div>
 
-        <!-- Post Title -->
-        <h1 class="text-2xl md:text-3xl lg:text-4xl font-extrabold text-gray-900 leading-tight font-sans tracking-tight mb-6 max-w-5xl" data-aos="fade-up" data-aos-delay="50">
-            {!! html_entity_decode($post->title) !!}
-        </h1>
+                    <!-- Article Title -->
+                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 leading-tight tracking-tight mb-4 font-sans">
+                        {!! html_entity_decode($post->title) !!}
+                    </h1>
 
-        <!-- Author & Date Meta -->
-        <div class="flex flex-wrap items-center gap-y-3 gap-x-6 text-gray-500 text-xs md:text-sm font-medium pb-8 border-b border-gray-100 mb-12" data-aos="fade-up" data-aos-delay="100">
-            <div class="flex items-center gap-2">
-                <i class="ti ti-calendar-event text-teal-600 text-base"></i>
-                <span>{{ $post->created_at->translatedFormat('d F Y') }}</span>
-            </div>
-            <div class="w-1.5 h-1.5 bg-gray-200 rounded-full"></div>
-            <div class="flex items-center gap-2">
-                <i class="ti ti-user-circle text-teal-600 text-base"></i>
-                <span>Administrator</span>
-            </div>
-            <div class="w-1.5 h-1.5 bg-gray-200 rounded-full"></div>
-            <div class="flex items-center gap-2">
-                <i class="ti ti-clock text-teal-600 text-base"></i>
-                <span>{{ max(1, ceil(str_word_count(strip_tags($post->content)) / 200)) }} Menit Baca</span>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-            <!-- Main Content Area -->
-            <div class="lg:col-span-8">
-                <!-- Featured Image -->
-                <div class="relative rounded-[2rem] overflow-hidden shadow-xl border border-gray-100 mb-12 group" data-aos="zoom-in">
-                    @if($post->image)
-                        <img src="{{ $post->getAdminImageUrl($post->image, 'posts') }}" alt="{{ $post->title }}" class="w-full h-[320px] md:h-[460px] object-cover group-hover:scale-102 transition-transform duration-700" onerror="this.onerror=null; this.outerHTML='<div class=\'w-full h-[320px] md:h-[460px] bg-gray-50 flex flex-col gap-2 items-center justify-center text-gray-400\'><i class=\'ti ti-photo text-5xl\'></i><span class=\'text-xs font-semibold\'>Gambar tidak ditemukan</span></div>';">
-                    @else
-                        <div class="w-full h-[320px] md:h-[460px] bg-gray-50 flex items-center justify-center">
-                            <i class="ti ti-photo text-6xl text-gray-200"></i>
+                    <!-- Article Meta Info -->
+                    <div class="flex flex-wrap items-center gap-y-2 gap-x-4 text-xs sm:text-sm text-slate-500 py-3 border-y border-slate-200 mb-6">
+                        <div class="flex items-center gap-1.5 font-medium text-slate-700">
+                            <i class="ti ti-user-circle text-teal-700 text-base"></i>
+                            <span>Redaksi Pesantren</span>
                         </div>
-                    @endif
-                </div>
-
-                <!-- Post Body (Prose) -->
-                <article class="prose prose-lg max-w-none prose-teal prose-headings:font-poppins prose-headings:font-black prose-headings:text-teal-950 prose-p:text-gray-600 prose-p:leading-relaxed prose-img:rounded-2xl prose-strong:text-teal-950">
-                    {!! $post->content !!}
-                </article>
-
-                <!-- Share Block -->
-                <div class="mt-16 pt-8 border-t border-gray-100 flex flex-wrap items-center justify-between gap-6">
-                    <div class="flex items-center gap-3">
-                        <span class="text-xs font-black text-gray-400 uppercase tracking-widest">Bagikan Berita:</span>
-                        <div class="flex gap-2">
-                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(request()->fullUrl()) }}" target="_blank" class="w-9 h-9 rounded-xl bg-gray-50 flex items-center justify-center text-gray-500 hover:bg-teal-600 hover:text-white transition-all shadow-sm"><i class="ti ti-brand-facebook text-lg"></i></a>
-                            <a href="https://twitter.com/intent/tweet?url={{ urlencode(request()->fullUrl()) }}&text={{ urlencode($post->title) }}" target="_blank" class="w-9 h-9 rounded-xl bg-gray-50 flex items-center justify-center text-gray-500 hover:bg-teal-600 hover:text-white transition-all shadow-sm"><i class="ti ti-brand-twitter text-lg"></i></a>
-                            <a href="https://api.whatsapp.com/send?text={{ urlencode($post->title . ' - ' . request()->fullUrl()) }}" target="_blank" class="w-9 h-9 rounded-xl bg-gray-50 flex items-center justify-center text-gray-500 hover:bg-teal-600 hover:text-white transition-all shadow-sm"><i class="ti ti-brand-whatsapp text-lg"></i></a>
+                        <span class="text-slate-300">•</span>
+                        <div class="flex items-center gap-1.5">
+                            <i class="ti ti-calendar text-slate-400"></i>
+                            <time datetime="{{ $post->created_at->toIso8601String() }}">
+                                {{ $post->created_at->translatedFormat('l, d F Y - H:i') }} WIB
+                            </time>
+                        </div>
+                        <span class="text-slate-300 hidden sm:inline">•</span>
+                        <div class="flex items-center gap-1.5 text-slate-400">
+                            <i class="ti ti-clock"></i>
+                            <span>{{ max(1, ceil(str_word_count(strip_tags($post->content)) / 200)) }} mnt baca</span>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <!-- Sidebar Area -->
-            <div class="lg:col-span-4">
-                <div class="sticky top-32 space-y-6">
-                    <!-- Recent Posts Card -->
-                    <div class="bg-gray-50/50 rounded-[2rem] p-6 md:p-8 border border-gray-100 shadow-sm">
-                        <h3 class="text-lg font-black text-teal-950 font-poppins mb-6 flex items-center gap-2.5">
-                            <span class="w-1.5 h-6 bg-yellow-400 rounded-full"></span>
+                    <!-- Featured Image & Caption -->
+                    @if($post->image)
+                    <figure class="mb-8">
+                        <div class="overflow-hidden rounded-xl bg-slate-100 border border-slate-200">
+                            <img 
+                                src="{{ $post->getAdminImageUrl($post->image, 'posts') }}" 
+                                alt="{{ $post->title }}" 
+                                class="w-full h-auto max-h-[500px] object-cover"
+                                onerror="this.onerror=null; this.outerHTML='<div class=\'w-full h-[320px] bg-slate-50 flex flex-col gap-2 items-center justify-center text-slate-400\'><i class=\'ti ti-photo text-4xl\'></i><span class=\'text-xs\'>Gambar tidak dapat dimuat</span></div>';"
+                            >
+                        </div>
+                        <figcaption class="mt-2 text-xs text-slate-500 italic flex items-center justify-between">
+                            <span>Dokumentasi: Pesantren Al-Amin</span>
+                        </figcaption>
+                    </figure>
+                    @endif
+
+                    <!-- Article Body / Typography -->
+                    <div class="prose prose-slate prose-base sm:prose-lg max-w-none 
+                                prose-headings:font-bold prose-headings:text-slate-900 prose-headings:tracking-tight
+                                prose-p:text-slate-700 prose-p:leading-relaxed prose-p:font-normal
+                                prose-a:text-teal-700 prose-a:font-semibold hover:prose-a:text-teal-800 prose-a:underline
+                                prose-strong:text-slate-900 prose-strong:font-semibold
+                                prose-img:rounded-lg prose-img:border prose-img:border-slate-200 prose-img:shadow-none
+                                prose-blockquote:border-l-4 prose-blockquote:border-teal-600 prose-blockquote:bg-slate-50 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:italic prose-blockquote:text-slate-700">
+                        {!! $post->content !!}
+                    </div>
+
+                    <!-- Article Footer / Tags & Social Share -->
+                    <div class="mt-10 pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Kategori:</span>
+                            <span class="px-2.5 py-1 bg-slate-100 text-slate-700 text-xs font-medium rounded hover:bg-slate-200 transition-colors">
+                                {{ $post->category->name ?? 'Berita' }}
+                            </span>
+                        </div>
+
+                        <!-- Share Buttons -->
+                        <div class="flex items-center gap-2 w-full sm:w-auto">
+                            <span class="text-xs font-semibold text-slate-500 mr-1">Bagikan:</span>
+                            
+                            <!-- WhatsApp -->
+                            <a href="https://api.whatsapp.com/send?text={{ urlencode($post->title . ' - ' . request()->fullUrl()) }}" 
+                               target="_blank" 
+                               rel="noopener noreferrer"
+                               class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#25D366]/10 text-[#128C7E] hover:bg-[#25D366] hover:text-white transition-colors text-xs font-medium"
+                               title="Bagikan ke WhatsApp">
+                                <i class="ti ti-brand-whatsapp text-sm"></i>
+                                <span>WhatsApp</span>
+                            </a>
+
+                            <!-- Facebook -->
+                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(request()->fullUrl()) }}" 
+                               target="_blank" 
+                               rel="noopener noreferrer"
+                               class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-slate-100 text-slate-600 hover:bg-[#1877F2] hover:text-white transition-colors text-xs"
+                               title="Bagikan ke Facebook">
+                                <i class="ti ti-brand-facebook text-base"></i>
+                            </a>
+
+                            <!-- Twitter / X -->
+                            <a href="https://twitter.com/intent/tweet?url={{ urlencode(request()->fullUrl()) }}&text={{ urlencode($post->title) }}" 
+                               target="_blank" 
+                               rel="noopener noreferrer"
+                               class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-slate-100 text-slate-600 hover:bg-black hover:text-white transition-colors text-xs"
+                               title="Bagikan ke X / Twitter">
+                                <i class="ti ti-brand-x text-sm"></i>
+                            </a>
+
+                            <!-- Copy Link -->
+                            <button onclick="navigator.clipboard.writeText(window.location.href); alert('Tautan berita berhasil disalin!');" 
+                                    class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 transition-colors text-xs" 
+                                    title="Salin Tautan">
+                                <i class="ti ti-link text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </main>
+
+            <!-- Sidebar (4 cols) -->
+            <aside class="lg:col-span-4 space-y-8">
+                
+                <!-- Berita Terpopuler / Terbaru Box -->
+                <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+                    <div class="border-b border-slate-200 pb-3 mb-4 flex items-center justify-between">
+                        <h2 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 bg-teal-600 rounded-sm"></span>
                             Berita Terbaru
-                        </h3>
-                        
-                        <div class="divide-y divide-gray-100">
-                            @foreach($recentPosts as $recent)
-                            <a href="{{ route('news.show', $recent->slug) }}" class="group flex gap-4 py-4 first:pt-0 last:pb-0 items-start">
-                                <div class="w-16 h-16 shrink-0 rounded-xl overflow-hidden bg-white border border-gray-100 shadow-inner">
+                        </h2>
+                        <a href="{{ route('news.index') }}" class="text-xs text-teal-700 hover:text-teal-800 font-semibold hover:underline">
+                            Lihat Semua
+                        </a>
+                    </div>
+
+                    <div class="divide-y divide-slate-100">
+                        @forelse($recentPosts as $index => $recent)
+                        <article class="py-3.5 first:pt-0 last:pb-0 group">
+                            <a href="{{ route('news.show', $recent->slug) }}" class="flex gap-3.5 items-start">
+                                <!-- Nomor urut atau Thumbnail -->
+                                <div class="w-20 h-16 shrink-0 rounded-lg overflow-hidden bg-slate-100 border border-slate-200 relative">
                                     @if($recent->image)
-                                        <img src="{{ $recent->getAdminImageUrl($recent->image, 'posts') }}" alt="{{ $recent->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.outerHTML='<div class=\'w-full h-full flex items-center justify-center bg-gray-50 text-gray-400\'><i class=\'ti ti-photo text-lg\'></i></div>';">
+                                        <img src="{{ $recent->getAdminImageUrl($recent->image, 'posts') }}" alt="{{ $recent->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.outerHTML='<div class=\'w-full h-full flex items-center justify-center bg-slate-100 text-slate-400\'><i class=\'ti ti-photo text-base\'></i></div>';">
                                     @else
-                                        <div class="w-full h-full flex items-center justify-center bg-gray-50">
-                                            <i class="ti ti-photo text-lg text-gray-200"></i>
+                                        <div class="w-full h-full flex items-center justify-center bg-slate-100 text-slate-400">
+                                            <i class="ti ti-photo text-base"></i>
                                         </div>
                                     @endif
                                 </div>
-                                <div class="min-w-0">
-                                    <h4 class="text-sm font-bold text-gray-800 group-hover:text-teal-700 transition-colors line-clamp-2 leading-snug">
+                                <div class="flex-1 min-w-0">
+                                    <h3 class="text-xs font-semibold text-slate-800 group-hover:text-teal-700 transition-colors line-clamp-2 leading-snug">
                                         {{ $recent->title }}
-                                    </h4>
-                                    <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mt-1">
-                                        {{ $recent->created_at->translatedFormat('d M Y') }}
+                                    </h3>
+                                    <span class="text-[11px] text-slate-400 block mt-1.5">
+                                        {{ $recent->created_at->translatedFormat('d F Y') }}
                                     </span>
                                 </div>
                             </a>
-                            @endforeach
-                        </div>
-
-                        <a href="{{ route('news.index') }}" class="mt-6 w-full py-3.5 bg-white border border-teal-100 text-teal-600 rounded-xl text-center text-xs font-black hover:bg-teal-600 hover:text-white hover:border-teal-600 transition-all block uppercase tracking-wider">
-                            Lihat Semua Berita
-                        </a>
+                        </article>
+                        @empty
+                        <p class="text-xs text-slate-400 py-3">Tidak ada berita terbaru lainnya.</p>
+                        @endforelse
                     </div>
                 </div>
-            </div>
+
+                <!-- Banner / Sekilas Info Pesantren -->
+                <div class="bg-gradient-to-br from-teal-800 to-teal-950 text-white rounded-xl p-6 shadow-sm">
+                    <span class="inline-block px-2.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-teal-600/50 text-teal-100 mb-3">
+                        Penerimaan Santri Baru
+                    </span>
+                    <h3 class="text-base font-bold mb-2">Pendaftaran Santri Baru Telah Dibuka</h3>
+                    <p class="text-xs text-teal-100/80 leading-relaxed mb-4">
+                        Bergabunglah bersama keluarga besar Pesantren Al-Amin. Raih masa depan dengan ilmu agama dan umum yang berintegritas.
+                    </p>
+                    <a href="/spmb" class="inline-flex items-center gap-1.5 px-4 py-2 bg-white text-teal-900 rounded-lg text-xs font-bold hover:bg-teal-50 transition-colors">
+                        Informasi SPMB
+                        <i class="ti ti-arrow-right text-xs"></i>
+                    </a>
+                </div>
+
+            </aside>
+
         </div>
     </div>
 </div>
 @endsection
+

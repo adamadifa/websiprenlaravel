@@ -5,99 +5,118 @@
 @section('meta_image', $post->getAdminImageUrl($post->image, 'posts'))
 
 @section('content')
-<!-- Hero/Header Section -->
-<div class="bg-teal-900 pt-8 pb-10 px-6 relative overflow-hidden">
-    <div class="absolute inset-0 opacity-10">
-    </div>
+<div class="bg-white min-h-screen">
     
-    <div class="relative z-10" data-aos="fade-down">
-        <!-- Breadcrumb & Category -->
-        <div class="flex items-center justify-between mb-0">
-            <span class="bg-white/10 backdrop-blur-md text-white text-[10px] font-black px-4 py-2 rounded-full uppercase tracking-widest border border-white/10">
-                {{ $post->category->name ?? 'Berita' }}
-            </span>
-            <div class="flex items-center gap-2 text-[10px] text-white font-bold uppercase tracking-widest">
-                <a href="/" class="text-white/80">Beranda</a>
-                <i class="ti ti-chevron-right text-[8px] text-teal-500"></i>
-                <span class="text-white">Detail</span>
-            </div>
-        </div>
+    <!-- Top Navigation / Breadcrumb -->
+    <div class="px-4 py-3 border-b border-slate-100 flex items-center justify-between text-xs">
+        <a href="{{ route('news.index') }}" class="inline-flex items-center gap-1 text-slate-600 font-medium">
+            <i class="ti ti-arrow-left text-sm text-teal-700"></i>
+            <span>Kembali ke Berita</span>
+        </a>
+        <span class="px-2 py-0.5 rounded bg-teal-50 text-teal-800 font-medium text-[11px] border border-teal-100">
+            {{ $post->category->name ?? 'Berita' }}
+        </span>
     </div>
-</div>
 
-<div class="px-6 pt-10 pb-20 bg-gray-50/50 min-h-screen">
+    <!-- Article Header -->
+    <header class="px-4 pt-4 pb-2">
+        <h1 class="text-xl sm:text-2xl font-bold text-slate-900 leading-snug tracking-tight mb-3">
+            {!! html_entity_decode($post->title) !!}
+        </h1>
 
-    <!-- Article Title -->
-    <div class="mb-8" data-aos="fade-up">
-        <h1 class="text-2xl font-black text-teal-950 leading-tight mb-4">{{ $post->title }}</h1>
-        <div class="flex items-center gap-4 text-[10px] text-gray-400 font-bold uppercase tracking-widest">
-            <div class="flex items-center gap-1.5">
-                <i class="ti ti-calendar-event text-teal-600 text-sm"></i>
-                <span>{{ $post->created_at->format('d M Y') }}</span>
-            </div>
-            <div class="flex items-center gap-1.5">
-                <i class="ti ti-user text-teal-600 text-sm"></i>
-                <span>Admin</span>
-            </div>
+        <div class="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-slate-500 pb-3 border-b border-slate-100">
+            <span class="font-medium text-slate-700">Redaksi Al-Amin</span>
+            <span class="text-slate-300">•</span>
+            <time datetime="{{ $post->created_at->toIso8601String() }}">
+                {{ $post->created_at->translatedFormat('d M Y, H:i') }} WIB
+            </time>
         </div>
-    </div>
+    </header>
 
     <!-- Featured Image -->
-    <div class="relative rounded-[2.5rem] overflow-hidden shadow-2xl shadow-teal-900/10 mb-10" data-aos="zoom-in">
-        <img src="{{ $post->getAdminImageUrl($post->image, 'posts') }}" alt="{{ $post->title }}" class="w-full h-auto object-cover max-h-[300px]">
-        <div class="absolute inset-0 bg-gradient-to-t from-teal-900/20 to-transparent"></div>
-    </div>
+    @if($post->image)
+    <figure class="px-4 my-3">
+        <div class="overflow-hidden rounded-lg bg-slate-100 border border-slate-200">
+            <img 
+                src="{{ $post->getAdminImageUrl($post->image, 'posts') }}" 
+                alt="{{ $post->title }}" 
+                class="w-full h-auto max-h-[260px] object-cover"
+                onerror="this.onerror=null; this.outerHTML='<div class=\'w-full h-[180px] bg-slate-50 flex items-center justify-center text-slate-400\'><i class=\'ti ti-photo text-3xl\'></i></div>';"
+            >
+        </div>
+        <figcaption class="mt-1 text-[11px] text-slate-400 italic">
+            Dokumentasi: Pesantren Al-Amin
+        </figcaption>
+    </figure>
+    @endif
 
     <!-- Article Content -->
-    <div class="prose prose-sm prose-teal max-w-none mb-16 text-gray-600 leading-relaxed font-medium" data-aos="fade-up">
-        {!! $post->content !!}
-    </div>
+    <article class="px-4 py-2">
+        <div class="prose prose-sm prose-slate max-w-none text-slate-700 leading-relaxed font-normal
+                    prose-headings:font-bold prose-headings:text-slate-900
+                    prose-p:mb-4 prose-p:leading-relaxed
+                    prose-a:text-teal-700 prose-a:font-medium
+                    prose-img:rounded-lg prose-img:my-4 prose-img:border prose-img:border-slate-100">
+            {!! $post->content !!}
+        </div>
+    </article>
 
     <!-- Share Section -->
-    <div class="bg-teal-50 p-8 rounded-[2.5rem] mb-16" data-aos="fade-up">
-        <div class="text-center mb-6">
-            <h3 class="text-sm font-black text-teal-950 uppercase tracking-widest">Bagikan Berita</h3>
-            <div class="h-1 w-8 bg-teal-200 mx-auto mt-2 rounded-full"></div>
+    <div class="mx-4 my-6 p-4 rounded-xl bg-slate-50 border border-slate-200">
+        <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-semibold text-slate-700">Bagikan artikel ini:</span>
+            <button onclick="navigator.clipboard.writeText(window.location.href); alert('Tautan berhasil disalin!');" class="text-xs text-teal-700 font-semibold flex items-center gap-1">
+                <i class="ti ti-link"></i> Salin Link
+            </button>
         </div>
-        <div class="flex justify-center gap-4">
-            <a href="https://wa.me/?text={{ urlencode($post->title . ' ' . url()->current()) }}" class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-[#25D366] shadow-sm active:scale-95 transition-all">
-                <i class="ti ti-brand-whatsapp text-2xl"></i>
+        <div class="grid grid-cols-3 gap-2">
+            <a href="https://wa.me/?text={{ urlencode($post->title . ' ' . url()->current()) }}" target="_blank" class="py-2 px-3 bg-white border border-slate-200 rounded-lg flex items-center justify-center gap-1.5 text-xs font-medium text-[#128C7E] active:bg-slate-100">
+                <i class="ti ti-brand-whatsapp text-base"></i> WhatsApp
             </a>
-            <a href="https://www.facebook.com/sharer/sharer.php?u={{ url()->current() }}" class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-[#1877F2] shadow-sm active:scale-95 transition-all">
-                <i class="ti ti-brand-facebook text-2xl"></i>
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{ url()->current() }}" target="_blank" class="py-2 px-3 bg-white border border-slate-200 rounded-lg flex items-center justify-center gap-1.5 text-xs font-medium text-[#1877F2] active:bg-slate-100">
+                <i class="ti ti-brand-facebook text-base"></i> Facebook
             </a>
-            <a href="https://twitter.com/intent/tweet?text={{ urlencode($post->title) }}&url={{ url()->current() }}" class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-[#1DA1F2] shadow-sm active:scale-95 transition-all">
-                <i class="ti ti-brand-twitter text-2xl"></i>
+            <a href="https://twitter.com/intent/tweet?text={{ urlencode($post->title) }}&url={{ url()->current() }}" target="_blank" class="py-2 px-3 bg-white border border-slate-200 rounded-lg flex items-center justify-center gap-1.5 text-xs font-medium text-slate-800 active:bg-slate-100">
+                <i class="ti ti-brand-x text-sm"></i> Twitter
             </a>
         </div>
     </div>
 
     <!-- Related News -->
-    <div class="mb-12">
-        <div class="flex items-center justify-between mb-8">
-            <h2 class="text-lg font-black text-teal-950 font-poppins">Berita Lainnya</h2>
-            <a href="/berita" class="text-[10px] font-black text-teal-600 uppercase">Lihat Semua</a>
+    <section class="px-4 pt-4 pb-8 border-t border-slate-100">
+        <div class="flex items-center justify-between mb-4">
+            <h2 class="text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                <span class="w-1.5 h-3.5 bg-teal-600 rounded-sm"></span>
+                Berita Terkait Lainnya
+            </h2>
+            <a href="{{ route('news.index') }}" class="text-xs font-semibold text-teal-700">Lihat Semua</a>
         </div>
         
-        <div class="space-y-6">
-            @foreach($recentPosts->take(3) as $recent)
-            <a href="{{ route('news.show', $recent->slug) }}" class="flex gap-4 group">
-                <div class="shrink-0 w-20 h-20 rounded-2xl overflow-hidden shadow-sm">
-                    <img src="{{ $recent->getAdminImageUrl($recent->image, 'posts') }}" alt="{{ $recent->title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+        <div class="divide-y divide-slate-100">
+            @foreach($recentPosts->take(4) as $recent)
+            <a href="{{ route('news.show', $recent->slug) }}" class="py-3 flex gap-3 items-start first:pt-0">
+                <div class="shrink-0 w-20 h-16 rounded-lg overflow-hidden bg-slate-100 border border-slate-200">
+                    @if($recent->image)
+                        <img src="{{ $recent->getAdminImageUrl($recent->image, 'posts') }}" alt="{{ $recent->title }}" class="w-full h-full object-cover">
+                    @else
+                        <div class="w-full h-full flex items-center justify-center text-slate-300">
+                            <i class="ti ti-photo text-base"></i>
+                        </div>
+                    @endif
                 </div>
-                <div class="flex-1 py-1">
-                    <h4 class="text-xs font-black text-teal-950 line-clamp-2 leading-snug mb-2 group-hover:text-teal-600 transition-colors">{{ $recent->title }}</h4>
-                    <span class="text-[9px] text-gray-400 font-bold uppercase tracking-wider">{{ $recent->created_at->format('d M Y') }}</span>
+                <div class="flex-1 min-w-0">
+                    <h3 class="text-xs font-medium text-slate-900 line-clamp-2 leading-snug mb-1">
+                        {{ $recent->title }}
+                    </h3>
+                    <span class="text-[10px] text-slate-400">
+                        {{ $recent->created_at->translatedFormat('d M Y') }}
+                    </span>
                 </div>
             </a>
             @endforeach
         </div>
-    </div>
-</div>
+    </section>
 
-<style>
-    .prose p { margin-bottom: 1.5rem; }
-    .prose img { border-radius: 1.5rem; margin: 2rem 0; }
-    .prose h2, .prose h3 { color: #042d27; font-weight: 900; margin-top: 2rem; margin-bottom: 1rem; }
-</style>
+</div>
 @endsection
+
