@@ -125,47 +125,63 @@
     </section>
 
 <!-- ==============================================================
-         NEW SECTION: PRAKATA MUDIR
+         PRAKATA MUDIR — Clean editorial layout
          ============================================================== -->
     @if(!empty($setting->prakata_content))
-    <section id="prakata" class="py-12 sm:py-16 bg-white border-b border-stone-100">
+    <section id="prakata" class="py-16 sm:py-20 bg-[#fdfcfb] border-b border-stone-200/60">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
                 
-                <!-- Left: Foto Mudir -->
-                <div class="md:col-span-5 lg:col-span-4" data-aos="fade-right">
-                    <div class="rounded-3xl overflow-hidden relative shadow-lg bg-stone-100 border border-stone-200 group">
+                <!-- Left: Photo + Name -->
+                <div class="lg:col-span-4" data-aos="fade-right">
+                    <div class="rounded-2xl overflow-hidden shadow-lg bg-stone-100 relative">
                         <img 
                             src="{{ !empty($setting->prakata_custom_foto) ? asset('storage/'.$setting->prakata_custom_foto) : asset('images/mts/santri-model.png') }}" 
-                            alt="{{ $setting->prakata_custom_nama ?? 'Mudir' }}" 
-                            class="w-full h-auto aspect-[3/4] object-cover group-hover:scale-105 transition-transform duration-500"
+                            alt="{{ $setting->prakata_custom_nama ?? 'Mudir MTs Persis' }}" 
+                            class="w-full aspect-[3/4] object-cover object-top"
                         >
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#3e2723] to-transparent p-6 text-white">
-                            <h4 class="font-inter font-bold text-lg leading-tight">{{ $setting->prakata_custom_nama ?? 'Pimpinan' }}</h4>
-                            <span class="text-xs text-amber-400 font-semibold uppercase tracking-wider">{{ $setting->prakata_custom_jabatan ?? 'Jabatan' }}</span>
+                        <!-- Badge nama di pojok bawah kiri -->
+                        <div class="absolute bottom-4 left-4">
+                            <div class="bg-[#3e2723] rounded-xl px-4 py-2.5 shadow-lg">
+                                <p class="font-inter font-bold text-sm text-white leading-tight">{{ $setting->prakata_custom_nama ?? 'Ust. Budi, S.Pd.I' }}</p>
+                                <p class="font-inter text-[11px] text-amber-300 mt-0.5 uppercase tracking-wider">{{ $setting->prakata_custom_jabatan ?? 'Mudir MTs Persis' }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Right: Prakata Content -->
-                <div class="md:col-span-7 lg:col-span-8" data-aos="fade-left">
-                    <span class="text-[#8d6e63] font-inter font-bold text-xs uppercase tracking-wider block mb-2">
-                        {{ $setting->prakata_tag ?? 'PRAKATA' }}
-                    </span>
-                    <h2 class="font-inter text-3xl sm:text-4xl font-extrabold text-[#3e2723] mb-6 leading-tight">
-                        {{ $setting->prakata_title ?? 'Membangun Karakter' }}
-                    </h2>
-                    
-                    <div class="relative mb-6">
-                        <i class="ti ti-quote absolute -top-4 -left-3 text-4xl text-amber-400/30"></i>
-                        <blockquote class="font-inter font-bold text-lg sm:text-xl text-stone-600 italic relative z-10 pl-6 border-l-4 border-amber-400">
-                            "{{ $setting->prakata_quote ?? 'Visi kami menjadikan santri berakhlak mulia.' }}"
-                        </blockquote>
-                    </div>
-                    
-                    <p class="font-inter text-stone-600 text-sm sm:text-base leading-relaxed">
-                        {{ $setting->prakata_content ?? '' }}
+                <!-- Right: Content -->
+                <div class="lg:col-span-8 pt-2" data-aos="fade-left">
+                    <p class="font-inter text-xs font-bold uppercase tracking-widest text-[#8d6e63] mb-3">
+                        {{ $setting->prakata_tag ?? 'Prakata Mudir' }}
                     </p>
+                    <h2 class="font-inter text-3xl sm:text-4xl font-extrabold text-[#3e2723] mb-6 leading-tight">
+                        {{ $setting->prakata_title ?? 'Membangun Generasi Islami yang Berilmu, Berakhlak, dan Berprestasi' }}
+                    </h2>
+
+                    <!-- Quote with left accent border -->
+                    <blockquote class="border-l-4 border-amber-500 pl-5 mb-6">
+                        <p class="font-inter font-semibold text-base sm:text-lg text-stone-700 italic leading-relaxed">
+                            "{{ $setting->prakata_quote ?? 'Kami hadir bukan sekadar mendidik, melainkan membentuk generasi yang siap membawa amanah Islam dengan ilmu yang mumpuni dan akhlak yang mulia.' }}"
+                        </p>
+                    </blockquote>
+
+                    @if(!empty($setting->prakata_content))
+                        <div class="font-inter text-sm sm:text-base text-stone-600 leading-relaxed mb-6 space-y-3">
+                            {!! nl2br(e($setting->prakata_content)) !!}
+                        </div>
+                    @endif
+
+                    <!-- Simple signature line -->
+                    <div class="flex items-center gap-3 pt-4 border-t border-stone-200">
+                        <div class="w-10 h-10 rounded-full bg-[#3e2723] text-amber-400 flex items-center justify-center font-inter font-extrabold text-sm shrink-0">
+                            {{ substr($setting->prakata_custom_nama ?? 'U', 0, 1) }}
+                        </div>
+                        <div>
+                            <p class="font-inter font-bold text-sm text-[#3e2723]">{{ $setting->prakata_custom_nama ?? 'Ust. Budi, S.Pd.I' }}</p>
+                            <p class="font-inter text-xs text-stone-500">{{ $setting->prakata_custom_jabatan ?? 'Mudir MTs Persis Sindangkasih' }}</p>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -176,116 +192,89 @@
 
 
     <!-- ==============================================================
-         3. SECTION 3: WHY CHOOSE US? (Identik Bagian Why Choose Antixor)
-         - Judul Center: "Why Choose MTs Persis?"
-         - 4 Bulatan Icon Garis Horisontal: Eco-Friendly, Verified, Affordable, Satisfaction
+         3. SECTION 3: FASILITAS UNGGULAN & SARANA PRASARANA (Card Interaktif Mewah)
          ============================================================== -->
-        @php
+    @php
         $fasilitasItems = (!empty($setting->custom_fasilitas) && count($setting->custom_fasilitas) > 0)
             ? $setting->custom_fasilitas
             : [
                 [
-                    'name' => 'Asrama Santri yang Nyaman',
-                    'tag' => 'FASILITAS',
-                    'image' => 'images/mts/section4-santri.jpg'
-                ],
-                [
-                    'name' => 'Ruang Belajar Interaktif',
+                    'name' => 'Ruang Kelas Multimedia',
                     'tag' => 'RUANG KELAS',
+                    'desc' => 'Ruang belajar representatif dilengkapi fasilitas multimedia, proyektor, pencahayaan alami, dan sirkulasi udara yang nyaman.',
                     'image' => 'images/mts/bg-bright.jpg'
                 ],
                 [
-                    'name' => 'Masjid Jami & Pusat Kajian',
-                    'tag' => 'IBADAH',
+                    'name' => 'Asrama Putra & Putri',
+                    'tag' => 'ASRAMA SANTRI',
+                    'desc' => 'Gedung asrama terpisah santri putra dan putri yang bersih, tertib, serta didampingi pembina/asatidz selama 24 jam penuh.',
+                    'image' => 'images/mts/section4-santri.jpg'
+                ],
+                [
+                    'name' => 'Masjid Kampus & Pusat Kajian',
+                    'tag' => 'PUSAT IBADAH',
+                    'desc' => 'Pusat pembinaan ruhani, halaqah tahfidz Al-Qur\'an, shalat berjamaah 5 waktu, kajian kitab tafsir dan hadits.',
                     'image' => 'images/mts/santri-model.png'
+                ],
+                [
+                    'name' => 'Laboratorium Komputer & Riset',
+                    'tag' => 'TEKNOLOGI',
+                    'desc' => 'Fasilitas komputer modern terhubung jaringan internet stabil untuk ujian CBT dan literasi teknologi santri.',
+                    'image' => 'images/mts/bg-bright.jpg'
                 ]
             ];
     @endphp
-    <section id="fasilitas" class="py-16 sm:py-20 bg-white relative overflow-hidden" x-data="{ activeFacSlide: 0 }">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+    <section id="fasilitas" class="py-16 sm:py-20 bg-white border-b border-stone-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
             
-            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12" data-aos="fade-up">
-                <div>
-                    <span class="font-fredoka font-bold text-xs sm:text-sm text-[#8d6e63] uppercase tracking-wider block mb-2">
-                        {{ $setting->fasilitas_tag ?? 'SARANA & PRASARANA' }}
-                    </span>
-                    <h2 class="font-fredoka text-2xl sm:text-4xl font-bold text-[#3e2723] leading-tight max-w-xl">
-                        {{ $setting->fasilitas_title ?? 'Fasilitas Belajar Representatif & Ramah Anak' }}
-                    </h2>
-                </div>
-                <div class="max-w-md text-left md:text-right">
-                    <p class="font-quicksand font-bold text-xs sm:text-sm text-slate-500">
-                        {{ $setting->fasilitas_description ?? 'Didukung lingkungan kampus pesantren yang asri, tenang, aman, serta sarana modern untuk menunjang pembelajaran aktif.' }}
-                    </p>
-                </div>
+            <!-- Section Header -->
+            <div class="mb-10" data-aos="fade-up">
+                <p class="font-inter text-xs font-bold uppercase tracking-widest text-[#8d6e63] mb-2">
+                    {{ $setting->fasilitas_tag ?? 'Sarana & Prasarana' }}
+                </p>
+                <h2 class="font-inter text-3xl sm:text-4xl font-extrabold text-[#3e2723] leading-tight">
+                    {{ $setting->fasilitas_title ?? 'Fasilitas Representatif untuk Santri' }}
+                </h2>
+                @if(!empty($setting->fasilitas_description))
+                <p class="font-inter text-sm sm:text-base text-stone-500 mt-3 max-w-2xl leading-relaxed">
+                    {{ $setting->fasilitas_description }}
+                </p>
+                @endif
             </div>
 
-            <!-- Mobile Swipe Hint -->
-            <div class="flex items-center justify-center gap-1.5 text-[11px] font-fredoka text-slate-600 bg-slate-50 border border-slate-200/70 py-1.5 px-3 rounded-full w-fit mx-auto mb-4 md:hidden">
-                <i class="ti ti-hand-swipe text-sm animate-pulse text-[#8d6e63]"></i>
-                <span>Geser untuk melihat fasilitas</span>
-            </div>
-
-            <!-- Fasilitas: Mobile Slider & Desktop 4-Cols Grid -->
-            <div 
-                id="fasilitasSlider"
-                class="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-6 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0 no-scrollbar"
-                @scroll="activeFacSlide = Math.round($el.scrollLeft / ($el.offsetWidth * 0.8))"
-            >
+            <!-- Fasilitas Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6">
                 @foreach($fasilitasItems as $fIdx => $f)
                     @php
                         $fName = $f['name'] ?? $f['title'] ?? 'Fasilitas Unggulan';
-                        $fTag = $f['tag'] ?? 'SARANA';
                         $fDesc = $f['desc'] ?? $f['deskripsi'] ?? '';
                         $fImg = !empty($f['image']) ? (str_starts_with($f['image'], 'http') ? $f['image'] : (file_exists(public_path($f['image'])) ? asset($f['image']) : $unit->getAdminImageUrl($f['image']))) : 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?q=80&w=600&auto=format&fit=crop';
                     @endphp
-                    <div class="min-w-[82%] sm:min-w-[70%] md:min-w-0 snap-center bg-white rounded-3xl border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col group hover:-translate-y-1" data-aos="fade-up" data-aos-delay="{{ ($fIdx + 1) * 80 }}">
-                        <div class="h-44 sm:h-48 overflow-hidden relative bg-stone-100">
+                    <div class="group rounded-xl overflow-hidden border border-stone-200 bg-white hover:shadow-md transition-shadow duration-300" data-aos="fade-up" data-aos-delay="{{ ($fIdx) * 60 }}">
+                        <!-- Photo -->
+                        <div class="h-44 overflow-hidden bg-stone-100">
                             <img 
                                 src="{{ $fImg }}" 
                                 alt="{{ $fName }}" 
-                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                             >
-                            <span class="absolute top-3 left-3 bg-[#3e2723]/90 backdrop-blur-md text-amber-400 font-inter font-bold text-[9px] px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm">
-                                {{ $fTag }}
-                            </span>
                         </div>
-                        <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between">
-                            <div>
-                                <h3 class="font-inter font-bold text-base sm:text-lg text-[#3e2723] mb-1.5 group-hover:text-[#5d4037] transition-colors leading-snug">
-                                    {{ $fName }}
-                                </h3>
-                                <p class="font-inter text-xs sm:text-sm text-stone-500 leading-relaxed">
-                                    {{ $fDesc }}
-                                </p>
-                            </div>
+                        <!-- Info -->
+                        <div class="p-4">
+                            <h3 class="font-inter font-bold text-sm text-[#3e2723] leading-snug mb-1.5">{{ $fName }}</h3>
+                            @if(!empty($fDesc))
+                            <p class="font-inter text-xs text-stone-500 leading-relaxed line-clamp-2">{{ $fDesc }}</p>
+                            @endif
                         </div>
                     </div>
                 @endforeach
             </div>
 
-            <!-- Mobile Dots Indicator Only -->
-            @if(count($fasilitasItems) > 1)
-                <div class="flex items-center justify-center gap-2 mt-4 md:hidden">
-                    @foreach($fasilitasItems as $fDotIdx => $fDotItem)
-                        <button 
-                            @click="document.getElementById('fasilitasSlider').scrollTo({ left: document.getElementById('fasilitasSlider').offsetWidth * 0.8 * {{ $fDotIdx }}, behavior: 'smooth' })" 
-                            :class="activeFacSlide === {{ $fDotIdx }} ? 'w-6 bg-[#3e2723]' : 'w-2 bg-slate-300'" 
-                            class="h-2 rounded-full transition-all duration-300"
-                            aria-label="Fasilitas {{ $fDotIdx + 1 }}"
-                        ></button>
-                    @endforeach
-                </div>
-            @endif
-
         </div>
     </section>
 
 
-
-    
-
-    <!-- ==============================================================
+        <!-- ==============================================================
          2. SECTION 2: OUR SERVICES (Identik Kotak Coklat Tua Besar)
          - Sisi Kiri: Judul "Our Services", Deskripsi, Tombol "View All"
          - Sisi Kanan: 6 Grid Card Putih Bersih dengan Icon Garis & Deskripsi
@@ -305,17 +294,17 @@
                     <div class="lg:col-span-4 text-center lg:text-left flex flex-col justify-between h-full">
                         <div>
                             <span class="text-amber-400 font-inter font-bold text-xs uppercase tracking-wider block mb-2">
-                                PROGRAM UNGGULAN
+                                {{ $setting->program_tag ?? 'PROGRAM UNGGULAN' }}
                             </span>
                             <h2 class="font-inter text-3xl sm:text-4xl font-extrabold text-white leading-tight mb-4">
-                                Layanan & Program Pendidikan
+                                {{ $setting->program_title ?? 'Layanan & Program Pendidikan' }}
                             </h2>
                             <p class="font-inter text-stone-300 text-sm leading-relaxed mb-8">
-                                Dari kurikulum madrasah nasional hingga spesialisasi kepesantrenan — kami menyediakan pembinaan menyeluruh bagi santri.
+                                {{ $setting->program_description ?? 'Dari kurikulum madrasah nasional hingga spesialisasi kepesantrenan — kami menyediakan pembinaan menyeluruh bagi santri.' }}
                             </p>
                         </div>
 
-                        <!-- Yellow Action Button (Identik Tombol Kuning Antixor "View All Services") -->
+                        <!-- Yellow Action Button -->
                         <div>
                             <a href="#biaya" class="btn-accent-gold inline-flex items-center justify-center px-6 py-3.5 rounded-lg font-bold text-sm shadow-md transition-all" style="background-color: #f59e0b !important; color: #2d1b18 !important;">
                                 <span>Lihat Seluruh Biaya</span>
@@ -326,39 +315,44 @@
                     <!-- Right Grid (lg:col-span-8): 6 White Service Cards (2x3 Grid) -->
                     <div class="lg:col-span-8">
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-                            
+
                             @php
-                                $programs = !empty($setting->custom_programs) ? $setting->custom_programs : [
-                                    [
-                                        'icon' => 'ti ti-book-2',
-                                        'title' => 'Tahfidz Al-Qur\'an',
-                                        'desc' => 'Talaqqi, tahsin bersanad, dan target hafalan mutqin minimal 3-5 juz selama jenjang MTs.'
-                                    ],
-                                    [
-                                        'icon' => 'ti ti-books',
-                                        'title' => 'Dirasah Islamiyah',
-                                        'desc' => 'Penguasaan kitab turats, aqidah shahihah, fiqih ibadah, hadits, dan tarikh Islam.'
-                                    ]
-                                ];
+                                // Prioritas: custom_programs dari setting, fallback ke $unggulan dari DB
+                                if (!empty($setting->custom_programs) && count($setting->custom_programs) > 0) {
+                                    $programs = $setting->custom_programs;
+                                    $useModel = false;
+                                } else {
+                                    $programs = $unggulan;
+                                    $useModel = true;
+                                }
                             @endphp
 
-                            @foreach($programs as $s)
-                                <!-- White Clean Service Card (Identik Antixor Card) -->
+                            @forelse($programs as $idx => $s)
+                                @php
+                                    if ($useModel) {
+                                        $pTitle = $s->nama_program ?? '';
+                                        $pDesc  = $s->deskripsi ?? '';
+                                        $pIcon  = null;
+                                    } else {
+                                        $pTitle = $s['title'] ?? $s['nama_program'] ?? '';
+                                        $pDesc  = $s['desc'] ?? $s['deskripsi'] ?? '';
+                                        $pIcon  = $s['icon'] ?? null;
+                                    }
+                                    $icons = ['ti ti-book-2','ti ti-books','ti ti-star','ti ti-certificate','ti ti-shield-check','ti ti-bulb'];
+                                    $iconClass = $pIcon ?? ($icons[$loop->index % count($icons)]);
+                                @endphp
                                 <div class="bg-white rounded-2xl p-5 sm:p-6 text-stone-800 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
                                     <div>
-                                        <!-- Line Icon in Brown Tone -->
                                         <div class="w-12 h-12 rounded-xl bg-amber-50 text-[#5d4037] flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
-                                            <i class="{{ $s['icon'] ?? 'ti-star' }}"></i>
+                                            <i class="{{ $iconClass }}"></i>
                                         </div>
-                                        <h3 class="font-inter font-bold text-base text-[#3e2723] mb-2 leading-snug">
-                                            {{ $s['title'] ?? '' }}
-                                        </h3>
-                                        <p class="font-inter text-xs text-stone-500 leading-relaxed">
-                                            {{ $s['desc'] ?? '' }}
-                                        </p>
+                                        <h3 class="font-inter font-bold text-base text-[#3e2723] mb-2 leading-snug">{{ $pTitle }}</h3>
+                                        <p class="font-inter text-xs text-stone-500 leading-relaxed">{{ $pDesc }}</p>
                                     </div>
                                 </div>
-                            @endforeach
+                            @empty
+                                <div class="col-span-3 text-center text-stone-400 text-sm py-6">Program belum tersedia.</div>
+                            @endforelse
 
                         </div>
                     </div>
@@ -369,106 +363,6 @@
 
         </div>
     </section>
-
-
-
-    <!-- ==============================================================
-         4. SECTION 4: SPLIT FEATURE WITH STATS (Identik Antixor "We Make Your Space Sparkle")
-         - Kiri: Foto Kegiatan Santri di Perpustakaan / Asrama
-         - Kanan: Card Coklat dengan Checklist Keunggulan + Tombol Daftar
-         - Bawah: 4 Angka Statistik (500+, 120+, 1,000+, 100%)
-         ============================================================== -->
-    <section id="tentang" class="py-12 sm:py-16 bg-[#fdfcfb]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-            
-            <div class="rounded-[2.5rem] bg-[#3e2723] text-white p-6 sm:p-10 lg:p-12 shadow-xl mb-12" style="background-color: #3e2723 !important; color: #ffffff !important;" data-aos="fade-up">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                    
-                    <!-- Left Photo: Kegiatan Santri / Ruang Belajar -->
-                    <div class="lg:col-span-7">
-                        <div class="rounded-3xl overflow-hidden h-[300px] sm:h-[380px] shadow-lg relative bg-stone-900 border-2 border-white/20">
-                            <img 
-                                src="{{ asset('images/mts/section4-santri.jpg') }}" 
-                                alt="Belajar Santri MTs" 
-                                class="w-full h-full object-cover"
-                            >
-                        </div>
-                    </div>
-
-                    <!-- Right Content (Checklist + Action Button) -->
-                    <div class="lg:col-span-5 flex flex-col justify-center">
-                        <span class="text-amber-400 font-inter font-bold text-xs uppercase tracking-wider block mb-2">
-                            LINGKUNGAN PEMBELAJARAN
-                        </span>
-                        <h2 class="font-inter text-2xl sm:text-3xl font-extrabold text-white mb-6 leading-tight">
-                            Mewujudkan Santri Cerdas, Tangguh & Beradab
-                        </h2>
-
-                        <!-- Bullet Checklist (Identik Antixor Checklist Icon) -->
-                        <div class="space-y-3.5 mb-8 font-inter text-xs sm:text-sm text-stone-200">
-                            <div class="flex items-start gap-3">
-                                <i class="ti ti-checkbox text-amber-400 text-lg shrink-0 mt-0.5"></i>
-                                <span>Kurikulum sains dan teknologi berpadu hafalan Qur'an</span>
-                            </div>
-                            <div class="flex items-start gap-3">
-                                <i class="ti ti-checkbox text-amber-400 text-lg shrink-0 mt-0.5"></i>
-                                <span>Bimbingan konseling dan pengasuhan santri 24 jam</span>
-                            </div>
-                            <div class="flex items-start gap-3">
-                                <i class="ti ti-checkbox text-amber-400 text-lg shrink-0 mt-0.5"></i>
-                                <span>Jadwal teratur, disiplin ibadah, dan fasilitas asrama asri</span>
-                            </div>
-                        </div>
-
-                        <!-- Yellow Action Button (Identik "Book Now") -->
-                        <div>
-                            <a href="/register" class="btn-accent-gold inline-flex items-center justify-center px-6 py-3 rounded-lg font-bold text-sm shadow-md transition-all" style="background-color: #f59e0b !important; color: #2d1b18 !important;">
-                                <span>Daftar Sekarang</span>
-                            </a>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- Stats Bar (Identik Antixor 500+ Happy Clients, 120+ Experts, 1,000+ Projects, 100% Satisfaction) -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 py-8 border-y border-stone-200 text-center" data-aos="fade-up">
-                <div>
-                    <div class="font-inter font-extrabold text-2xl sm:text-4xl text-[#3e2723] mb-1">500+</div>
-                    <div class="font-inter text-xs text-stone-500 uppercase tracking-wider font-semibold">Santri Aktif</div>
-                </div>
-                <div>
-                    <div class="font-inter font-extrabold text-2xl sm:text-4xl text-[#3e2723] mb-1">35+</div>
-                    <div class="font-inter text-xs text-stone-500 uppercase tracking-wider font-semibold">Asatidz & Pembina</div>
-                </div>
-                <div>
-                    <div class="font-inter font-extrabold text-2xl sm:text-4xl text-[#3e2723] mb-1">1,500+</div>
-                    <div class="font-inter text-xs text-stone-500 uppercase tracking-wider font-semibold">Alumni Sukses</div>
-                </div>
-                <div>
-                    <div class="font-inter font-extrabold text-2xl sm:text-4xl text-[#3e2723] mb-1">100%</div>
-                    <div class="font-inter text-xs text-stone-500 uppercase tracking-wider font-semibold">Kelulusan & Mutu</div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-
-
-    <!-- ==============================================================
-         5. SECTION 5: HOW IT WORKS (Identik Antixor: 3 Langkah 01, 02, 03)
-         - 01: Daftar Online (Book Online)
-         - 02: Observasi & Tes (We Clean)
-         - 03: Resmi Menjadi Santri (You Relax)
-         ============================================================== -->
-    
-
-
-
-    
-
-
 
 
 
@@ -645,9 +539,66 @@
 
 
 
-        <!-- ==========================================
+    <!-- ==============================================================
+         SECTION BERITA TERKINI
+         ============================================================== -->
+    @if(isset($news) && $news->count() > 0)
+    <section id="berita" class="py-16 sm:py-20 bg-[#fdfcfb] border-t border-stone-200/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10" data-aos="fade-up">
+                <div>
+                    <p class="font-inter text-xs font-bold uppercase tracking-widest text-[#8d6e63] mb-2">Berita & Informasi</p>
+                    <h2 class="font-inter text-3xl sm:text-4xl font-extrabold text-[#3e2723] leading-tight">Berita Terkini MTs Persis</h2>
+                </div>
+                <a href="/berita" class="font-inter text-sm font-bold text-[#3e2723] hover:text-[#8d6e63] transition-colors flex items-center gap-1.5 shrink-0">
+                    Lihat semua <i class="ti ti-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                 @foreach($news->take(3) as $post)
+                 <article class="group rounded-xl overflow-hidden border border-stone-200 bg-white hover:shadow-md transition-shadow duration-300" data-aos="fade-up" data-aos-delay="{{ $loop->index * 80 }}">
+                    <!-- Thumbnail -->
+                    <div class="h-48 overflow-hidden bg-stone-100">
+                        @if(!empty($post->image))
+                            <img 
+                                src="{{ asset('storage/' . $post->image) }}" 
+                                alt="{{ $post->title }}" 
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            >
+                        @else
+                            <div class="w-full h-full bg-stone-200 flex items-center justify-center">
+                                <i class="ti ti-news text-4xl text-stone-400"></i>
+                            </div>
+                        @endif
+                    </div>
+                    <!-- Content -->
+                    <div class="p-5">
+                        <p class="font-inter text-[10px] text-[#8d6e63] uppercase tracking-wider font-bold mb-2">
+                            {{ \Carbon\Carbon::parse($post->created_at)->translatedFormat('d F Y') }}
+                        </p>
+                        <h3 class="font-inter font-bold text-sm text-[#3e2723] leading-snug mb-2 line-clamp-2 group-hover:text-[#8d6e63] transition-colors">
+                            {{ $post->judul ?? $post->title }}
+                        </h3>
+                        <p class="font-inter text-xs text-stone-500 leading-relaxed line-clamp-2">
+                            {{ Str::limit(strip_tags($post->isi ?? $post->content ?? ''), 100) }}
+                        </p>
+                        <a href="/berita/{{ $post->slug ?? $post->id }}" class="inline-flex items-center gap-1 mt-3 font-inter text-xs font-bold text-[#3e2723] hover:text-amber-600 transition-colors">
+                            Baca selengkapnya <i class="ti ti-arrow-right text-sm"></i>
+                        </a>
+                    </div>
+                </article>
+                @endforeach
+            </div>
+
+        </div>
+    </section>
+    @endif
+
+    <!-- ==============================================================
          8. RINCIAN BIAYA PENDIDIKAN (BOARDING / ASRAMA & FULL DAY)
-         ========================================== -->
+         ============================================================== -->
     <section id="biaya" class="py-16 sm:py-20 lg:py-24 bg-[#fbf9f8] border-t border-stone-200/80" x-data="{ biayaTab: 'asrama' }">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             

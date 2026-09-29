@@ -153,9 +153,9 @@
                 <a href="#prakata" class="hover:text-amber-400 transition-colors py-1">Prakata</a>
                 <a href="#fasilitas" class="hover:text-amber-400 transition-colors py-1">Fasilitas</a>
                 <a href="#layanan" class="hover:text-amber-400 transition-colors py-1">Program</a>
-                <a href="#tentang" class="hover:text-amber-400 transition-colors py-1">Keunggulan</a>
                 <a href="#guru" class="hover:text-amber-400 transition-colors py-1">Guru & Staff</a>
                 <a href="#testimoni" class="hover:text-amber-400 transition-colors py-1">Testimoni</a>
+                <a href="#berita" class="hover:text-amber-400 transition-colors py-1">Berita</a>
                 <a href="#biaya" class="hover:text-amber-400 transition-colors py-1 text-amber-400">Biaya</a>
             </nav>
 
@@ -223,16 +223,16 @@
                     <span>Program Unggulan</span>
                     <i class="ti ti-chevron-right text-stone-400 text-sm"></i>
                 </a>
-                <a @click="mobileMenu = false" href="#tentang" class="py-2.5 px-3 rounded-xl hover:bg-white/10 hover:text-amber-400 transition-colors flex items-center justify-between">
-                    <span>Keunggulan</span>
-                    <i class="ti ti-chevron-right text-stone-400 text-sm"></i>
-                </a>
                 <a @click="mobileMenu = false" href="#guru" class="py-2.5 px-3 rounded-xl hover:bg-white/10 hover:text-amber-400 transition-colors flex items-center justify-between">
                     <span>Guru & Staff</span>
                     <i class="ti ti-chevron-right text-stone-400 text-sm"></i>
                 </a>
                 <a @click="mobileMenu = false" href="#testimoni" class="py-2.5 px-3 rounded-xl hover:bg-white/10 hover:text-amber-400 transition-colors flex items-center justify-between">
                     <span>Testimoni</span>
+                    <i class="ti ti-chevron-right text-stone-400 text-sm"></i>
+                </a>
+                <a @click="mobileMenu = false" href="#berita" class="py-2.5 px-3 rounded-xl hover:bg-white/10 hover:text-amber-400 transition-colors flex items-center justify-between">
+                    <span>Berita</span>
                     <i class="ti ti-chevron-right text-stone-400 text-sm"></i>
                 </a>
                 <a @click="mobileMenu = false" href="#biaya" class="py-2.5 px-3 rounded-xl hover:bg-white/10 hover:text-amber-400 transition-colors flex items-center justify-between text-amber-400">
