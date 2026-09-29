@@ -27,11 +27,11 @@
             <div class="absolute bottom-10 left-1/4 w-60 sm:w-[350px] lg:w-[400px] h-60 sm:h-[350px] lg:h-[400px] bg-teal-100/35 rounded-full blur-3xl"></div>
         </div>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div class="max-w-7xl 2xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
                 
                 <!-- Left Text Content (order-2 on mobile, order-1 on desktop) -->
-                <div class="lg:col-span-7 text-center lg:text-left order-2 lg:order-1" data-aos="fade-right">
+                <div class="lg:col-span-6 xl:col-span-5 text-center lg:text-left order-2 lg:order-1" data-aos="fade-right">
                     
                     <!-- Authentic Editorial Tag / Badge -->
                     <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-2xl bg-white/90 border border-amber-200/80 shadow-sm mb-6">
@@ -43,7 +43,7 @@
                         </span>
                     </div>
 
-                    <h1 class="font-fredoka text-3xl sm:text-5xl lg:text-[56px] font-bold text-slate-800 leading-[1.12] mb-4 sm:mb-6">
+                    <h1 class="font-fredoka text-3xl sm:text-5xl lg:text-[46px] xl:text-[52px] font-bold text-slate-800 leading-[1.12] mb-4 sm:mb-6">
                         @if($setting && $setting->hero_title_prefix)
                             {{ $setting->hero_title_prefix }} <br class="hidden sm:inline">
                             <span class="text-teal-500">{{ $setting->hero_title_highlight ?? 'Qurani' }}</span><span class="text-amber-500">!</span>
@@ -86,46 +86,46 @@
                     </div>
                 </div>
 
-                <!-- Right Visual: Model Transparan Berdiri Sendiri (order-1 on mobile, order-2 on desktop) -->
-                <div class="lg:col-span-5 relative flex justify-center items-end mt-2 mb-6 lg:mt-0 lg:mb-0 order-1 lg:order-2" data-aos="fade-left">
-                    <div class="relative w-full max-w-[280px] sm:max-w-sm lg:max-w-md flex justify-center">
+                <!-- Right Visual: Model Transparan Berdiri Sendiri - UKURAN EXTRA BESAR (order-1 on mobile, order-2 on desktop) -->
+                <div class="lg:col-span-6 xl:col-span-7 relative flex justify-center items-end mt-4 mb-6 lg:mt-0 lg:mb-0 order-1 lg:order-2" data-aos="fade-left">
+                    <div class="relative w-full max-w-[460px] sm:max-w-xl lg:max-w-none flex justify-center items-end">
                         
-                        <!-- Floating Cute Playful Sticker Badge (DI BELAKANG FOTO: z-0) -->
-                        <div class="absolute top-2 -left-4 sm:top-6 sm:-left-12 lg:top-8 lg:-left-16 bg-white/95 backdrop-blur-md px-2.5 sm:px-3.5 py-2 sm:py-3 rounded-2xl shadow-lg border border-amber-200 animate-bounce-gentle z-0 flex items-center gap-2 sm:gap-3 transform -rotate-3 hover:rotate-0 transition-transform max-w-[175px] sm:max-w-[210px] lg:max-w-none">
-                            <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-amber-400 via-orange-400 to-amber-500 text-white flex items-center justify-center text-sm sm:text-lg shadow-sm shrink-0">
+                        <!-- Floating Cute Playful Sticker Badge (MOBILE: z-20 di bawah kiri agar tidak tertutup & tidak menutupi wajah; DESKTOP: lg:z-0 di belakang foto agar tidak menutupi wajah model) -->
+                        <div class="absolute bottom-2 -left-1 sm:bottom-4 sm:-left-2 lg:bottom-auto lg:top-8 lg:-left-6 xl:top-10 xl:-left-8 bg-white/95 backdrop-blur-md px-3 sm:px-3.5 py-2 sm:py-2.5 rounded-2xl shadow-xl border border-amber-200 animate-bounce-gentle z-20 lg:z-0 flex items-center gap-2 sm:gap-2.5 transform -rotate-1 lg:-rotate-3 hover:rotate-0 transition-transform max-w-[185px] sm:max-w-[210px] lg:max-w-[230px]">
+                            <div class="w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 rounded-xl bg-gradient-to-tr from-amber-400 via-orange-400 to-amber-500 text-white flex items-center justify-center text-sm sm:text-base lg:text-lg shadow-sm shrink-0">
                                 <i class="{{ $setting->hero_badge_icon ?? 'ti ti-palette' }}"></i>
                             </div>
                             <div>
                                 <div class="flex items-center gap-1 mb-0.5">
                                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                                    <span class="font-fredoka font-semibold text-[8px] sm:text-[10px] text-amber-900 uppercase tracking-wider">{{ $unit->nama_unit ?? 'TK Calisa Rabbani' }}</span>
+                                    <span class="font-fredoka font-semibold text-[8px] sm:text-[9px] text-amber-900 uppercase tracking-wider">{{ $unit->nama_unit ?? 'TK Calisa Rabbani' }}</span>
                                 </div>
                                 <div class="font-fredoka font-bold text-[11px] sm:text-xs text-slate-800 leading-tight">
                                     {{ $setting->hero_badge_text ?? 'Pendaftaran Baru' }}
                                 </div>
-                                <div class="mt-0.5 inline-flex items-center gap-1 px-2 py-0.5 bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-fredoka font-bold text-[8px] sm:text-[9px] rounded-full uppercase tracking-wider shadow-sm">
+                                <div class="mt-0.5 inline-flex items-center gap-1 px-2 py-0.5 bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-fredoka font-bold text-[7.5px] sm:text-[8px] rounded-full uppercase tracking-wider shadow-sm">
                                     <span>{{ $setting->hero_badge_status ?? 'Buka Sekarang' }}</span>
-                                    <i class="ti ti-sparkles text-[8px]"></i>
+                                    <i class="ti ti-sparkles text-[7px]"></i>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Floating Activity Badge (Pojok Kanan Bawah Model: z-20) -->
-                        <div class="absolute bottom-2 -right-2 sm:bottom-4 sm:-right-4 lg:bottom-6 lg:-right-10 bg-white/95 backdrop-blur-sm px-2.5 sm:px-3.5 py-1.5 sm:py-2.5 rounded-2xl shadow-lg border border-amber-100 flex items-center gap-2 sm:gap-2.5 animate-bounce-gentle z-20">
-                            <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center text-sm sm:text-base">
+                        <div class="absolute bottom-2 -right-1 sm:bottom-4 sm:-right-2 lg:bottom-6 lg:right-0 xl:-right-4 bg-white/95 backdrop-blur-sm px-3 sm:px-3.5 lg:px-4 py-1.5 sm:py-2 lg:py-2.5 rounded-2xl shadow-xl border border-amber-100 flex items-center gap-2 sm:gap-2.5 animate-bounce-gentle z-20">
+                            <div class="w-7 h-7 sm:w-8 sm:h-8 lg:w-9 lg:h-9 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center text-sm sm:text-base lg:text-lg shadow-inner shrink-0">
                                 <i class="ti ti-mood-smile"></i>
                             </div>
                             <div>
-                                <div class="font-fredoka font-bold text-[10px] sm:text-xs text-slate-800">Fun & Play</div>
-                                <div class="font-quicksand font-bold text-[8px] sm:text-[10px] text-slate-400">Belajar Ceria</div>
+                                <div class="font-fredoka font-bold text-[11px] sm:text-xs lg:text-sm text-slate-800">Fun & Play</div>
+                                <div class="font-quicksand font-bold text-[8px] sm:text-[9px] lg:text-[10px] text-slate-400">Belajar Ceria</div>
                             </div>
                         </div>
 
-                        <!-- Model Foto Transparan Langsung (DI DEPAN BADGE: z-10) -->
+                        <!-- Model Foto Transparan Langsung - UKURAN EXTRA BESAR & JELAS (DI DEPAN BADGE: z-10) -->
                         <img 
                             src="{{ ($setting && $setting->hero_model_image) ? $unit->getAdminImageUrl($setting->hero_model_image) : ($pengaturan ? $pengaturan->getAdminImageUrl($pengaturan->model_1) : 'https://placehold.co/500x650?text=Model+Kids') }}" 
                             alt="Santri Cilik TK" 
-                            class="relative z-10 w-full max-w-[260px] sm:max-w-[340px] lg:max-w-[420px] h-auto object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.12)] animate-float-model"
+                            class="relative z-10 w-full max-w-[420px] sm:max-w-[560px] lg:max-w-[700px] xl:max-w-[850px] 2xl:max-w-[920px] max-h-[600px] sm:max-h-[720px] lg:max-h-[820px] xl:max-h-[900px] h-auto object-contain drop-shadow-[0_25px_40px_rgba(0,0,0,0.18)] animate-float-model"
                         >
                     </div>
                 </div>
@@ -582,6 +582,9 @@
     <!-- ==========================================
          5. BANNER CALL TO ACTION
          ========================================== -->
+    <!-- ==========================================
+         5. BANNER CALL TO ACTION
+         ========================================== -->
     <section class="py-12 sm:py-16 bg-[#fdfbf7] relative overflow-visible">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10" data-aos="fade-up">
             <div class="rounded-[2.5rem] sm:rounded-[3rem] bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-white p-6 sm:p-10 lg:p-14 shadow-2xl relative overflow-visible border-4 border-white/60">
@@ -595,33 +598,50 @@
                     <div class="lg:col-span-8 text-center lg:text-left">
                         <div class="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-white/20 backdrop-blur-md text-amber-100 font-fredoka font-semibold text-[10px] sm:text-xs uppercase tracking-wider mb-3 sm:mb-4 border border-white/25 shadow-sm">
                             <i class="ti ti-sparkles text-yellow-300 text-xs sm:text-sm"></i>
-                            <span>Penerimaan Santri Baru TK Calisa Rabbani</span>
+                            <span>{{ $setting->cta_tag ?? 'Penerimaan Santri Baru TK Calisa Rabbani' }}</span>
                         </div>
 
                         <h2 class="font-fredoka text-2xl sm:text-4xl lg:text-[44px] font-bold text-white mb-3 sm:mb-4 leading-tight">
-                            Mulai Langkah Emas Si Kecil <br class="hidden sm:inline">
-                            Bersama <span class="text-yellow-200 underline decoration-wavy decoration-yellow-300/60 decoration-2">TK Calisa Rabbani!</span>
+                            @if($setting && $setting->cta_title)
+                                {{ $setting->cta_title }}
+                            @else
+                                Mulai Langkah Emas Si Kecil <br class="hidden sm:inline">
+                                Bersama <span class="text-yellow-200 underline decoration-wavy decoration-yellow-300/60 decoration-2">TK Calisa Rabbani!</span>
+                            @endif
                         </h2>
 
                         <p class="font-quicksand font-bold text-amber-100 text-xs sm:text-base leading-relaxed max-w-xl mx-auto lg:mx-0 mb-6 sm:mb-8 opacity-95">
-                            Bimbing ananda tercinta menjadi generasi mandiri, ceria, santun, dan cinta Al-Qur'an sejak usia dini. Kuota kelas terbatas setiap tahun ajaran.
+                            {{ $setting->cta_description ?? "Bimbing ananda tercinta menjadi generasi mandiri, ceria, santun, dan cinta Al-Qur'an sejak usia dini. Kuota kelas terbatas setiap tahun ajaran." }}
                         </p>
 
+                        @php
+                            $unitWaCta = ($setting && $setting->unit_whatsapp) ? preg_replace('/^0/', '62', preg_replace('/[^0-9]/', '', $setting->unit_whatsapp)) : ($pengaturan->telepon ?? '089654052437');
+                            $waMsgCta = ($setting && $setting->cta_wa_text) ? urlencode($setting->cta_wa_text) : urlencode('Halo Admin TK Calisa Rabbani, saya ingin tanya informasi pendaftaran');
+                        @endphp
                         <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 sm:gap-4">
-                            <a href="/register" class="px-6 sm:px-8 py-3.5 sm:py-4 bg-slate-900 hover:bg-black text-white font-fredoka font-bold text-xs sm:text-sm rounded-2xl shadow-xl hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2">
-                                <span>Daftar Online Sekarang</span>
+                            <a href="{{ $setting->cta_button_url ?? '/register' }}" class="px-6 sm:px-8 py-3.5 sm:py-4 bg-slate-900 hover:bg-black text-white font-fredoka font-bold text-xs sm:text-sm rounded-2xl shadow-xl hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2">
+                                <span>{{ $setting->cta_button_text ?? 'Daftar Online Sekarang' }}</span>
                                 <i class="ti ti-arrow-right text-base sm:text-lg text-yellow-400"></i>
                             </a>
-                            <a href="https://wa.me/{{ $pengaturan->telepon ?? '089654052437' }}?text=Halo%20Admin%20TK%20Calisa%20Rabbani,%20saya%20ingin%20tanya%20informasi%20pendaftaran" target="_blank" class="px-5 sm:px-7 py-3.5 sm:py-4 bg-white/95 hover:bg-white text-amber-950 font-fredoka font-bold text-xs sm:text-sm rounded-2xl shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2">
-                                <i class="ti ti-brand-whatsapp text-emerald-600 text-xl sm:text-2xl"></i>
-                                <span>WhatsApp Admin TK</span>
-                            </a>
+                            @if(!empty($unitWaCta))
+                                <a href="https://wa.me/{{ $unitWaCta }}?text={{ $waMsgCta }}" target="_blank" class="px-5 sm:px-7 py-3.5 sm:py-4 bg-white/95 hover:bg-white text-amber-950 font-fredoka font-bold text-xs sm:text-sm rounded-2xl shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2">
+                                    <i class="ti ti-brand-whatsapp text-emerald-600 text-xl sm:text-2xl"></i>
+                                    <span>WhatsApp Admin TK</span>
+                                </a>
+                            @endif
                         </div>
                     </div>
 
                     <!-- Right Single Popping Model -->
+                    @php
+                        $ctaModelBanner = ($setting && $setting->cta_model_image)
+                            ? $unit->getAdminImageUrl($setting->cta_model_image)
+                            : (($setting && $setting->hero_model_image)
+                                ? $unit->getAdminImageUrl($setting->hero_model_image)
+                                : ($pengaturan ? $pengaturan->getAdminImageUrl($pengaturan->model_4) : 'https://placehold.co/400x500?text=Model+Kid'));
+                    @endphp
                     <div class="lg:col-span-4 relative flex justify-center lg:justify-end items-end">
-                        <div class="relative w-full max-w-[220px] sm:max-w-[280px] lg:max-w-[320px] -mt-4 sm:-mt-8 lg:-mt-24 lg:-mb-14">
+                        <div class="relative w-full max-w-[240px] sm:max-w-[300px] lg:max-w-[340px] -mt-4 sm:-mt-8 lg:-mt-24 lg:-mb-14">
                             <!-- Floating Badge on Model -->
                             <div class="absolute -top-3 -left-3 bg-white text-slate-800 p-2 sm:p-2.5 rounded-2xl shadow-xl border border-amber-200 hidden sm:flex items-center gap-2 z-20 animate-bounce-gentle">
                                 <span class="text-base sm:text-xl">🎒</span>
@@ -629,7 +649,7 @@
                             </div>
 
                             <img 
-                                src="{{ $pengaturan ? $pengaturan->getAdminImageUrl($pengaturan->model_4) : 'https://placehold.co/400x500?text=Model+Kid' }}" 
+                                src="{{ $ctaModelBanner }}" 
                                 alt="Santri TK Calisa" 
                                 class="relative z-10 w-full h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.3)] transform hover:scale-105 transition-transform duration-500"
                             >
@@ -1068,24 +1088,46 @@
                         @endif
                     </div>
 
-                    <!-- Fast Consultation Box -->
-                    <div class="rounded-[2rem] sm:rounded-[2.5rem] bg-gradient-to-br from-emerald-500 via-teal-600 to-emerald-700 text-white p-5 sm:p-8 shadow-xl relative overflow-hidden">
+                    <!-- Fast Consultation Box dengan Foto Model CTA -->
+                    @php
+                        $ctaModelImgFast = ($setting && $setting->cta_model_image)
+                            ? $unit->getAdminImageUrl($setting->cta_model_image)
+                            : (($setting && $setting->hero_model_image)
+                                ? $unit->getAdminImageUrl($setting->hero_model_image)
+                                : null);
+                    @endphp
+                    <div class="rounded-[2rem] sm:rounded-[2.5rem] bg-gradient-to-br from-emerald-500 via-teal-600 to-emerald-700 text-white p-5 sm:p-7 shadow-xl relative overflow-hidden flex flex-col justify-between">
+                        <!-- Ornamen glow -->
+                        <div class="absolute -right-10 -bottom-10 w-44 h-44 rounded-full bg-white/10 blur-xl pointer-events-none"></div>
+
                         <div class="relative z-10">
                             <div class="flex items-center gap-2 mb-2">
                                 <span class="w-2.5 h-2.5 rounded-full bg-yellow-300 animate-ping"></span>
                                 <span class="font-fredoka text-[10px] sm:text-[11px] font-bold text-emerald-100 uppercase tracking-wider">Fast Response</span>
                             </div>
-                            <h4 class="font-fredoka font-bold text-lg sm:text-xl text-white mb-2 leading-tight">
-                                {{ $setting->cta_title ?? 'Butuh Bantuan / Skema Pembayaran Bertahap?' }}
-                            </h4>
-                            <p class="font-quicksand font-bold text-xs text-emerald-100/90 leading-relaxed mb-5 sm:mb-6">
-                                {{ $setting->cta_description ?? 'Hubungi admin PPDB TK Calisa Rabbani untuk konsultasi rincian biaya, potongan beasiswa, atau jadwal observasi ananda.' }}
-                            </p>
+                            
+                            <div class="grid {{ $ctaModelImgFast ? 'grid-cols-1 sm:grid-cols-12 gap-3 items-center' : 'grid-cols-1' }}">
+                                <div class="{{ $ctaModelImgFast ? 'sm:col-span-8' : '' }}">
+                                    <h4 class="font-fredoka font-bold text-lg sm:text-xl text-white mb-2 leading-tight">
+                                        {{ $setting->cta_title ?? 'Butuh Bantuan / Skema Pembayaran Bertahap?' }}
+                                    </h4>
+                                    <p class="font-quicksand font-bold text-xs text-emerald-100/90 leading-relaxed mb-4">
+                                        {{ $setting->cta_description ?? 'Hubungi admin PPDB TK Calisa Rabbani untuk konsultasi rincian biaya, potongan beasiswa, atau jadwal observasi ananda.' }}
+                                    </p>
+                                </div>
+                                
+                                @if($ctaModelImgFast)
+                                    <div class="sm:col-span-4 flex justify-center sm:justify-end items-end mb-2 sm:mb-0">
+                                        <img src="{{ $ctaModelImgFast }}" alt="Model CTA" class="w-24 sm:w-28 h-auto max-h-36 object-contain drop-shadow-md hover:scale-105 transition-transform">
+                                    </div>
+                                @endif
+                            </div>
+
                             @php
                                 $unitWa = ($setting && $setting->unit_whatsapp) ? preg_replace('/^0/', '62', preg_replace('/[^0-9]/', '', $setting->unit_whatsapp)) : ($pengaturan->telepon ?? '089654052437');
                                 $waMsg = ($setting && $setting->cta_wa_text) ? urlencode($setting->cta_wa_text) : urlencode('Halo Admin TK Calisa Rabbani, saya ingin tanya rincian biaya pendaftaran santri baru');
                             @endphp
-                            <a href="https://wa.me/{{ $unitWa }}?text={{ $waMsg }}" target="_blank" class="w-full py-3 sm:py-3.5 bg-white hover:bg-emerald-50 text-emerald-900 font-fredoka font-bold rounded-2xl shadow-lg text-center text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2">
+                            <a href="https://wa.me/{{ $unitWa }}?text={{ $waMsg }}" target="_blank" class="w-full py-3 sm:py-3.5 bg-white hover:bg-emerald-50 text-emerald-900 font-fredoka font-bold rounded-2xl shadow-lg text-center text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 mt-2">
                                 <i class="ti ti-brand-whatsapp text-emerald-600 text-lg sm:text-xl"></i>
                                 <span>Hubungi Admin via WhatsApp</span>
                             </a>

@@ -136,17 +136,17 @@ class UnitLandingController extends Controller
         $activePPDB = \App\Models\Tahunajaranppdb::where('status', 1)->first() 
             ?? \App\Models\Tahunajaranppdb::latest()->first();
 
-        $biayaList = collect();
         $biayaNonAsrama = collect();
         $biayaAsrama = collect();
         if ($activePPDB) {
-            $biayaList = \Illuminate\Support\Facades\DB::table('konfigurasi_biaya')
+            $rawBiayaList = \Illuminate\Support\Facades\DB::table('konfigurasi_biaya')
                 ->join('konfigurasi_biaya_detail', 'konfigurasi_biaya.kode_biaya', '=', 'konfigurasi_biaya_detail.kode_biaya')
                 ->join('jenis_biaya', 'konfigurasi_biaya_detail.kode_jenis_biaya', '=', 'jenis_biaya.kode_jenis_biaya')
                 ->where('konfigurasi_biaya.kode_unit', $kodeUnit)
                 ->where('konfigurasi_biaya.kode_ta', $activePPDB->kode_ta)
                 ->where('konfigurasi_biaya.tingkat', 1)
                 ->where('konfigurasi_biaya.is_pindahan', 0)
+                ->where('jenis_biaya.tampilkan_di_landing', 1)
                 ->select(
                     'konfigurasi_biaya_detail.kode_jenis_biaya',
                     'konfigurasi_biaya_detail.jumlah',
@@ -155,6 +155,17 @@ class UnitLandingController extends Controller
                 )
                 ->orderBy('konfigurasi_biaya_detail.kode_jenis_biaya', 'asc')
                 ->get();
+
+            // Mapping: Khusus SPP (kode B07 atau nama SPP), perhitungan awal masuk di landing page adalah 1 bulan (total / 12)
+            $biayaList = $rawBiayaList->map(function ($item) {
+                $isSPP = ($item->kode_jenis_biaya === 'B07') || (stripos($item->jenis_biaya, 'spp') !== false);
+                if ($isSPP) {
+                    $item->jumlah_tahunan = $item->jumlah;
+                    $item->jumlah = (int) round($item->jumlah / 12);
+                    $item->jenis_biaya = $item->jenis_biaya . ' (Bulan Pertama)';
+                }
+                return $item;
+            });
 
             $biayaNonAsrama = $biayaList->where('asrama', 0)->values();
             $biayaAsrama = $biayaList->where('asrama', 1)->values();
