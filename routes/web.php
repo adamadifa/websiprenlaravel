@@ -5,8 +5,35 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\UnitLandingController;
 use Illuminate\Support\Facades\Route;
 
+/*
+|--------------------------------------------------------------------------
+| Subdomain & Unit Landing Page Routes
+|--------------------------------------------------------------------------
+*/
+// Support for Subdomains (e.g. tk.domain.com, sdit.domain.com)
+Route::domain('{unit_slug}.' . env('APP_DOMAIN', 'localhost'))->group(function () {
+    Route::get('/', [UnitLandingController::class, 'show'])->name('unit.subdomain');
+});
+
+// Direct Accessible Path Routes for Unit Landing Pages
+Route::get('/unit/tk', [UnitLandingController::class, 'tk'])->name('unit.tk');
+Route::get('/tk', [UnitLandingController::class, 'tk'])->name('unit.tk.short');
+Route::get('/sdit', function () {
+    return app(\App\Http\Controllers\UnitLandingController::class)->show(request(), 'sdit');
+})->name('unit.sdit.short');
+Route::get('/mts', function () {
+    return app(\App\Http\Controllers\UnitLandingController::class)->show(request(), 'mts');
+})->name('unit.mts.short');
+Route::get('/unit/{slug}', [UnitLandingController::class, 'show'])->name('unit.show');
+
+/*
+|--------------------------------------------------------------------------
+| Main Website (Pesantren Al Amin) Routes
+|--------------------------------------------------------------------------
+*/
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/tentang-pesantren', [HomeController::class, 'about'])->name('about');
 Route::get('/spmb', [HomeController::class, 'spmb'])->name('spmb');

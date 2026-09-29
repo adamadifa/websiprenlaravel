@@ -12,4 +12,9 @@ class Unit extends Model
     protected $primaryKey = 'kode_unit';
     public $incrementing = false;
     protected $keyType = 'string';
+
+    public function landingSetting()
+    {
+        return $this->hasOne(UnitLandingSetting::class, 'kode_unit', 'kode_unit');
+    }
 }
