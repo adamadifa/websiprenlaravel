@@ -9,7 +9,7 @@
          1. HERO SECTION: Mirrored from Reference Design
          (Where Little Minds Grow & Bright Futures Begin)
          ========================================== -->
-    <section id="hero" class="relative pt-8 pb-16 sm:pt-14 sm:pb-24 lg:pt-16 lg:pb-28 bg-[#fafbfc] overflow-hidden">
+    <section id="hero" class="relative pt-6 pb-16 sm:pt-10 sm:pb-24 lg:pt-12 lg:pb-28 bg-[#fafbfc] overflow-hidden">
         
         <!-- School Building Photo Background Overlay (Subtle, Clean & Blended) -->
         <div class="absolute inset-0 pointer-events-none z-0 overflow-hidden">
@@ -38,11 +38,11 @@
             <div class="absolute top-1/2 left-0 w-72 sm:w-[400px] h-72 sm:h-[400px] bg-blue-100/40 rounded-full blur-3xl"></div>
         </div>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
+        <div class="max-w-7xl 2xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
                 
-                <!-- Left Text Content (lg:col-span-7) -->
-                <div class="lg:col-span-7 text-center lg:text-left order-2 lg:order-1 pt-2 sm:pt-4 lg:pt-0" data-aos="fade-right">
+                <!-- Left Text Content (lg:col-span-5) -->
+                <div class="lg:col-span-5 text-center lg:text-left order-2 lg:order-1 pt-1 sm:pt-2 lg:pt-0" data-aos="fade-right">
                     
                     <!-- Decorative Paper Airplane Doodle & Small Tag -->
                     <div class="flex items-center justify-center lg:justify-start gap-3 mb-3 sm:mb-4">
@@ -54,7 +54,7 @@
 
                     <!-- Main Headline with Color Highlights & Heart Doodle -->
                     <div class="relative">
-                        <h1 class="font-fredoka text-2xl sm:text-5xl lg:text-[56px] font-bold text-[#192b56] leading-[1.2] sm:leading-[1.15] mb-4 sm:mb-5 tracking-tight">
+                        <h1 class="font-fredoka text-2xl sm:text-5xl lg:text-[46px] xl:text-[54px] font-bold text-[#192b56] leading-[1.2] sm:leading-[1.12] mb-4 sm:mb-5 tracking-tight">
                             @if($setting && $setting->hero_title_prefix)
                                 <span>{{ $setting->hero_title_prefix }}</span>
                                 <span class="text-amber-500 inline-block align-middle">
@@ -134,20 +134,20 @@
 
                 </div>
 
-                <!-- Right Visual Column (Freestanding Dynamic Model + Fluid Organic Splashes + Floating Micro-Badges) -->
+                <!-- Right Visual Column (Freestanding Dynamic Model - UKURAN SUPER JUMBO) -->
                 <!-- order-1 on mobile so model stays at the top, order-2 on desktop -->
-                <div class="lg:col-span-5 relative flex justify-center items-end order-1 lg:order-2 pt-2 sm:pt-10 lg:pt-0 mb-6 lg:mb-0" data-aos="fade-left">
-                    <div class="relative w-full max-w-[300px] sm:max-w-md lg:max-w-[480px] xl:max-w-[520px] flex justify-center items-end">
+                <div class="lg:col-span-7 relative flex justify-center items-end order-1 lg:order-2 pt-2 sm:pt-4 lg:pt-0 mb-4 sm:mb-6 lg:mb-0" data-aos="fade-left">
+                    <div class="relative w-full max-w-[360px] sm:max-w-xl lg:max-w-none flex justify-center items-end">
                         
                         <!-- 1. Ambient Background Glows & Fluid Organic Shape (DI BELAKANG MODEL: z-0) -->
                         <div class="absolute inset-0 pointer-events-none z-0 flex items-center justify-center">
-                            <!-- Fluid Organic Splash in Golden Amber & Soft Yellow -->
-                            <div class="w-[280px] h-[310px] sm:w-[420px] sm:h-[480px] lg:w-[460px] lg:h-[520px] rounded-[52%_48%_68%_32%/45%_55%_45%_55%] bg-gradient-to-tr from-amber-400 via-amber-300 to-yellow-200 opacity-90 shadow-2xl shadow-amber-500/25 transform -rotate-6 animate-pulse-soft"></div>
+                            <!-- Fluid Organic Splash in Golden Amber & Soft Yellow (Compact Size) -->
+                            <div class="w-[260px] h-[280px] sm:w-[360px] sm:h-[400px] lg:w-[400px] lg:h-[450px] rounded-[52%_48%_68%_32%/45%_55%_45%_55%] bg-gradient-to-tr from-amber-400 via-amber-300 to-yellow-200 opacity-90 shadow-2xl shadow-amber-500/25 transform -rotate-6 animate-pulse-soft"></div>
                             
                             <!-- Soft Deep Backlight Aura -->
-                            <div class="absolute -top-12 -right-10 w-48 sm:w-64 h-48 sm:h-64 rounded-full bg-amber-300/40 blur-3xl"></div>
-                            <div class="absolute -bottom-10 -left-10 w-48 sm:w-64 h-48 sm:h-64 rounded-full bg-blue-400/25 blur-3xl"></div>
-                            <div class="absolute top-1/3 -left-8 w-36 sm:w-44 h-36 sm:h-44 rounded-full bg-teal-300/30 blur-2xl"></div>
+                            <div class="absolute -top-8 -right-8 w-44 sm:w-56 h-44 sm:h-56 rounded-full bg-amber-300/40 blur-2xl"></div>
+                            <div class="absolute -bottom-8 -left-8 w-44 sm:w-56 h-44 sm:h-56 rounded-full bg-blue-400/25 blur-2xl"></div>
+                            <div class="absolute top-1/3 -left-6 w-32 sm:w-40 h-32 sm:h-40 rounded-full bg-teal-300/30 blur-xl"></div>
                         </div>
 
                         <!-- 2. Playful Doodle Sparkles & Confetti Around the Model -->
@@ -165,8 +165,8 @@
                         <div class="absolute top-1/2 left-1 sm:-left-6 w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-teal-400/90 pointer-events-none"></div>
 
                         <!-- 3. Floating Interactive Micro-Badges -->
-                        <!-- Badge A: Samping Atas Kiri Model (Di mobile: z-0 di belakang model seperti di TK agar wajah santri tidak tertutup sama sekali) -->
-                        <div class="absolute top-4 -left-4 sm:top-14 sm:-left-16 lg:top-16 lg:-left-20 xl:-left-24 bg-white/95 backdrop-blur-md px-3 sm:px-4 py-1.5 sm:py-2.5 rounded-2xl shadow-xl border border-amber-200/90 flex items-center gap-2 sm:gap-3 animate-bounce-slow z-0 sm:z-20 transform -rotate-3 hover:rotate-0 transition-transform">
+                        <!-- Badge A: Mobile di bottom-left agar tidak nutupin wajah, Desktop di top-left z-0 -->
+                        <div class="absolute bottom-2 -left-1 sm:bottom-auto sm:top-6 sm:-left-6 lg:top-8 lg:-left-6 xl:top-10 xl:-left-8 bg-white/95 backdrop-blur-md px-3 sm:px-4 py-1.5 sm:py-2.5 rounded-2xl shadow-xl border border-amber-200/90 flex items-center gap-2 sm:gap-3 animate-bounce-slow z-20 lg:z-0 transform -rotate-2 sm:-rotate-3 hover:rotate-0 transition-transform max-w-[190px] sm:max-w-[240px]">
                             <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-amber-500 to-yellow-400 text-white flex items-center justify-center text-sm sm:text-xl shadow-md shrink-0">
                                 <i class="{{ $setting->hero_badge_icon ?? 'ti ti-sparkles' }}"></i>
                             </div>
@@ -180,7 +180,7 @@
                         </div>
 
                         <!-- Badge B: Bottom-Right Tahfidz Mutqin / Target (z-20) -->
-                        <div class="absolute bottom-2 -right-2 sm:bottom-2 sm:-right-10 lg:bottom-4 lg:-right-12 bg-white/95 backdrop-blur-md px-3 sm:px-4 py-1.5 sm:py-2.5 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-2 sm:gap-3 animate-bounce-slow z-20 transform rotate-2 hover:rotate-0 transition-transform" style="animation-delay: 1.2s;">
+                        <div class="absolute bottom-2 -right-1 sm:bottom-4 sm:-right-2 lg:bottom-6 lg:right-0 xl:-right-4 bg-white/95 backdrop-blur-md px-3 sm:px-4 py-1.5 sm:py-2.5 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-2 sm:gap-3 animate-bounce-slow z-20 transform rotate-2 hover:rotate-0 transition-transform" style="animation-delay: 1.2s;">
                             <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center text-sm sm:text-xl shadow-sm shrink-0">
                                 <i class="ti ti-book-2"></i>
                             </div>
@@ -202,31 +202,24 @@
                         </div>
 
                         <!-- Badge C: Bottom-Left Pill (Active & Fun Learning) -->
-                        <div class="hidden sm:flex absolute -bottom-5 left-0 sm:-left-4 bg-[#192b56] text-white px-4 py-2 rounded-full shadow-lg items-center gap-2 z-20 text-xs font-fredoka font-bold animate-pulse-soft">
+                        <div class="hidden sm:flex absolute -bottom-3 left-4 sm:left-2 lg:left-0 bg-[#192b56] text-white px-4 py-2 rounded-full shadow-lg items-center gap-2 z-20 text-xs font-fredoka font-bold animate-pulse-soft">
                             <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
                             <span>Sekolah Ramah Anak</span>
                         </div>
 
-                        <!-- 4. Model Transparan Lepas Bebas (z-10 di depan Badge A di mobile sehingga wajah bebas tidak tertutup) -->
-                        @if($setting && $setting->hero_model_image)
-                            <img 
-                                src="{{ $unit->getAdminImageUrl($setting->hero_model_image) }}" 
-                                alt="Santri SDIT Al-Amin" 
-                                class="relative z-10 w-full max-w-[280px] sm:max-w-[420px] lg:max-w-[480px] xl:max-w-[520px] h-auto max-h-[460px] sm:max-h-[580px] lg:max-h-[640px] object-contain drop-shadow-[0_25px_35px_rgba(25,43,86,0.22)] animate-float-gentle"
-                            >
-                        @elseif($pengaturan && $pengaturan->model_1)
-                            <img 
-                                src="{{ $pengaturan->getAdminImageUrl($pengaturan->model_1) }}" 
-                                alt="Santri SDIT Al-Amin" 
-                                class="relative z-10 w-full max-w-[280px] sm:max-w-[420px] lg:max-w-[480px] xl:max-w-[520px] h-auto max-h-[460px] sm:max-h-[580px] lg:max-h-[640px] object-contain drop-shadow-[0_25px_35px_rgba(25,43,86,0.22)] animate-float-gentle"
-                            >
-                        @else
-                            <img 
-                                src="{{ $pengaturan ? $pengaturan->getAdminImageUrl($pengaturan->model_3) : 'https://placehold.co/400x550?text=Santri+SDIT' }}" 
-                                alt="Santri SDIT Al-Amin" 
-                                class="relative z-10 w-full max-w-[280px] sm:max-w-[420px] lg:max-w-[480px] xl:max-w-[520px] h-auto max-h-[460px] sm:max-h-[580px] lg:max-h-[640px] object-contain drop-shadow-[0_25px_35px_rgba(25,43,86,0.22)] animate-float-gentle"
-                            >
-                        @endif
+                        <!-- 4. Model Transparan Lepas Bebas - UKURAN JUMBO MAKSIMAL -->
+                        @php
+                            $sditModelImg = ($setting && $setting->hero_model_image)
+                                ? $unit->getAdminImageUrl($setting->hero_model_image)
+                                : (($pengaturan && $pengaturan->model_1)
+                                    ? $pengaturan->getAdminImageUrl($pengaturan->model_1)
+                                    : ($pengaturan ? $pengaturan->getAdminImageUrl($pengaturan->model_3) : 'https://placehold.co/500x650?text=Santri+SDIT'));
+                        @endphp
+                        <img 
+                            src="{{ $sditModelImg }}" 
+                            alt="Santri SDIT Al-Amin" 
+                            class="relative z-10 w-full min-w-[290px] xs:min-w-[340px] sm:min-w-[440px] lg:min-w-[560px] max-w-[440px] sm:max-w-[700px] lg:max-w-[950px] xl:max-w-[1100px] max-h-[500px] sm:max-h-[660px] lg:max-h-[740px] xl:max-h-[780px] h-auto object-contain drop-shadow-[0_20px_35px_rgba(25,43,86,0.22)] animate-float-gentle scale-110 sm:scale-105 lg:scale-110 xl:scale-115 origin-bottom"
+                        >
 
                     </div>
                 </div>
@@ -244,34 +237,94 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
                 
-                <!-- Left: Foto Kepala Sekolah -->
-                <div class="lg:col-span-5 flex justify-center" data-aos="fade-right">
-                    <div class="relative w-full max-w-[280px] sm:max-w-sm">
-                        <!-- Soft Ambient Glow behind headmaster photo -->
-                        <div class="absolute inset-0 rounded-3xl bg-amber-200/40 blur-2xl transform -rotate-3 scale-105 pointer-events-none"></div>
-                        <div class="absolute -bottom-6 -left-6 w-36 h-36 rounded-full bg-blue-200/40 blur-xl pointer-events-none"></div>
+                <!-- Left: Foto Kepala Sekolah dengan Ornamen Elegan & Modern -->
+                <div class="lg:col-span-5 flex justify-center items-center" data-aos="fade-right">
+                    <div class="relative w-full max-w-[320px] sm:max-w-[360px] lg:max-w-[400px] flex justify-center items-end">
                         
-                        <div class="relative z-10 rounded-3xl overflow-hidden border-4 border-white shadow-2xl bg-slate-100 h-80 sm:h-96">
-                            @if($setting && $setting->prakata_custom_foto)
-                                <img 
-                                    src="{{ $unit->getAdminImageUrl($setting->prakata_custom_foto) }}" 
-                                    alt="Kepala Sekolah SDIT" 
-                                    class="w-full h-full object-cover object-top"
-                                >
-                            @elseif($kepalaSekolah && $kepalaSekolah->foto)
-                                <img 
-                                    src="{{ $kepalaSekolah->getAdminImageUrl($kepalaSekolah->foto) }}" 
-                                    alt="{{ $kepalaSekolah->nama_lengkap }}" 
-                                    class="w-full h-full object-cover object-top"
-                                >
-                            @else
+                        <!-- 1. Ambient Background Layer: Soft Fluid Organic Blob & Aura (Amber & Deep Navy) -->
+                        <div class="absolute inset-0 pointer-events-none z-0 flex items-center justify-center">
+                            <!-- Elegant Fluid Organic Shape -->
+                            <div class="w-[260px] h-[280px] sm:w-[320px] sm:h-[340px] rounded-[58%_42%_65%_35%/48%_56%_44%_52%] bg-gradient-to-tr from-amber-400/80 via-amber-200/60 to-blue-100/70 opacity-90 shadow-2xl shadow-amber-500/15 transform rotate-6 animate-pulse-soft"></div>
+                            
+                            <!-- Soft Deep Backlight Aura -->
+                            <div class="absolute -top-6 -right-6 w-40 sm:w-48 h-40 sm:h-48 rounded-full bg-amber-300/30 blur-2xl"></div>
+                            <div class="absolute -bottom-6 -left-6 w-40 sm:w-48 h-40 sm:h-48 rounded-full bg-[#192b56]/15 blur-2xl"></div>
+                            <div class="absolute top-1/2 -left-4 w-28 h-28 rounded-full bg-teal-300/25 blur-xl"></div>
+                        </div>
+
+                        <!-- 2. Subtle Elegant Floating Accent Ornaments -->
+                        <!-- A. Golden Star Accent (Top Right) -->
+                        <div class="absolute -top-3 right-2 sm:right-4 text-amber-500 text-xl sm:text-2xl z-20 animate-pulse pointer-events-none">
+                            <i class="ti ti-sparkles"></i>
+                        </div>
+                        
+                        <!-- B. Subtle Geometric Accents (Teal & Navy) -->
+                        <div class="absolute top-1/3 -left-3 sm:-left-5 w-6 h-6 rounded-lg bg-teal-500/10 border border-teal-500/30 flex items-center justify-center text-teal-600 text-xs z-20 shadow-sm pointer-events-none animate-bounce-slow">
+                            <i class="ti ti-award"></i>
+                        </div>
+                        <div class="absolute bottom-24 -right-2 sm:-right-4 w-3 h-3 rounded-full bg-[#192b56]/60 shadow-sm pointer-events-none"></div>
+                        <div class="absolute top-12 left-4 w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-amber-400/80 shadow-sm pointer-events-none animate-ping" style="animation-duration: 3.5s;"></div>
+
+                        <!-- 3. Floating Modern Micro-Badges -->
+                        <!-- Badge A: Floating Leadership / Experience Badge (Top Left: z-0 di belakang foto agar tidak menutupi bahu/badan kepala sekolah) -->
+                        <div class="absolute top-2 -left-4 sm:top-6 sm:-left-8 bg-white/95 backdrop-blur-md px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-2xl shadow-xl border border-amber-200/80 flex items-center gap-2 sm:gap-2.5 animate-bounce-slow z-0 transform -rotate-3 hover:rotate-0 transition-transform max-w-[170px] sm:max-w-[210px]">
+                            <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-gradient-to-tr from-amber-500 to-amber-400 text-white flex items-center justify-center text-xs sm:text-sm shadow-sm shrink-0">
+                                <i class="ti ti-certificate"></i>
+                            </div>
+                            <div>
+                                <div class="font-fredoka font-bold text-[10px] sm:text-xs text-[#192b56] leading-tight">
+                                    Pendidikan Unggul
+                                </div>
+                                <div class="font-quicksand font-bold text-[8px] sm:text-[9px] text-amber-600 leading-tight">Berakhlak & Prestasi</div>
+                            </div>
+                        </div>
+
+                        <!-- Badge B: Floating Qurani & Sains Badge (Bottom Right: z-20 di pojok kanan bawah) -->
+                        <div class="absolute -bottom-3 -right-2 sm:-bottom-4 sm:-right-6 bg-white/95 backdrop-blur-md px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-2 sm:gap-2.5 animate-bounce-slow z-20 transform rotate-2 hover:rotate-0 transition-transform" style="animation-delay: 1.2s;">
+                            <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-blue-50 text-[#192b56] flex items-center justify-center text-xs sm:text-sm shadow-sm shrink-0">
+                                <i class="ti ti-school"></i>
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-1">
+                                    <span class="font-fredoka font-bold text-[10px] sm:text-xs text-[#192b56]">SDIT Al-Amin</span>
+                                    <div class="flex text-[8px] text-amber-400">
+                                        <i class="ti ti-star-filled"></i>
+                                        <i class="ti ti-star-filled"></i>
+                                        <i class="ti ti-star-filled"></i>
+                                    </div>
+                                </div>
+                                <div class="font-quicksand font-bold text-[8px] sm:text-[9px] text-slate-400 leading-tight">Terakreditasi A</div>
+                            </div>
+                        </div>
+
+                        <!-- 4. Foto Kepala Sekolah (Transparan Model Lepas atau Framed Modern) -->
+                        @php
+                            $fotoKepala = null;
+                            if ($setting && $setting->prakata_custom_foto) {
+                                $fotoKepala = $unit->getAdminImageUrl($setting->prakata_custom_foto);
+                            } elseif ($kepalaSekolah && $kepalaSekolah->foto) {
+                                $fotoKepala = $kepalaSekolah->getAdminImageUrl($kepalaSekolah->foto);
+                            } elseif ($pengaturan && $pengaturan->model_2) {
+                                $fotoKepala = $pengaturan->getAdminImageUrl($pengaturan->model_2);
+                            }
+                        @endphp
+
+                        @if($fotoKepala)
+                            <img 
+                                src="{{ $fotoKepala }}" 
+                                alt="{{ $setting->prakata_custom_nama ?? ($kepalaSekolah->nama_lengkap ?? 'Kepala Sekolah') }}" 
+                                class="relative z-10 w-full max-w-[240px] sm:max-w-[290px] lg:max-w-[320px] max-h-[440px] h-auto object-contain drop-shadow-[0_20px_35px_rgba(25,43,86,0.18)] animate-float-gentle"
+                            >
+                        @else
+                            <div class="relative z-10 w-[240px] sm:w-[280px] h-[340px] sm:h-[380px] rounded-3xl overflow-hidden border-4 border-white shadow-2xl bg-slate-100 flex items-center justify-center">
                                 <img 
                                     src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=600&auto=format&fit=crop" 
                                     alt="Kepala Sekolah SDIT" 
                                     class="w-full h-full object-cover object-top"
                                 >
-                            @endif
-                        </div>
+                            </div>
+                        @endif
+
                     </div>
                 </div>
 
