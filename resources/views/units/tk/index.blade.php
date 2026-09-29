@@ -429,9 +429,13 @@
                             @endif
                         </div>
 
+                        @php
+                            $tkIcon = $pVal['icon'] ?? 'ti ti-star';
+                            $tkIconClass = str_starts_with($tkIcon, 'ti ') ? $tkIcon : (str_starts_with($tkIcon, 'ti-') ? 'ti ' . $tkIcon : 'ti ti-' . $tkIcon);
+                        @endphp
                         <div class="flex justify-start">
                             <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full {{ $pStyle['icon_bg'] }} text-white flex items-center justify-center shadow-md">
-                                <i class="{{ $pVal['icon'] ?? 'ti ti-star' }} text-base sm:text-lg"></i>
+                                <i class="{{ $tkIconClass }} text-base sm:text-lg"></i>
                             </div>
                         </div>
                     </div>

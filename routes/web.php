@@ -27,6 +27,9 @@ Route::get('/sdit', function () {
 Route::get('/mts', function () {
     return app(\App\Http\Controllers\UnitLandingController::class)->show(request(), 'mts');
 })->name('unit.mts.short');
+Route::get('/ma', function () {
+    return app(\App\Http\Controllers\UnitLandingController::class)->show(request(), 'ma');
+})->name('unit.ma.short');
 Route::get('/unit/{slug}', [UnitLandingController::class, 'show'])->name('unit.show');
 
 /*

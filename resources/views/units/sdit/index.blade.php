@@ -417,8 +417,12 @@
                             >
                             
                             <!-- Floating Circular Icon Button -->
+                            @php
+                                $sditIcon = $p['icon'] ?? 'ti ti-star';
+                                $sditIconClass = str_starts_with($sditIcon, 'ti ') ? $sditIcon : (str_starts_with($sditIcon, 'ti-') ? 'ti ' . $sditIcon : 'ti ti-' . $sditIcon);
+                            @endphp
                             <div class="absolute -bottom-4 left-6 w-11 h-11 rounded-full bg-white shadow-md border border-slate-100 flex items-center justify-center text-lg z-10 {{ $idx == 0 ? 'text-teal-600' : ($idx == 1 ? 'text-amber-500' : ($idx == 2 ? 'text-blue-600' : 'text-rose-500')) }}">
-                                <i class="{{ $p['icon'] ?? 'ti ti-star' }}"></i>
+                                <i class="{{ $sditIconClass }}"></i>
                             </div>
                         </div>
 
