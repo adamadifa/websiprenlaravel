@@ -1,40 +1,43 @@
 @extends('layouts.auth')
 
-@section('title', 'Masuk - SPMB Al Amin')
+@section('title', 'Masuk Akun SPMB - ' . ($pengaturan->nama_sekolah ?? 'Pesantren Al Amin'))
+@section('meta_description', 'Masuk ke portal pendaftaran santri baru SPMB Pesantren Persatuan Islam 80 Al Amin.')
 
 @section('content')
-<div class="min-h-[100dvh] bg-white flex flex-col font-sans selection:bg-teal-100 overflow-x-hidden">
+<div class="min-h-[100dvh] bg-[#faf9f6] flex flex-col justify-between font-sans selection:bg-[#bef264] selection:text-[#062d27] pb-6">
     
-    <!-- TOP SECTION: Branding (Fixed Height) -->
-    <div class="h-[42vh] bg-gradient-to-br from-teal-900 via-teal-800 to-teal-900 relative flex flex-col items-center justify-center px-6 overflow-hidden">
-        <!-- Abstract Background Elements -->
-        <div class="absolute top-0 right-0 w-64 h-64 bg-teal-500 rounded-full blur-[80px] opacity-20 -translate-y-1/2 translate-x-1/4"></div>
-        <div class="absolute bottom-0 left-0 w-48 h-48 bg-teal-400 rounded-full blur-[60px] opacity-20 translate-y-1/4 -translate-x-1/4"></div>
-        <div class="absolute inset-0 opacity-[0.03]" style="background-image: url('https://www.transparenttextures.com/patterns/cubes.png');"></div>
-
-        <!-- Logo & Text -->
-        <div class="relative z-10 flex flex-col items-center transform -translate-y-4">
-            <div class="w-20 h-20 bg-white rounded-[24px] shadow-2xl shadow-teal-950/50 flex items-center justify-center p-3.5 mb-5 border border-white/10" data-aos="zoom-in" data-aos-duration="800">
-                @php
-                    $pengaturan = \App\Models\PengaturanUmum::first();
-                    $logoUrl = optional($pengaturan)->logo 
-                        ? config('app.admin_url') . '/storage/' . $pengaturan->logo 
-                        : asset('assets/img/logo/persisalamin.png');
-                @endphp
+    <!-- Top App Bar (Sticky Native Green Style) -->
+    <header class="sticky top-0 z-30 bg-[#062d27] px-4 pt-4 pb-3 flex items-center justify-between border-b border-emerald-900/80 shadow-md">
+        <a href="/" class="w-10 h-10 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 shadow-sm flex items-center justify-center text-white active:scale-90 transition-transform">
+            <i class="ti ti-chevron-left text-xl"></i>
+        </a>
+        
+        <div class="flex items-center gap-2">
+            @php
+                $logoUrl = optional($pengaturan)->logo 
+                    ? $pengaturan->getAdminImageUrl($pengaturan->logo)
+                    : asset('assets/img/logo/persisalamin.png');
+            @endphp
+            <div class="w-7 h-7 rounded-lg bg-white/10 p-1 flex items-center justify-center border border-white/15">
                 <img src="{{ $logoUrl }}" alt="Logo" class="w-full h-full object-contain">
             </div>
-            
-            <h1 class="text-[28px] font-black text-white tracking-tight leading-none mb-1.5 shadow-sm" data-aos="fade-up" data-aos-delay="100">SPMB Portal</h1>
-            <p class="text-teal-100/80 text-[10px] font-bold uppercase tracking-[0.25em]" data-aos="fade-up" data-aos-delay="200">Pesantren Al Amin</p>
+            <span class="text-xs font-bold text-white font-poppins">SPMB Al-Amin</span>
         </div>
-    </div>
 
-    <!-- BOTTOM SECTION: Form Drawer (Expands to fill) -->
-    <div class="flex-1 bg-white rounded-t-[40px] -mt-12 relative z-20 px-7 pt-10 pb-8 flex flex-col shadow-[0_-15px_40px_rgba(0,0,0,0.15)]"
-         x-data="{
-            form: { username: '', password: '' },
+        <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $pengaturan->telepon ?? '') }}?text=Halo%20Panitia%20SPMB,%20saya%20butuh%20bantuan%20login" 
+           target="_blank" 
+           class="w-10 h-10 rounded-2xl bg-[#bef264]/20 hover:bg-[#bef264]/30 border border-[#bef264]/30 flex items-center justify-center text-[#bef264] active:scale-90 transition-transform shadow-sm">
+            <i class="ti ti-brand-whatsapp text-lg"></i>
+        </a>
+    </header>
+
+    <!-- Main Container -->
+    <div 
+        class="flex-1 px-5 pt-4 max-w-sm w-full mx-auto flex flex-col justify-center"
+        x-data="{
+            form: { username: '{{ old('username') }}', password: '' },
+            showPassword: false,
             errors: {},
-            isFocus: '',
             validate(field) {
                 this.errors[field] = '';
                 if (!this.form[field]) this.errors[field] = 'Kolom ini wajib diisi.';
@@ -44,105 +47,177 @@
                 this.validate('password');
                 if (this.errors.username || this.errors.password) e.preventDefault();
             }
-         }">
-        
-        <!-- Drag Handle Indicator -->
-        <div class="absolute top-4 left-1/2 -translate-x-1/2 w-12 h-1.5 bg-slate-200 rounded-full"></div>
-
-        <div class="mb-8" data-aos="fade-up" data-aos-delay="300">
-            <h2 class="text-2xl font-black text-slate-800">Masuk Akun</h2>
-            <p class="text-[13px] text-slate-400 font-medium mt-1">Silakan masuk untuk melanjutkan</p>
+        }"
+    >
+        <!-- Segmented Tab Switcher (Native App Style) -->
+        <div class="bg-stone-200/70 p-1 rounded-2xl flex gap-1 mb-5">
+            <a href="/login" class="flex-1 py-2.5 text-center text-xs font-bold rounded-xl bg-white text-[#062d27] shadow-xs font-poppins transition-all">
+                Masuk Akun
+            </a>
+            <a href="/register" class="flex-1 py-2.5 text-center text-xs font-bold rounded-xl text-stone-500 hover:text-stone-800 font-poppins transition-all">
+                Daftar Baru
+            </a>
         </div>
+
+        <!-- Heading Section (Exact Desktop Typography & Style) -->
+        <div class="mb-5">
+            <div class="inline-flex items-center gap-2 bg-[#062d27] text-[#bef264] px-3.5 py-1 rounded-full text-xs font-bold mb-2.5 font-poppins shadow-xs">
+                <i class="ti ti-login text-sm"></i>
+                <span>Akun Calon Santri</span>
+            </div>
+
+            <h1 class="text-2xl font-black text-[#062d27] font-poppins leading-tight tracking-tight">
+                Sistem Penerimaan Murid Baru (SPMB)
+            </h1>
+            <p class="text-xs text-stone-500 font-normal mt-1.5 leading-relaxed">
+                Gunakan <strong>Nomor Registrasi</strong> (contoh: OL...) atau <strong>Email</strong> yang terdaftar.
+            </p>
+        </div>
+
+        <!-- Flash Messages -->
+        @if(session('success'))
+            <div class="mb-4 p-3.5 bg-emerald-50 border border-emerald-200/80 rounded-2xl flex items-start gap-2.5 shadow-xs">
+                <i class="ti ti-circle-check text-emerald-700 text-lg shrink-0 mt-0.5"></i>
+                <div>
+                    <h5 class="text-xs font-bold text-emerald-950 font-poppins">Pemberitahuan</h5>
+                    <p class="text-xs text-emerald-800 font-medium leading-relaxed">{{ session('success') }}</p>
+                </div>
+            </div>
+        @endif
 
         @if($errors->any())
-            <div class="mb-6 p-4 bg-rose-50 border border-rose-100 rounded-2xl flex items-start gap-3 animate-shake">
-                <i class="ti ti-alert-triangle text-rose-500 text-lg shrink-0 mt-0.5"></i>
-                <p class="text-[12px] text-rose-700 font-bold leading-relaxed">{{ $errors->first() }}</p>
+            <div class="mb-4 p-3.5 bg-rose-50 border border-rose-200/80 rounded-2xl flex items-start gap-2.5 shadow-xs">
+                <i class="ti ti-alert-triangle text-rose-600 text-lg shrink-0 mt-0.5"></i>
+                <div>
+                    <h5 class="text-xs font-bold text-rose-950 font-poppins">Gagal Masuk</h5>
+                    <p class="text-xs text-rose-700 font-medium leading-relaxed">{{ $errors->first() }}</p>
+                </div>
             </div>
         @endif
 
-        @if(session('success'))
-            <div class="mb-6 p-4 bg-emerald-50 border border-emerald-100 rounded-2xl flex items-start gap-3">
-                <i class="ti ti-circle-check text-emerald-500 text-lg shrink-0 mt-0.5"></i>
-                <p class="text-[12px] text-emerald-700 font-bold leading-relaxed">{{ session('success') }}</p>
-            </div>
-        @endif
-
-        <form action="/login" method="POST" class="space-y-5" @submit="submit" novalidate data-aos="fade-up" data-aos-delay="400">
+        <!-- Form Elements -->
+        <form action="/login" method="POST" class="space-y-4" @submit="submit" novalidate>
             @csrf
             
-            <!-- Modern Input: Username -->
+            <!-- No. Register / Email Floating Label -->
             <div class="space-y-1">
-                <div class="relative group">
-                    <div class="absolute left-4 top-1/2 -translate-y-1/2 transition-colors duration-300"
-                         :class="errors.username ? 'text-rose-500' : (isFocus === 'username' ? 'text-teal-600' : 'text-slate-400')">
-                        <i class="ti ti-user text-xl"></i>
-                    </div>
-                    <input type="text" name="username" x-model="form.username" 
-                        @focus="isFocus = 'username'" @blur="isFocus = ''; validate('username')"
-                        placeholder="No. Register / Email" required
-                        class="w-full bg-slate-50 border rounded-2xl py-4 pl-12 pr-4 text-[14px] font-bold text-slate-800 outline-none transition-all duration-300 focus:bg-white placeholder:text-slate-400 placeholder:font-medium"
-                        :class="errors.username ? 'border-rose-500 focus:border-rose-500 focus:ring-4 focus:ring-rose-500/10' : 'border-slate-200 focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10'">
+                <div class="relative">
+                    <input 
+                        type="text" 
+                        id="username_mobile"
+                        name="username" 
+                        x-model="form.username" 
+                        @blur="validate('username')" 
+                        placeholder=" " 
+                        required
+                        class="peer block w-full bg-white border rounded-2xl py-3.5 pl-11 pr-4 text-xs font-semibold text-stone-900 outline-none transition-all shadow-2xs placeholder-shown:border-stone-200/90"
+                        :class="errors.username ? '!border-rose-500 !bg-rose-50/20 focus:!border-rose-500 focus:!ring-4 focus:!ring-rose-500/15' : 'border-stone-200/90 focus:border-[#062d27] focus:ring-4 focus:ring-emerald-900/10'"
+                    >
+                    <i class="ti ti-id absolute left-3.5 top-1/2 -translate-y-1/2 text-lg pointer-events-none transition-colors" 
+                       :class="errors.username ? 'text-rose-500' : 'text-stone-400 peer-focus:text-[#062d27]'"></i>
+                    <label 
+                        for="username_mobile" 
+                        class="absolute left-11 pointer-events-none transition-all duration-200 font-poppins
+                               peer-focus:-top-2 peer-focus:left-3.5 peer-focus:bg-white peer-focus:px-1.5 peer-focus:text-[10px] peer-focus:font-bold peer-focus:text-[#062d27] peer-focus:translate-y-0 peer-focus:z-10"
+                        :class="form.username 
+                            ? '-top-2 left-3.5 bg-white px-1.5 text-[10px] font-bold translate-y-0 z-10 ' + (errors.username ? 'text-rose-600' : 'text-stone-600')
+                            : 'top-1/2 -translate-y-1/2 text-xs font-medium ' + (errors.username ? 'text-rose-500' : 'text-stone-400')"
+                    >
+                        Nomor Registrasi / Email <span class="text-rose-500">*</span>
+                    </label>
                 </div>
-                <p x-show="errors.username" x-text="errors.username" class="text-rose-500 text-[10px] font-bold ml-1"></p>
+                <p x-show="errors.username" class="text-rose-600 text-[11px] font-bold mt-1 flex items-center gap-1 font-poppins">
+                    <i class="ti ti-alert-circle text-xs shrink-0"></i>
+                    <span x-text="errors.username"></span>
+                </p>
             </div>
 
-            <!-- Modern Input: Password -->
+            <!-- Password Floating Label -->
             <div class="space-y-1">
-                <div class="relative group">
-                    <div class="absolute left-4 top-1/2 -translate-y-1/2 transition-colors duration-300"
-                         :class="errors.password ? 'text-rose-500' : (isFocus === 'password' ? 'text-teal-600' : 'text-slate-400')">
-                        <i class="ti ti-lock text-xl"></i>
-                    </div>
-                    <input type="password" name="password" x-model="form.password" 
-                        @focus="isFocus = 'password'" @blur="isFocus = ''; validate('password')"
-                        placeholder="Kata Sandi" required
-                        class="w-full bg-slate-50 border rounded-2xl py-4 pl-12 pr-4 text-[14px] font-bold text-slate-800 outline-none transition-all duration-300 focus:bg-white placeholder:text-slate-400 placeholder:font-medium"
-                        :class="errors.password ? 'border-rose-500 focus:border-rose-500 focus:ring-4 focus:ring-rose-500/10' : 'border-slate-200 focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10'">
+                <div class="relative">
+                    <input 
+                        :type="showPassword ? 'text' : 'password'" 
+                        id="password_mobile"
+                        name="password" 
+                        x-model="form.password" 
+                        @blur="validate('password')" 
+                        placeholder=" " 
+                        required
+                        class="peer block w-full bg-white border rounded-2xl py-3.5 pl-11 pr-11 text-xs font-semibold text-stone-900 outline-none transition-all shadow-2xs placeholder-shown:border-stone-200/90"
+                        :class="errors.password ? '!border-rose-500 !bg-rose-50/20 focus:!border-rose-500 focus:!ring-4 focus:!ring-rose-500/15' : 'border-stone-200/90 focus:border-[#062d27] focus:ring-4 focus:ring-emerald-900/10'"
+                    >
+                    <i class="ti ti-lock absolute left-3.5 top-1/2 -translate-y-1/2 text-lg pointer-events-none transition-colors" 
+                       :class="errors.password ? 'text-rose-500' : 'text-stone-400 peer-focus:text-[#062d27]'"></i>
+                    <label 
+                        for="password_mobile" 
+                        class="absolute left-11 pointer-events-none transition-all duration-200 font-poppins
+                               peer-focus:-top-2 peer-focus:left-3.5 peer-focus:bg-white peer-focus:px-1.5 peer-focus:text-[10px] peer-focus:font-bold peer-focus:text-[#062d27] peer-focus:translate-y-0 peer-focus:z-10"
+                        :class="form.password 
+                            ? '-top-2 left-3.5 bg-white px-1.5 text-[10px] font-bold translate-y-0 z-10 ' + (errors.password ? 'text-rose-600' : 'text-stone-600')
+                            : 'top-1/2 -translate-y-1/2 text-xs font-medium ' + (errors.password ? 'text-rose-500' : 'text-stone-400')"
+                    >
+                        Kata Sandi <span class="text-rose-500">*</span>
+                    </label>
+                    <button 
+                        type="button" 
+                        @click="showPassword = !showPassword" 
+                        class="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600 focus:outline-none p-1.5"
+                        aria-label="Tampilkan sandi"
+                    >
+                        <i class="ti text-base" :class="showPassword ? 'ti-eye-off' : 'ti-eye'"></i>
+                    </button>
                 </div>
-                <p x-show="errors.password" x-text="errors.password" class="text-rose-500 text-[10px] font-bold ml-1"></p>
+                <p x-show="errors.password" class="text-rose-600 text-[11px] font-bold mt-1 flex items-center gap-1 font-poppins">
+                    <i class="ti ti-alert-circle text-xs shrink-0"></i>
+                    <span x-text="errors.password"></span>
+                </p>
             </div>
 
-            <div class="flex items-center justify-between px-1 pt-1">
-                <label class="flex items-center gap-2 cursor-pointer group">
-                    <input type="checkbox" name="remember" class="w-4 h-4 rounded text-teal-600 border-slate-300 focus:ring-teal-500">
-                    <span class="text-xs font-semibold text-slate-500 group-hover:text-slate-700 transition-colors">Ingat Saya</span>
-                </label>
-                <a href="#" class="text-xs font-bold text-teal-600 hover:text-teal-700 transition-colors">Lupa Sandi?</a>
+            <!-- Remember Me & Forgot Password -->
+            <div class="flex items-center justify-between pt-0.5">
+                <div class="flex items-center gap-2">
+                    <input 
+                        type="checkbox" 
+                        name="remember" 
+                        id="remember_mobile" 
+                        class="w-4 h-4 rounded text-[#062d27] border-stone-300 focus:ring-[#062d27] cursor-pointer"
+                    >
+                    <label for="remember_mobile" class="text-xs font-medium text-stone-600 cursor-pointer select-none font-poppins">
+                        Ingat sesi saya
+                    </label>
+                </div>
+                <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $pengaturan->telepon ?? '') }}?text=Halo%20Admin%20SPMB,%20saya%20lupa%20kata%20sandi%20akun%20pendaftaran" target="_blank" class="text-[11px] font-bold text-emerald-800 hover:text-emerald-950 font-poppins">
+                    Lupa Sandi?
+                </a>
             </div>
 
-            <div class="pt-4">
-                <button type="submit" 
-                    class="w-full py-4 bg-teal-600 hover:bg-teal-700 active:bg-teal-800 rounded-2xl text-white font-black text-[14px] tracking-wide shadow-lg shadow-teal-600/30 transition-all flex items-center justify-center gap-2">
-                    Masuk
-                    <i class="ti ti-arrow-right text-lg"></i>
-                </button>
-            </div>
+            <!-- Submit Button -->
+            <button 
+                type="submit" 
+                class="w-full py-4 bg-[#bef264] hover:bg-[#a3e635] text-[#062d27] font-black text-xs rounded-2xl shadow-lg shadow-lime-500/20 transition-all flex items-center justify-center gap-2 font-poppins active:scale-[0.98]"
+            >
+                <span>Masuk ke Dashboard SPMB</span>
+                <i class="ti ti-arrow-right text-base font-bold"></i>
+            </button>
         </form>
 
-        <!-- Bottom Text -->
-        <div class="mt-auto pt-10 text-center" data-aos="fade-up" data-aos-delay="500">
-            <p class="text-[13px] text-slate-500 font-medium mb-6">
-                Belum punya akun? 
-                <a href="/register" class="font-bold text-teal-600 hover:text-teal-700">Daftar Baru</a>
-            </p>
-            
-            <div class="flex items-center justify-center gap-2 text-slate-400">
-                <i class="ti ti-headset text-lg"></i>
-                <span class="text-[11px] font-semibold">Butuh Bantuan? Hubungi Admin</span>
-            </div>
+        <!-- Helpdesk WhatsApp Action -->
+        <div class="mt-6 text-center">
+            <a 
+                href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $pengaturan->telepon ?? '') }}?text=Halo%20Panitia%20SPMB,%20saya%20butuh%20bantuan%20login%20portal" 
+                target="_blank"
+                class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-white border border-stone-200 text-[11px] font-bold text-stone-600 hover:text-emerald-800 shadow-2xs active:scale-95 transition-all font-poppins"
+            >
+                <i class="ti ti-brand-whatsapp text-base text-emerald-600"></i>
+                <span>Butuh bantuan? Chat Panitia SPMB</span>
+            </a>
         </div>
     </div>
-</div>
 
-<style>
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    75% { transform: translateX(5px); }
-}
-.animate-shake {
-    animation: shake 0.4s ease-in-out;
-}
-</style>
+    <!-- Footer Copyright -->
+    <footer class="pt-6 text-center text-[11px] text-stone-400 font-medium font-poppins">
+        &copy; {{ date('Y') }} {{ $pengaturan->nama_sekolah ?? 'Pesantren Persatuan Islam 80 Al Amin' }}
+    </footer>
+
+</div>
 @endsection

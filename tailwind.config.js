@@ -25,6 +25,7 @@ export default {
         fontFamily: {
             sans: ['Public Sans', 'sans-serif'],
             poppins: ['Poppins', 'sans-serif'],
+            montserrat: ['Montserrat', 'sans-serif'],
         },
     },
   },

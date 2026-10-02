@@ -1,77 +1,82 @@
 @extends('layouts.mobile')
 
-@section('title', 'Galeri Kegiatan - Al Amin')
+@section('title', 'Galeri Kegiatan - ' . ($pengaturan->nama_sekolah ?? 'Al Amin'))
 
 @section('content')
-<div class="bg-teal-900 pt-8 pb-12 px-6 relative overflow-hidden">
-    <div class="absolute inset-0 opacity-10">
-        <div class="absolute bottom-0 right-0 w-64 h-64 bg-yellow-400 rounded-full blur-3xl -mr-32 -mb-32"></div>
-    </div>
-    
+<div class="bg-[#062d27] pt-6 pb-10 px-5 relative overflow-hidden text-white border-b border-emerald-900/60">
     <div class="relative z-10" data-aos="fade-down">
-        <div class="flex items-center gap-2 text-[10px] text-white font-bold uppercase tracking-widest mb-3">
-            <span class="w-6 h-px bg-white"></span>
+        <div class="flex items-center gap-2 text-[10px] text-emerald-300 font-bold uppercase tracking-wider mb-2 font-poppins">
             Dokumentasi Pesantren
         </div>
-        <h1 class="text-3xl font-black text-white leading-tight mb-4 tracking-tight">Galeri <span class="text-yellow-400">Kegiatan</span></h1>
-        <p class="text-xs text-teal-100/80 font-medium leading-relaxed max-w-[90%]">Kumpulan momen dan dokumentasi berbagai kegiatan santri di Pesantren Al Amin.</p>
+        <h1 class="text-2xl font-black text-white leading-tight mb-2 font-poppins">
+            Galeri <span class="text-[#bef264]">Kegiatan</span>
+        </h1>
+        <p class="text-xs text-emerald-100/80 font-normal leading-relaxed">
+            Kumpulan momen dan dokumentasi ragam aktivitas santri {{ $pengaturan->nama_sekolah ?? 'Pesantren Persatuan Islam 80 Al Amin' }}.
+        </p>
     </div>
 </div>
 
-<div class="px-6 pt-10 pb-24 bg-gray-50/50 min-h-screen">
-    <div class="grid grid-cols-1 gap-6">
+<div class="px-5 pt-6 pb-24 bg-[#faf9f6] min-h-screen">
+    <div class="grid grid-cols-1 gap-5">
         @forelse($albums as $album)
-        <a href="{{ route('gallery.show', $album->id) }}" class="group bg-white rounded-[2.5rem] overflow-hidden border border-gray-100 shadow-sm active:scale-[0.98] transition-all" data-aos="fade-up">
-            <div class="aspect-[16/10] relative overflow-hidden">
-                @if($album->cover)
-                    <img src="{{ $album->getAdminImageUrl($album->cover) }}" alt="{{ $album->nama_album }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                @else
-                    <div class="w-full h-full bg-teal-50 flex items-center justify-center text-teal-200">
-                        <i class="ti ti-photo text-6xl"></i>
+            <a href="{{ route('gallery.show', $album->id) }}" class="group bg-white rounded-3xl overflow-hidden border border-stone-200/80 shadow-xs active:scale-[0.98] transition-all flex flex-col" data-aos="fade-up">
+                <div class="aspect-[16/10] relative overflow-hidden bg-stone-100">
+                    @if($album->cover)
+                        <img src="{{ $album->getAdminImageUrl($album->cover) }}" alt="{{ $album->title }}" class="w-full h-full object-cover">
+                    @else
+                        <div class="w-full h-full bg-emerald-950 flex items-center justify-center text-emerald-300/40">
+                            <i class="ti ti-photo text-5xl"></i>
+                        </div>
+                    @endif
+                    
+                    <!-- Photo Count Badge -->
+                    <div class="absolute top-3 right-3 z-10">
+                        <div class="bg-[#062d27]/85 backdrop-blur-md text-[#bef264] px-2.5 py-1 rounded-full text-[10px] font-bold font-poppins flex items-center gap-1.5 border border-emerald-500/30">
+                            <i class="ti ti-camera text-xs"></i>
+                            {{ $album->photos_count ?? $album->photos->count() }} Foto
+                        </div>
                     </div>
-                @endif
-                
-                <!-- Photo Count Badge -->
-                <div class="absolute top-4 right-4">
-                    <div class="bg-black/40 backdrop-blur-md text-white px-3 py-1.5 rounded-xl text-[10px] font-black flex items-center gap-2 border border-white/20">
-                        <i class="ti ti-camera"></i>
-                        {{ $album->photos_count }} Foto
-                    </div>
-                </div>
 
-                <!-- Gradient Overlay -->
-                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                
-                <!-- Date Overlay -->
-                <div class="absolute bottom-4 left-6">
-                    <div class="flex items-center gap-2 text-white/80 text-[10px] font-bold uppercase tracking-widest">
-                        <i class="ti ti-calendar"></i>
-                        {{ $album->created_at->format('d M Y') }}
+                    <!-- Date Overlay -->
+                    <div class="absolute inset-x-0 bottom-0 pt-8 pb-2.5 px-4 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-center text-white/90 text-[11px] font-medium gap-1.5 font-poppins">
+                        <i class="ti ti-calendar text-emerald-300"></i>
+                        {{ $album->created_at ? $album->created_at->translatedFormat('d M Y') : '-' }}
                     </div>
                 </div>
-            </div>
-            
-            <div class="p-6">
-                <h3 class="text-lg font-black text-teal-950 leading-tight mb-2">{{ $album->nama_album }}</h3>
-                <p class="text-[11px] text-gray-500 line-clamp-2 leading-relaxed font-medium">{{ $album->deskripsi }}</p>
                 
-                <div class="mt-4 flex items-center gap-2 text-teal-600 font-bold text-[10px] uppercase tracking-widest">
-                    Lihat Koleksi Foto
-                    <i class="ti ti-arrow-right text-sm"></i>
+                <div class="p-5 flex flex-col flex-1">
+                    <h3 class="text-base font-bold font-poppins text-gray-900 group-hover:text-emerald-800 leading-snug mb-1.5">
+                        {{ $album->title }}
+                    </h3>
+                    
+                    @if($album->description)
+                        <p class="text-[12px] text-gray-500 line-clamp-2 leading-relaxed font-normal mb-3">
+                            {{ $album->description }}
+                        </p>
+                    @endif
+                    
+                    <div class="mt-auto pt-3 border-t border-gray-100 flex items-center justify-between text-emerald-800 font-bold text-[11px] font-poppins">
+                        <span>Buka Koleksi Foto</span>
+                        <div class="w-6 h-6 rounded-full bg-emerald-50 text-emerald-800 flex items-center justify-center">
+                            <i class="ti ti-arrow-right text-xs"></i>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </a>
+            </a>
         @empty
-        <div class="py-20 text-center bg-white rounded-[2.5rem] border border-dashed border-gray-200" data-aos="fade-up">
-            <i class="ti ti-photo-off text-5xl text-gray-200 mb-4 block"></i>
-            <p class="text-gray-400 font-bold uppercase text-[10px] tracking-widest">Belum ada album foto</p>
-        </div>
+            <div class="py-16 text-center bg-white rounded-3xl border border-dashed border-stone-300 p-6" data-aos="fade-up">
+                <i class="ti ti-photo-off text-4xl text-emerald-800/40 mb-3 block"></i>
+                <p class="text-gray-500 font-medium text-xs">Belum ada album foto dokumentasi.</p>
+            </div>
         @endforelse
     </div>
 
     <!-- Pagination -->
-    <div class="mt-12">
-        {{ $albums->links() }}
-    </div>
+    @if($albums->hasPages())
+        <div class="mt-8 flex justify-center">
+            {{ $albums->links() }}
+        </div>
+    @endif
 </div>
 @endsection

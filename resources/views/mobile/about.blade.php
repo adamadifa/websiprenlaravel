@@ -1,136 +1,131 @@
 @extends('layouts.mobile')
 
-@section('title', 'Tentang Pesantren - Al Amin')
-@section('meta_description', 'Mengenal lebih dekat sejarah, visi, dan misi perjuangan Pesantren Persatuan Islam 80 Al Amin.')
+@section('title', 'Tentang Pesantren - ' . ($pengaturan->nama_sekolah ?? 'Al Amin'))
+@section('meta_description', 'Mengenal rekam jejak sejarah, piagam visi, dan misi perjuangan Pesantren Persatuan Islam 80 Al Amin.')
 
 @section('content')
-<!-- Hero Section -->
-<div class="bg-teal-900 pt-8 pb-12 px-6 relative overflow-hidden">
-    <div class="absolute inset-0 opacity-10">
-        <div class="absolute bottom-0 right-0 w-64 h-64 bg-yellow-400 rounded-full blur-3xl -mr-32 -mb-32"></div>
-    </div>
-    
+<!-- Mobile Masthead -->
+<div class="bg-[#062d27] pt-8 pb-10 px-6 relative overflow-hidden text-white font-poppins border-b border-emerald-900/60">
     <div class="relative z-10" data-aos="fade-down">
-        <div class="flex items-center gap-2 text-[10px] text-white font-bold uppercase tracking-widest mb-3">
-            <span class="w-6 h-px bg-white"></span>
-            Profil Lembaga
+        <div class="flex items-center gap-2 text-[10px] text-[#bef264] font-bold uppercase tracking-widest mb-2.5">
+            <span>Profil & Sejarah Lembaga</span>
+            <span class="text-white/30">•</span>
+            <span>PPI 80</span>
         </div>
-        <h1 class="text-3xl font-black text-white leading-tight mb-4 tracking-tight">Tentang <span class="text-yellow-400">Pesantren</span></h1>
-        <p class="text-xs text-teal-100/80 font-medium leading-relaxed max-w-[90%]">Mengenal lebih dekat sejarah, visi, dan misi perjuangan Pesantren Persatuan Islam 80 Al Amin.</p>
+        <h1 class="text-2xl font-black text-white leading-tight mb-2.5 tracking-tight font-poppins">
+            Tentang <span class="text-[#bef264]">Pesantren</span>
+        </h1>
+        <p class="text-xs text-emerald-100/80 font-normal leading-relaxed font-sans">
+            Mengenal rekam jejak, piagam visi, dan arah langkah {{ $pengaturan->nama_sekolah ?? 'Pesantren Persatuan Islam 80 Al Amin' }} Sindangkasih.
+        </p>
     </div>
 </div>
 
-<div class="px-6 pt-10 pb-24 bg-gray-50/50 min-h-screen">
+<div class="px-5 pt-7 pb-24 bg-[#faf9f6] min-h-screen space-y-8">
 
-    <!-- Visi Card (Prominent) -->
-    <div class="mb-14">
-        <div class="bg-gradient-to-br from-teal-800 to-teal-950 rounded-3xl p-8 shadow-[0_8px_30px_rgb(0,0,0,0.1)] relative overflow-hidden text-white" data-aos="fade-up">
-            <!-- Abstract pattern -->
-            <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9IiNmZmYiLz48L3N2Zz4=')]"></div>
-            <div class="absolute -top-12 -right-12 w-48 h-48 bg-teal-500/20 rounded-full blur-3xl"></div>
-            
-            <div class="relative z-10">
-                <h2 class="text-[10px] font-bold text-yellow-400 uppercase tracking-widest mb-2">Visi Kami</h2>
-                <p class="text-lg font-bold leading-relaxed">
-                    "{{ $visi->deskripsi ?? 'Terwujudnya Pesantren sebagai lembaga kaderisasi terbaik dan miniatur masyarakat Rabbani.' }}"
-                </p>
+    <!-- 1. PIAGAM VISI (Mobile Plaque) -->
+    <div data-aos="fade-up">
+        <div class="bg-[#062d27] text-white p-6 rounded-2xl border border-emerald-800/80 shadow-sm relative overflow-hidden">
+            <div class="flex items-center justify-between pb-3 mb-3 border-b border-emerald-800/60 text-[10px] font-poppins">
+                <div class="flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#bef264]"></span>
+                    <span class="font-extrabold uppercase tracking-widest text-[#bef264]">Piagam Visi</span>
+                </div>
+                <span class="text-emerald-300/70 font-bold uppercase text-[9px]">Haluan Utama</span>
             </div>
+
+            <h2 class="text-base font-black text-white font-poppins mb-2">Visi Kami</h2>
+
+            <blockquote class="text-xs sm:text-sm font-bold font-poppins text-white leading-relaxed italic mb-3">
+                "{{ $visi->deskripsi ?? 'Terwujudnya Pesantren sebagai lembaga kaderisasi terbaik dan miniatur masyarakat Rabbani.' }}"
+            </blockquote>
+
+            <p class="text-[10px] text-emerald-200/80 leading-relaxed border-t border-emerald-800/40 pt-2.5 font-sans">
+                Pedoman fundamental pembinaan aqidah, ibadah shahihah, dan keunggulan santri.
+            </p>
         </div>
     </div>
 
-    <!-- Misi List -->
-    <div class="mb-14">
-        <div class="flex items-center justify-between mb-8">
+    <!-- 2. MISI STRATEGIS (Connected Roadmap Mobile) -->
+    @if(isset($misi) && $misi->count() > 0)
+    <div class="bg-white p-6 rounded-2xl border border-stone-200/80 shadow-xs" data-aos="fade-up">
+        
+        <div class="flex items-center justify-between pb-3 mb-5 border-b border-stone-100 font-poppins">
             <div>
-                <h2 class="text-lg font-black text-teal-950 font-poppins">Misi Kami</h2>
-                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-1">Langkah Nyata Perjuangan</p>
+                <span class="text-[9px] font-bold uppercase tracking-widest text-emerald-800 block">Langkah Nyata</span>
+                <h2 class="text-base font-black text-[#062d27]">Misi Kami</h2>
             </div>
-            <div class="w-12 h-12 bg-teal-50 rounded-2xl flex items-center justify-center text-teal-600">
-                <i class="ti ti-target-arrow text-2xl"></i>
-            </div>
+            <span class="text-[10px] font-extrabold uppercase tracking-wider text-emerald-900 bg-[#bef264] px-2 py-0.5 rounded shadow-xs">
+                {{ $misi->count() }} Poin
+            </span>
         </div>
 
-        <div class="space-y-6">
+        <div class="relative pl-4 border-l-2 border-emerald-900/15 space-y-5 ml-1.5">
             @foreach($misi as $item)
-            <div class="relative pl-10 group" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-                <!-- Vertical Line Connector -->
-                @if(!$loop->last)
-                <div class="absolute left-4 top-10 bottom-0 w-px border-l border-dashed border-teal-200"></div>
-                @endif
-                
-                <!-- Number Icon -->
-                <div class="absolute left-0 top-0 w-8 h-8 rounded-xl bg-white shadow-md border border-teal-50 flex items-center justify-center text-teal-700 font-black text-xs z-10 group-hover:bg-teal-700 group-hover:text-white transition-all duration-300">
-                    {{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}
+            <div class="relative group">
+                <div class="absolute -left-[23px] top-0.5 w-5 h-5 rounded-full bg-[#062d27] text-[#bef264] text-[9px] font-black flex items-center justify-center font-poppins border-2 border-white shadow-xs">
+                    {{ $loop->iteration }}
                 </div>
-                
-                <div class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-                    <h3 class="text-sm font-black text-teal-950 mb-2 leading-snug">{{ $item->judul }}</h3>
-                    <p class="text-[11px] text-gray-500 leading-relaxed font-medium">{{ $item->deskripsi }}</p>
+                <div>
+                    <h3 class="text-xs font-bold text-gray-900 font-poppins leading-snug mb-1">{{ $item->judul }}</h3>
+                    <p class="text-[11px] text-gray-500 leading-relaxed font-sans">{{ $item->deskripsi }}</p>
                 </div>
             </div>
             @endforeach
         </div>
     </div>
+    @endif
 
-    <!-- Sejarah Singkat -->
-    <div class="mb-20">
-        <div class="flex items-center justify-between mb-8">
+    <!-- 3. RISALAH SEJARAH -->
+    <div class="bg-white p-6 rounded-2xl border border-stone-200/80 shadow-xs" data-aos="fade-up">
+        <div class="flex items-center justify-between pb-3 mb-4 border-b border-stone-100 font-poppins">
             <div>
-                <h2 class="text-lg font-black text-teal-950 font-poppins">Sejarah Singkat</h2>
-                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-1">Jejak Perjalanan Al Amin</p>
+                <span class="text-[9px] font-bold uppercase tracking-widest text-emerald-800 block">Kilas Tarikh</span>
+                <h2 class="text-base font-black text-[#062d27]">Sejarah Singkat</h2>
             </div>
-            <div class="w-12 h-12 bg-teal-50 rounded-2xl flex items-center justify-center text-teal-600">
-                <i class="ti ti-history text-2xl"></i>
-            </div>
+            <i class="ti ti-history text-lg text-emerald-800"></i>
         </div>
         
-        <div class="relative" data-aos="fade-up">
-            <!-- Decorative Accent -->
-            <div class="absolute -top-4 -left-4 w-24 h-24 bg-teal-500/5 rounded-full blur-2xl"></div>
-            <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-yellow-400/10 rounded-full blur-2xl"></div>
+        <div class="prose prose-sm max-w-none text-gray-600 leading-relaxed text-justify font-sans space-y-3">
+            @if($about && !empty($about->content))
+                {!! $about->content !!}
+            @else
+                <p>
+                    Berawal dari sebuah masjid yang didirikan pada tahun 1986 dengan nama Masjid Al-Amin, kegiatan dakwah dan pengajian mulai dirintis bagi anak-anak usia sekolah dasar setiap ba'da maghrib.
+                </p>
+            @endif
+        </div>
 
-            <div class="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-xl shadow-teal-900/5 relative z-10">
-                <!-- Quote Icon Accent -->
-                <div class="absolute top-6 right-8 text-teal-50">
-                    <i class="ti ti-quote text-5xl"></i>
-                </div>
-
-                <div class="prose prose-sm prose-teal max-w-none text-gray-600 leading-relaxed font-medium relative z-20 text-justify">
-                    <div class="dropcap-first">
-                        {!! $about->content !!}
-                    </div>
-                </div>
-
-                <!-- Footer Decoration -->
-                <div class="mt-8 pt-6 border-t border-gray-50 flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-teal-50 flex items-center justify-center text-teal-600">
-                        <i class="ti ti-building-mosque text-xl"></i>
-                    </div>
-                    <div>
-                        <p class="text-[10px] font-black text-teal-900 uppercase">Membangun Ummat</p>
-                        <p class="text-[9px] text-gray-400 font-bold uppercase tracking-tighter">Sejak Berdirinya Pesantren</p>
-                    </div>
-                </div>
+        <!-- Archival Sign-off -->
+        <div class="mt-6 pt-4 border-t border-stone-100 flex items-center gap-3">
+            <img 
+                src="{{ $pengaturan ? $pengaturan->getAdminImageUrl($pengaturan->logo) : asset('favicon.ico') }}" 
+                alt="Logo Al Amin" 
+                class="w-7 h-7 object-contain grayscale opacity-80"
+            >
+            <div>
+                <p class="text-[10px] font-bold text-gray-900 font-poppins">Sekretariat Pesantren Al Amin</p>
+                <p class="text-[9px] text-gray-400 font-poppins">Sindangkasih, Ciamis</p>
             </div>
         </div>
+    </div>
+
+    <!-- 4. Quick SPMB Link -->
+    <div class="rounded-2xl bg-[#062d27] p-5 text-white shadow-sm flex items-center justify-between gap-3 border border-emerald-800/60">
+        <div>
+            <h3 class="text-xs font-bold text-white font-poppins">Penerimaan Santri Baru</h3>
+            <p class="text-[10px] text-emerald-100/70 font-sans">Pendaftaran dibuka untuk seluruh jenjang.</p>
+        </div>
+        <a href="/spmb" class="shrink-0 bg-[#bef264] text-[#062d27] font-extrabold px-3.5 py-2 rounded-xl text-xs uppercase tracking-wider font-poppins inline-flex items-center gap-1 shadow-xs">
+            <span>SPMB</span>
+            <i class="ti ti-arrow-right text-xs font-bold"></i>
+        </a>
     </div>
 
 </div>
 
 <style>
-    .prose p { margin-bottom: 1.25rem; font-size: 0.875rem; line-height: 1.7; }
-    .prose p:last-child { margin-bottom: 0; }
-    .prose img { border-radius: 1rem; margin: 1.5rem 0; }
-    .prose h2, .prose h3 { color: #042d27; font-weight: 900; margin-top: 1.5rem; margin-bottom: 0.75rem; font-size: 1.125rem;}
-    
-    .dropcap-first p:first-child::first-letter {
-        float: left;
-        font-size: 3.5rem;
-        line-height: 1;
-        font-weight: 900;
-        margin-right: 0.75rem;
-        color: #0d9488;
-        font-family: 'Poppins', sans-serif;
-    }
+    .prose p { margin-bottom: 0.9rem; font-size: 0.8125rem; line-height: 1.7; color: #4b5563; }
+    .prose h2, .prose h3, .prose h4 { font-family: 'Poppins', sans-serif; font-weight: 800; color: #062d27; font-size: 1rem; margin-top: 1.15rem; margin-bottom: 0.4rem; }
 </style>
 @endsection

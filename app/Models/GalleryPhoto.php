@@ -11,6 +11,10 @@ class GalleryPhoto extends Model
 
     protected $table = 'gallery_photos';
 
+    protected $casts = [
+        'is_hero' => 'boolean',
+    ];
+
     public function album()
     {
         return $this->belongsTo(GalleryAlbum::class, 'gallery_album_id');

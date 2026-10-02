@@ -3,22 +3,21 @@
 @section('title', 'Konfirmasi Pembayaran')
 
 @section('content')
-<div x-data="paymentForm()" class="min-h-[100dvh] bg-slate-50 flex flex-col font-sans selection:bg-teal-100 pb-24">
+<div x-data="paymentForm()" class="min-h-[100dvh] bg-[#faf9f6] flex flex-col font-sans selection:bg-[#bef264] selection:text-[#062d27] pb-28">
     
-    <!-- TOP HEADER: Teal Branding -->
-    <div class="bg-teal-900 pt-8 pb-12 px-6 relative overflow-hidden">
-        <!-- Decorative Background -->
-        <div class="absolute top-0 right-0 w-64 h-64 bg-teal-500 rounded-full blur-[80px] opacity-20 -translate-y-1/2 translate-x-1/4"></div>
-        <div class="absolute inset-0 opacity-[0.05]" style="background-image: url('https://www.transparenttextures.com/patterns/cubes.png');"></div>
+    <!-- TOP HEADER: Deep Emerald Branding -->
+    <div class="bg-[#062d27] pt-7 pb-12 px-5 relative overflow-hidden border-b border-emerald-900/60">
+        <div class="absolute -top-16 -right-16 w-56 h-56 bg-[#bef264]/15 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 -left-16 w-48 h-48 bg-emerald-500/15 rounded-full blur-2xl pointer-events-none"></div>
 
         <div class="relative z-10">
-            <div class="flex items-center gap-4 mb-2">
-                <a href="/dashboard" class="w-10 h-10 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center text-teal-100 border border-white/20 active:scale-90 transition-all">
-                    <i class="ti ti-chevron-left text-2xl"></i>
+            <div class="flex items-center gap-3.5 mb-2">
+                <a href="/dashboard" class="w-10 h-10 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center text-emerald-100 border border-white/15 active:scale-90 transition-all shadow-xs">
+                    <i class="ti ti-chevron-left text-xl"></i>
                 </a>
                 <div>
-                    <h1 class="text-white text-lg font-black leading-none tracking-tight">Pembayaran</h1>
-                    <p class="text-teal-200/80 text-[11px] font-medium mt-1">Konfirmasi Biaya Pendaftaran</p>
+                    <h1 class="text-white text-base font-black leading-tight tracking-tight font-montserrat">Pembayaran SPMB</h1>
+                    <p class="text-[#bef264] text-[11px] font-bold font-montserrat mt-0.5">Konfirmasi Biaya Pendaftaran</p>
                 </div>
             </div>
         </div>
@@ -29,138 +28,155 @@
         
         <!-- Feedback Notifications -->
         @if(session('success'))
-            <div class="p-4 bg-emerald-50 border border-emerald-100 rounded-2xl text-emerald-700 text-[11px] font-bold flex items-center gap-3 shadow-sm" data-aos="fade-down">
-                <div class="w-8 h-8 bg-emerald-500 rounded-xl flex items-center justify-center text-white shadow-lg shadow-emerald-500/20">
-                    <i class="ti ti-check text-lg"></i>
+            <div class="p-4 bg-emerald-50 border border-emerald-200/80 rounded-2xl text-emerald-900 text-xs font-bold flex items-center gap-3 shadow-xs font-montserrat">
+                <div class="w-7 h-7 bg-emerald-600 rounded-xl flex items-center justify-center text-white shrink-0">
+                    <i class="ti ti-check text-sm"></i>
                 </div>
-                {{ session('success') }}
+                <span>{{ session('success') }}</span>
             </div>
         @endif
 
         @if(session('error'))
-            <div class="p-4 bg-rose-50 border border-rose-100 rounded-2xl text-rose-700 text-[11px] font-bold flex items-center gap-3 shadow-sm" data-aos="fade-down">
-                <div class="w-8 h-8 bg-rose-500 rounded-xl flex items-center justify-center text-white shadow-lg shadow-rose-500/20">
-                    <i class="ti ti-alert-triangle text-lg"></i>
+            <div class="p-4 bg-rose-50 border border-rose-200/80 rounded-2xl text-rose-800 text-xs font-bold flex items-center gap-3 shadow-xs font-montserrat">
+                <div class="w-7 h-7 bg-rose-600 rounded-xl flex items-center justify-center text-white shrink-0">
+                    <i class="ti ti-alert-triangle text-sm"></i>
                 </div>
-                {{ session('error') }}
+                <span>{{ session('error') }}</span>
             </div>
         @endif
 
-        <!-- BANK INFO CARD -->
-        <div class="bg-teal-600 rounded-2xl p-5 shadow-xl shadow-teal-600/20 border border-white/10 relative overflow-hidden">
-            <div class="absolute top-0 right-0 p-4 opacity-10">
-                <i class="ti ti-building-bank text-6xl text-white"></i>
-            </div>
+        <!-- REKENING CARD (Deep Emerald) -->
+        <div class="bg-[#062d27] rounded-3xl p-5 shadow-lg border border-emerald-900/60 text-white relative overflow-hidden">
+            <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-[#bef264]/10 rounded-full blur-2xl pointer-events-none"></div>
+
             <div class="relative z-10">
-                <p class="text-[10px] font-bold text-teal-100 uppercase tracking-widest mb-3">Rekening Tujuan</p>
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center font-black text-teal-800 shadow-lg shadow-black/10">BSI</div>
-                    <div>
-                        <p class="text-white text-base font-black tracking-wider leading-none mb-1.5">7085588887</p>
-                        <p class="text-teal-50 text-[10px] font-bold">A.N Pesantren Persis 80 Ciamis</p>
+                <div class="flex justify-between items-center mb-3">
+                    <span class="text-[10px] font-bold text-[#bef264] uppercase font-montserrat">Rekening Resmi</span>
+                    <span class="text-[10px] text-emerald-200 font-bold font-montserrat">SPMB 2026</span>
+                </div>
+
+                <div class="flex items-center gap-3.5 bg-white/10 backdrop-blur-md rounded-2xl p-3 border border-white/15">
+                    <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center font-black text-emerald-900 text-xs shadow-sm shrink-0">
+                        BSI
                     </div>
-                    <button @click="copyToClipboard('7085588887')" class="ml-auto w-9 h-9 bg-white/20 rounded-lg flex items-center justify-center text-white active:scale-90 transition-all border border-white/10">
-                        <i class="ti ti-copy text-lg"></i>
+                    <div class="min-w-0 flex-1">
+                        <p class="text-[10px] font-bold text-emerald-200 uppercase font-montserrat">Bank Syariah Indonesia</p>
+                        <p class="text-base font-black text-[#bef264] font-mono tracking-wider">7085588887</p>
+                        <p class="text-[10px] text-white/90 font-medium truncate">A.N Pesantren Persis 80 Ciamis</p>
+                    </div>
+                    <button type="button" @click="copyToClipboard('7085588887')" class="w-9 h-9 bg-[#bef264] text-[#062d27] rounded-xl flex items-center justify-center active:scale-90 transition-transform shadow-xs shrink-0 font-bold">
+                        <i class="ti ti-copy text-base"></i>
                     </button>
                 </div>
             </div>
         </div>
 
         <!-- PAYMENT FORM -->
-        <div class="bg-white rounded-xl p-6 shadow-xl shadow-teal-950/5 border border-slate-100">
-            <h3 class="text-slate-800 text-sm font-black mb-6 flex items-center gap-2">
-                <i class="ti ti-upload text-teal-600 text-lg"></i>
-                Kirim Bukti Bayar
+        <div class="bg-white rounded-3xl p-5 shadow-sm border border-stone-200/80">
+            <h3 class="text-[#062d27] text-xs font-bold uppercase tracking-wider mb-4 flex items-center gap-2 font-montserrat">
+                <i class="ti ti-upload text-emerald-800 text-base"></i>
+                <span>Unggah Bukti Pembayaran</span>
             </h3>
 
             <form action="/pembayaran" method="POST" enctype="multipart/form-data" class="space-y-4">
                 @csrf
                 
-                <div class="relative group">
-                    <input type="date" name="tanggal_pembayaran" x-model="form.tanggal_pembayaran" id="tanggal_pembayaran" class="peer w-full bg-slate-50 border border-slate-200 rounded-xl pt-6 pb-2 px-4 text-[13px] font-bold text-slate-800 outline-none focus:bg-white focus:border-teal-500 transition-all">
-                    <label for="tanggal_pembayaran" class="absolute text-[11px] font-medium text-slate-500 duration-300 transform -translate-y-3 scale-90 top-4.5 z-10 origin-[0] left-4 pointer-events-none" :class="form.tanggal_pembayaran ? '' : 'scale-100 -translate-y-1/2 top-1/2'">Tanggal Pembayaran</label>
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-bold text-[#062d27] font-montserrat">Tanggal Bayar <span class="text-rose-500">*</span></label>
+                    <input type="date" name="tanggal_pembayaran" x-model="form.tanggal_pembayaran"
+                           class="w-full px-4 py-3 rounded-2xl bg-[#faf9f6] text-xs font-bold text-stone-900 border border-stone-200/80 focus:border-[#062d27] focus:bg-white transition-all outline-none">
                 </div>
 
-                <div class="relative group">
-                    <input type="number" name="jumlah_pembayaran" x-model="form.jumlah_pembayaran" id="jumlah_pembayaran" placeholder=" " class="peer w-full bg-slate-50 border border-slate-200 rounded-xl pt-6 pb-2 px-4 text-[13px] font-bold text-slate-800 outline-none focus:bg-white focus:border-teal-500 transition-all">
-                    <label for="jumlah_pembayaran" class="absolute text-[11px] font-medium text-slate-500 duration-300 transform -translate-y-3 scale-90 top-4.5 z-10 origin-[0] left-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-4.5 peer-focus:scale-90 peer-focus:-translate-y-3 pointer-events-none">Jumlah Bayar (Rp)</label>
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-bold text-[#062d27] font-montserrat">Jumlah Transfer (Rp) <span class="text-rose-500">*</span></label>
+                    <input type="number" name="jumlah_pembayaran" x-model="form.jumlah_pembayaran"
+                           class="w-full px-4 py-3 rounded-2xl bg-[#faf9f6] text-xs font-bold text-stone-900 border border-stone-200/80 focus:border-[#062d27] focus:bg-white transition-all outline-none font-mono"
+                           placeholder="Contoh: 250000">
                 </div>
 
-                <div class="relative group">
-                    <select name="metode_pembayaran" x-model="form.metode_pembayaran" id="metode_pembayaran" class="peer w-full bg-slate-50 border border-slate-200 rounded-xl pt-6 pb-2 px-4 text-[13px] font-bold text-slate-800 outline-none focus:bg-white focus:border-teal-500 appearance-none transition-all">
-                        <option value="transfer">Transfer Bank</option>
-                        <option value="tunai">Tunai / Langsung</option>
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-bold text-[#062d27] font-montserrat">Metode Pembayaran <span class="text-rose-500">*</span></label>
+                    <select name="metode_pembayaran" x-model="form.metode_pembayaran"
+                            class="w-full px-4 py-3 rounded-2xl bg-[#faf9f6] text-xs font-bold text-stone-900 border border-stone-200/80 focus:border-[#062d27] focus:bg-white transition-all outline-none">
+                        <option value="transfer">Transfer Bank / M-Banking</option>
+                        <option value="tunai">Tunai / Bayar Langsung</option>
                     </select>
-                    <label for="metode_pembayaran" class="absolute text-[11px] font-medium text-slate-500 duration-300 transform -translate-y-3 scale-90 top-4.5 z-10 origin-[0] left-4 pointer-events-none">Metode Pembayaran</label>
-                    <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 mt-1">
-                        <i class="ti ti-chevron-down"></i>
-                    </div>
                 </div>
 
                 <!-- UPLOAD BUKTI -->
-                <div class="space-y-2">
-                    <div x-show="!imagePreview" class="relative">
-                        <input type="file" name="bukti_pembayaran" id="bukti_pembayaran" class="hidden" accept="image/*" @change="previewImage">
-                        <label for="bukti_pembayaran" class="flex flex-col items-center justify-center w-full h-32 bg-slate-50 border-2 border-dashed border-slate-200 rounded-2xl cursor-pointer hover:bg-slate-100 transition-all">
-                            <i class="ti ti-camera text-3xl text-slate-300 mb-2"></i>
-                            <span class="text-[11px] font-bold text-slate-500">Ambil Foto / Pilih Bukti</span>
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-bold text-[#062d27] font-montserrat">Struk / Bukti Transfer <span class="text-rose-500">*</span></label>
+                    <div x-show="!imagePreview">
+                        <label for="bukti_pembayaran" class="flex flex-col items-center justify-center w-full p-6 bg-[#faf9f6] border-2 border-dashed border-stone-300 rounded-2xl cursor-pointer hover:bg-stone-100 transition-all active:scale-[0.99] select-none text-center">
+                            <input type="file" name="bukti_pembayaran" id="bukti_pembayaran" class="hidden" accept="image/*" @change="previewImage">
+                            <div class="w-11 h-11 rounded-2xl bg-white border border-stone-200 flex items-center justify-center text-stone-400 mb-2 shadow-2xs">
+                                <i class="ti ti-camera text-2xl"></i>
+                            </div>
+                            <span class="text-xs font-bold text-[#062d27] font-montserrat">Pilih / Ambil Foto Struk</span>
+                            <span class="text-[10px] text-stone-400 mt-0.5">JPG, PNG (Maks 2MB)</span>
                         </label>
                     </div>
 
-                    <div x-show="imagePreview" x-cloak class="relative group">
-                        <img :src="imagePreview" class="w-full h-48 object-cover rounded-2xl border border-slate-200">
-                        <button type="button" @click="removeImage" class="absolute top-2 right-2 w-8 h-8 bg-rose-500 text-white rounded-lg flex items-center justify-center shadow-lg active:scale-90 transition-all">
-                            <i class="ti ti-trash"></i>
+                    <div x-show="imagePreview" x-cloak class="relative group rounded-2xl overflow-hidden border border-stone-200">
+                        <img :src="imagePreview" class="w-full h-44 object-cover">
+                        <button type="button" @click="removeImage" class="absolute top-2 right-2 w-8 h-8 bg-rose-600 text-white rounded-xl flex items-center justify-center shadow-lg active:scale-90 transition-all">
+                            <i class="ti ti-trash text-sm"></i>
                         </button>
                     </div>
                 </div>
 
-                <div class="relative group">
-                    <textarea name="keterangan" x-model="form.keterangan" id="keterangan" rows="2" placeholder=" " class="peer w-full bg-slate-50 border border-slate-200 rounded-xl pt-6 pb-2 px-4 text-[13px] font-bold text-slate-800 outline-none focus:bg-white focus:border-teal-500 transition-all"></textarea>
-                    <label for="keterangan" class="absolute text-[11px] font-medium text-slate-500 duration-300 transform -translate-y-3 scale-90 top-5 z-10 origin-[0] left-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-5 peer-focus:top-5 peer-focus:scale-90 peer-focus:-translate-y-3 pointer-events-none">Keterangan (Opsional)</label>
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-bold text-[#062d27] font-montserrat">Catatan Tambahan</label>
+                    <textarea name="keterangan" x-model="form.keterangan" rows="2"
+                              class="w-full px-4 py-3 rounded-2xl bg-[#faf9f6] text-xs font-bold text-stone-900 border border-stone-200/80 focus:border-[#062d27] focus:bg-white transition-all outline-none"
+                              placeholder="Nama pemilik rekening pengirim (opsional)"></textarea>
                 </div>
 
-                <button type="submit" class="w-full bg-teal-600 text-white py-4 rounded-2xl text-[13px] font-black shadow-lg shadow-teal-600/30 active:scale-95 transition-all flex items-center justify-center gap-3">
-                    <i class="ti ti-send text-lg"></i>
-                    Kirim Konfirmasi
+                <button type="submit" class="w-full bg-[#bef264] hover:bg-[#a3e635] text-[#062d27] py-3.5 rounded-2xl text-xs font-black shadow-md shadow-lime-500/20 active:scale-95 transition-all flex items-center justify-center gap-2 font-montserrat">
+                    <i class="ti ti-send text-base"></i>
+                    <span>Kirim Bukti Pembayaran</span>
                 </button>
             </form>
         </div>
 
         <!-- HISTORY SECTION -->
-        <div class="space-y-4">
-            <h3 class="text-slate-800 text-[11px] font-black uppercase tracking-widest flex items-center gap-2 ml-1">
-                <i class="ti ti-history text-teal-600 text-lg"></i>
-                Riwayat Pembayaran
+        <div class="space-y-3">
+            <h3 class="text-[#062d27] text-xs font-bold uppercase tracking-wider flex items-center gap-2 font-montserrat ml-1">
+                <i class="ti ti-history text-emerald-800 text-base"></i>
+                <span>Riwayat Pembayaran</span>
             </h3>
 
             <div class="space-y-3">
                 @forelse($pembayaran as $p)
-                <div class="bg-white rounded-2xl p-4 border border-slate-100 shadow-sm flex items-center justify-between">
+                <div class="bg-white rounded-3xl p-4.5 border border-stone-200/80 shadow-2xs flex items-center justify-between">
                     <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl flex items-center justify-center {{ $p->status == 'approved' ? 'bg-emerald-50 text-emerald-600' : ($p->status == 'rejected' ? 'bg-rose-50 text-rose-600' : 'bg-amber-50 text-amber-600') }}">
-                            <i class="ti ti-{{ $p->status == 'approved' ? 'circle-check' : ($p->status == 'rejected' ? 'circle-x' : 'clock-hour-4') }} text-xl"></i>
+                        <div class="w-10 h-10 rounded-2xl flex items-center justify-center {{ $p->status == 'approved' ? 'bg-emerald-50 text-emerald-800' : ($p->status == 'rejected' ? 'bg-rose-50 text-rose-700' : 'bg-amber-50 text-amber-700') }}">
+                            <i class="ti ti-{{ $p->status == 'approved' ? 'circle-check' : ($p->status == 'rejected' ? 'circle-x' : 'clock') }} text-xl"></i>
                         </div>
                         <div>
-                            <p class="text-[13px] font-black text-slate-800 leading-none mb-1">Rp {{ number_format($p->jumlah_pembayaran, 0, ',', '.') }}</p>
-                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">{{ \Carbon\Carbon::parse($p->tanggal_pembayaran)->translatedFormat('d M Y') }}</p>
+                            <p class="text-xs font-black text-[#062d27] font-mono leading-none mb-1">Rp {{ number_format($p->jumlah_pembayaran, 0, ',', '.') }}</p>
+                            <p class="text-[10px] text-stone-400 font-medium">{{ \Carbon\Carbon::parse($p->tanggal_pembayaran)->translatedFormat('d M Y') }}</p>
                         </div>
                     </div>
                     <div class="text-right">
-                        <span class="px-2 py-1 rounded-lg text-[9px] font-black uppercase tracking-tighter border {{ $p->status == 'approved' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : ($p->status == 'rejected' ? 'bg-rose-50 text-rose-600 border-rose-100' : 'bg-amber-50 text-amber-600 border-amber-100') }}">
-                            {{ $p->status }}
-                        </span>
+                        @if($p->status == 'approved')
+                            <span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-800 text-[10px] font-bold rounded-full border border-emerald-200 font-montserrat">Selesai</span>
+                        @elseif($p->status == 'rejected')
+                            <span class="px-2.5 py-0.5 bg-rose-50 text-rose-700 text-[10px] font-bold rounded-full border border-rose-200 font-montserrat">Ditolak</span>
+                        @else
+                            <span class="px-2.5 py-0.5 bg-amber-50 text-amber-700 text-[10px] font-bold rounded-full border border-amber-200 font-montserrat">Menunggu</span>
+                        @endif
                         @if($p->bukti_pembayaran)
-                        <button type="button" @click="modalImage = '{{ asset('storage/' . $p->bukti_pembayaran) }}'; showModal = true" class="block text-[9px] font-bold text-teal-600 mt-1.5 hover:underline">Lihat Bukti</button>
+                        <button type="button" @click="modalImage = '{{ asset('storage/' . $p->bukti_pembayaran) }}'; showModal = true" class="block text-[10px] font-bold text-emerald-800 mt-1 hover:underline font-montserrat">Lihat Struk</button>
                         @endif
                     </div>
                 </div>
                 @empty
-                <div class="bg-white rounded-xl p-10 border border-slate-100 text-center">
-                    <div class="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center text-slate-200 mx-auto mb-3">
-                        <i class="ti ti-credit-card-off text-3xl"></i>
+                <div class="bg-white rounded-3xl p-8 border border-stone-200/80 text-center">
+                    <div class="w-12 h-12 bg-stone-100 rounded-2xl flex items-center justify-center text-stone-400 mx-auto mb-2">
+                        <i class="ti ti-receipt-off text-2xl"></i>
                     </div>
-                    <p class="text-[11px] font-bold text-slate-400 uppercase tracking-widest">Belum ada riwayat</p>
+                    <p class="text-xs text-stone-500 font-bold font-montserrat">Belum ada riwayat</p>
                 </div>
                 @endforelse
             </div>
@@ -170,59 +186,59 @@
 
     <!-- IMAGE MODAL OVERLAY -->
     <div x-show="showModal" x-cloak class="fixed inset-0 z-[100] flex items-center justify-center p-4">
-        <div x-show="showModal" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" @click="showModal = false" class="absolute inset-0 bg-slate-900/90 backdrop-blur-sm"></div>
-        <div x-show="showModal" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100" class="relative max-w-full max-h-full bg-white rounded-xl overflow-hidden shadow-2xl z-10">
-            <div class="p-4 border-b border-slate-100 flex justify-between items-center bg-white">
-                <h4 class="text-xs font-black text-slate-800 uppercase tracking-widest">Bukti Pembayaran</h4>
-                <button @click="showModal = false" class="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center text-slate-500">
-                    <i class="ti ti-x text-lg"></i>
+        <div x-show="showModal" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" @click="showModal = false" class="absolute inset-0 bg-stone-900/80 backdrop-blur-sm"></div>
+        <div x-show="showModal" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" class="relative max-w-full max-h-full bg-white rounded-3xl overflow-hidden shadow-2xl z-10">
+            <div class="p-4 border-b border-stone-100 flex justify-between items-center bg-white">
+                <h4 class="text-xs font-black text-[#062d27] font-montserrat">Struk Pembayaran</h4>
+                <button @click="showModal = false" class="w-8 h-8 bg-stone-100 rounded-xl flex items-center justify-center text-stone-500">
+                    <i class="ti ti-x text-base"></i>
                 </button>
             </div>
-            <div class="p-2 bg-slate-50">
-                <img :src="modalImage" class="max-w-full h-auto rounded-2xl shadow-sm mx-auto" alt="Bukti Transfer">
+            <div class="p-3 bg-[#faf9f6]">
+                <img :src="modalImage" class="max-w-full max-h-[70vh] rounded-2xl shadow-xs mx-auto object-contain" alt="Bukti Transfer">
             </div>
-            <div class="p-4 bg-white text-center">
-                <a :href="modalImage" download class="inline-flex items-center gap-2 text-[11px] font-bold text-teal-600">
-                    <i class="ti ti-download"></i>
-                    Unduh Gambar
+            <div class="p-3 bg-white text-center border-t border-stone-100">
+                <a :href="modalImage" download class="inline-flex items-center gap-1.5 text-xs font-bold text-[#062d27] font-montserrat">
+                    <i class="ti ti-download text-sm"></i>
+                    <span>Unduh Gambar Struk</span>
                 </a>
             </div>
         </div>
     </div>
 
-    <!-- BOTTOM NAVIGATION (Active: Bayar) -->
-    <div class="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-2xl border-t border-slate-200/60 shadow-[0_-15px_40px_rgba(0,0,0,0.03)] z-50 px-2 pb-[env(safe-area-inset-bottom,16px)] pt-3">
-        <div class="flex items-center justify-around pb-2">
-            <a href="/dashboard" class="group flex flex-col items-center w-16">
-                <div class="text-slate-400 group-active:scale-90 flex items-center justify-center h-8">
-                    <i class="ti ti-smart-home text-[24px]"></i>
+    <!-- BOTTOM NAVIGATION (Emerald & Lime theme) -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-2xl border-t border-stone-200/70 shadow-[0_-15px_40px_rgba(0,0,0,0.04)] z-50 px-3 pb-[env(safe-area-inset-bottom,12px)] pt-2.5">
+        <div class="flex items-center justify-around">
+            <a href="/dashboard" class="flex flex-col items-center py-1 w-16 group">
+                <div class="w-8 h-8 rounded-xl text-stone-400 group-hover:text-[#062d27] flex items-center justify-center transition-transform group-active:scale-90">
+                    <i class="ti ti-smart-home text-lg"></i>
                 </div>
-                <span class="text-[10px] font-bold text-slate-400 tracking-wide mt-1">Beranda</span>
+                <span class="text-[10px] font-semibold text-stone-400 group-hover:text-[#062d27] font-montserrat mt-1">Beranda</span>
             </a>
             
-            <a href="/biodata" class="group flex flex-col items-center w-16">
-                <div class="text-slate-400 group-active:scale-90 flex items-center justify-center h-8">
-                    <i class="ti ti-user-edit text-[24px]"></i>
+            <a href="/biodata" class="flex flex-col items-center py-1 w-16 group">
+                <div class="w-8 h-8 rounded-xl text-stone-400 group-hover:text-[#062d27] flex items-center justify-center transition-transform group-active:scale-90">
+                    <i class="ti ti-file-text text-lg"></i>
                 </div>
-                <span class="text-[10px] font-bold text-slate-400 tracking-wide mt-1">Biodata</span>
+                <span class="text-[10px] font-semibold text-stone-400 group-hover:text-[#062d27] font-montserrat mt-1">Biodata</span>
             </a>
 
-            <a href="/pembayaran" class="group flex flex-col items-center relative w-16">
-                <div class="absolute -top-4 w-12 h-1 bg-teal-500 rounded-b-lg"></div>
-                <div class="text-teal-600 transition-transform group-active:scale-90 flex items-center justify-center h-8">
-                    <i class="ti ti-wallet text-[26px]"></i>
+            <a href="/pembayaran" class="flex flex-col items-center py-1 w-16 group">
+                <div class="w-8 h-8 rounded-xl bg-[#062d27] text-[#bef264] flex items-center justify-center shadow-xs transition-transform group-active:scale-90">
+                    <i class="ti ti-credit-card text-lg"></i>
                 </div>
-                <span class="text-[10px] font-black text-teal-600 tracking-wide mt-1">Bayar</span>
+                <span class="text-[10px] font-bold text-[#062d27] font-montserrat mt-1">Bayar</span>
             </a>
 
-            <a href="/password" class="group flex flex-col items-center w-16">
-                <div class="text-slate-400 group-active:scale-90 flex items-center justify-center h-8">
-                    <i class="ti ti-settings text-[24px]"></i>
+            <a href="/password" class="flex flex-col items-center py-1 w-16 group">
+                <div class="w-8 h-8 rounded-xl text-stone-400 group-hover:text-[#062d27] flex items-center justify-center transition-transform group-active:scale-90">
+                    <i class="ti ti-lock text-lg"></i>
                 </div>
-                <span class="text-[10px] font-bold text-slate-400 tracking-wide mt-1">Akun</span>
+                <span class="text-[10px] font-semibold text-stone-400 group-hover:text-[#062d27] font-montserrat mt-1">Akun</span>
             </a>
         </div>
     </div>
+
 </div>
 
 <script>
@@ -253,8 +269,17 @@ function paymentForm() {
         },
         copyToClipboard(text) {
             navigator.clipboard.writeText(text);
-            // Optional: add toast notification here
-            alert('Nomor rekening disalin!');
+            if(window.Swal) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Disalin',
+                    text: 'Nomor rekening telah disalin ke clipboard.',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            } else {
+                alert('Nomor rekening disalin: ' + text);
+            }
         }
     }
 }

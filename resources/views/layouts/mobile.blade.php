@@ -3,13 +3,16 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
-    <title>@yield('title', 'Al Amin Mobile')</title>
+    <title>@yield('title', 'Pesantren Persatuan Islam 80 Al Amin Sindangkasih Ciamis | Pesantren Persis Unggulan')</title>
     
-    <!-- Fonts (Preconnect & Preload Optimization) -->
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ $pengaturan ? $pengaturan->getAdminImageUrl($pengaturan->logo) : asset('favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ $pengaturan ? $pengaturan->getAdminImageUrl($pengaturan->logo) : asset('favicon.ico') }}" type="image/x-icon">
+    
+    @include('layouts.partials.seo')
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@400;600;700;800;900&family=Public+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Icons (Asynchronous Loading) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" media="print" onload="this.media='all'">
@@ -27,7 +30,7 @@
         body { -webkit-tap-highlight-color: transparent; }
     </style>
 </head>
-<body class="antialiased bg-slate-50">
+<body class="antialiased bg-[#062d27]">
     @php
         $isAuthPage = request()->is('dashboard*', 'biodata*', 'pembayaran*', 'password*', 'login*', 'register*');
     @endphp
@@ -36,7 +39,7 @@
         @include('layouts.partials.header-mobile')
     @endif
 
-    <main class="{{ !$isAuthPage ? 'pt-[88px]' : '' }} {{ !$isAuthPage ? 'pb-24' : 'pb-10' }}">
+    <main class="{{ !$isAuthPage ? 'pt-[60px]' : '' }} {{ !$isAuthPage ? 'pb-24' : 'pb-10' }} min-h-screen">
         @yield('content')
     </main>
 

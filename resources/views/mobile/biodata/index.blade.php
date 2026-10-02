@@ -3,297 +3,300 @@
 @section('title', 'Lengkapi Biodata')
 
 @section('content')
-<div x-data="biodataForm()" class="min-h-[100dvh] bg-slate-50 flex flex-col font-sans selection:bg-teal-100 pb-16">
+<div x-data="biodataForm()" class="min-h-[100dvh] bg-[#faf9f6] flex flex-col font-sans selection:bg-[#bef264] selection:text-[#062d27] pb-32">
     
-    <!-- TOP HEADER: Teal Branding -->
-    <div class="bg-teal-900 pt-8 pb-12 px-6 relative overflow-hidden">
-        <!-- Decorative Background -->
-        <div class="absolute top-0 right-0 w-64 h-64 bg-teal-500 rounded-full blur-[80px] opacity-20 -translate-y-1/2 translate-x-1/4"></div>
-        <div class="absolute inset-0 opacity-[0.05]" style="background-image: url('https://www.transparenttextures.com/patterns/cubes.png');"></div>
+    <!-- TOP HEADER: Deep Emerald Branding -->
+    <div class="bg-[#062d27] pt-7 pb-12 px-5 relative overflow-hidden border-b border-emerald-900/60">
+        <div class="absolute -top-16 -right-16 w-56 h-56 bg-[#bef264]/15 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 -left-16 w-48 h-48 bg-emerald-500/15 rounded-full blur-2xl pointer-events-none"></div>
 
         <div class="relative z-10">
-            <div class="flex items-center gap-4 mb-2">
-                <a href="/dashboard" class="w-10 h-10 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center text-teal-100 border border-white/20 active:scale-90 transition-all">
-                    <i class="ti ti-chevron-left text-2xl"></i>
+            <div class="flex items-center gap-3.5 mb-2">
+                <a href="/dashboard" class="w-10 h-10 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center text-emerald-100 border border-white/15 active:scale-90 transition-all shadow-xs">
+                    <i class="ti ti-chevron-left text-xl"></i>
                 </a>
                 <div>
-                    <h1 class="text-white text-lg font-black leading-none tracking-tight">Biodata Lengkap</h1>
-                    <p class="text-teal-200/80 text-[11px] font-medium mt-1">Sistem Pendaftaran Al Amin</p>
+                    <h1 class="text-white text-base font-black leading-tight tracking-tight font-montserrat">Biodata Santri Baru</h1>
+                    <p class="text-[#bef264] text-[11px] font-bold font-montserrat mt-0.5">SPMB {{ $pendaftaran->tahun_ajaran }}</p>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- MAIN CONTENT -->
-    <form action="/biodata" method="POST" class="flex-1 -mt-6 px-5 relative z-20">
+    <form action="/biodata" method="POST" id="formBiodataMobile" class="flex-1 -mt-6 px-5 relative z-20 space-y-4">
         @csrf
         
         <!-- Feedback Notifications -->
         @if(session('success'))
-            <div class="mb-4 p-4 bg-emerald-50 border border-emerald-100 rounded-2xl text-emerald-700 text-[11px] font-bold flex items-center gap-3 shadow-sm" data-aos="fade-down">
-                <div class="w-8 h-8 bg-emerald-500 rounded-xl flex items-center justify-center text-white shadow-lg shadow-emerald-500/20">
-                    <i class="ti ti-check text-lg"></i>
+            <div class="p-4 bg-emerald-50 border border-emerald-200/80 rounded-2xl text-emerald-900 text-xs font-bold flex items-center gap-3 shadow-xs font-montserrat">
+                <div class="w-7 h-7 bg-emerald-600 rounded-xl flex items-center justify-center text-white shrink-0">
+                    <i class="ti ti-check text-sm"></i>
                 </div>
-                {{ session('success') }}
+                <span>{{ session('success') }}</span>
             </div>
         @endif
 
         @if(session('error'))
-            <div class="mb-4 p-4 bg-rose-50 border border-rose-100 rounded-2xl text-rose-700 text-[11px] font-bold flex items-center gap-3 shadow-sm" data-aos="fade-down">
-                <div class="w-8 h-8 bg-rose-500 rounded-xl flex items-center justify-center text-white shadow-lg shadow-rose-500/20">
-                    <i class="ti ti-alert-triangle text-lg"></i>
+            <div class="p-4 bg-rose-50 border border-rose-200/80 rounded-2xl text-rose-800 text-xs font-bold flex items-center gap-3 shadow-xs font-montserrat">
+                <div class="w-7 h-7 bg-rose-600 rounded-xl flex items-center justify-center text-white shrink-0">
+                    <i class="ti ti-alert-triangle text-sm"></i>
                 </div>
-                {{ session('error') }}
+                <span>{{ session('error') }}</span>
             </div>
         @endif
         
-        <!-- PROGRESS CARD (Floating) -->
-        <div class="bg-white rounded-2xl p-5 shadow-xl shadow-teal-950/5 border border-slate-100 mb-6">
-            <div class="flex justify-between items-center mb-3">
+        <!-- PROGRESS CARD -->
+        <div class="bg-white rounded-3xl p-4.5 shadow-sm border border-stone-200/80">
+            <div class="flex justify-between items-center mb-2.5">
                 <div class="flex items-center gap-2.5">
-                    <div class="w-7 h-7 bg-teal-50 text-teal-600 rounded-xl flex items-center justify-center text-xs font-black border border-teal-100" x-text="step"></div>
+                    <div class="w-7 h-7 bg-[#062d27] text-[#bef264] rounded-xl flex items-center justify-center text-xs font-black font-montserrat" x-text="'0' + step"></div>
                     <div>
-                        <span class="text-[13px] font-bold text-slate-800 block leading-none" x-text="stepTitles[step-1]"></span>
-                        <span class="text-[11px] font-medium text-slate-500 mt-0.5 block">Langkah <span x-text="step"></span> dari 4</span>
+                        <span class="text-xs font-black text-[#062d27] font-montserrat block leading-none" x-text="stepTitles[step-1]"></span>
+                        <span class="text-[10px] font-semibold text-stone-400 mt-0.5 block">Langkah <span x-text="step"></span> dari 4</span>
                     </div>
                 </div>
-                <div class="px-2 py-1 bg-teal-50 rounded-lg">
-                    <span class="text-[11px] font-black text-teal-600" x-text="Math.round((step/4)*100) + '%'"></span>
+                <div class="px-2.5 py-0.5 bg-[#bef264] rounded-full">
+                    <span class="text-[10px] font-black text-[#062d27] font-montserrat" x-text="Math.round((step/4)*100) + '%'"></span>
                 </div>
             </div>
-            <div class="h-2 bg-slate-100 rounded-full overflow-hidden p-0.5">
-                <div class="h-full bg-teal-500 rounded-full transition-all duration-700 shadow-sm" :style="'width: ' + (step/4)*100 + '%'"></div>
+            <div class="h-2 bg-stone-100 rounded-full overflow-hidden p-0.5">
+                <div class="h-full bg-[#062d27] rounded-full transition-all duration-500" :style="'width: ' + (step/4)*100 + '%'"></div>
             </div>
         </div>
 
         <!-- STEP 1: Data Diri -->
-        <div x-show="step === 1" x-transition:enter="transition ease-out duration-300 delay-100" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" class="space-y-4">
-            <div class="bg-white rounded-xl p-5 shadow-xl shadow-teal-950/5 border border-slate-100">
-                <div class="space-y-4">
-                    <div class="relative group">
-                        <div class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-teal-500 transition-colors z-10"><i class="ti ti-id text-lg"></i></div>
-                        <input type="text" name="no_kk" x-model="form.no_kk" id="no_kk" placeholder=" " class="peer w-full bg-slate-50 border border-slate-200 rounded-xl pt-6 pb-2 pl-11 pr-4 text-[13px] font-bold text-slate-800 outline-none focus:bg-white focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10 transition-all">
-                        <label for="no_kk" class="absolute text-[11px] font-medium text-slate-500 duration-300 transform -translate-y-3 scale-90 top-4.5 z-10 origin-[0] left-11 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-4.5 peer-focus:scale-90 peer-focus:-translate-y-3 pointer-events-none">NIK Santri (Sesuai KK)</label>
-                    </div>
-                    <div class="relative group">
-                        <div class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-teal-500 transition-colors z-10"><i class="ti ti-school text-lg"></i></div>
-                        <input type="text" name="nisn" x-model="form.nisn" id="nisn" placeholder=" " class="peer w-full bg-slate-50 border border-slate-200 rounded-xl pt-6 pb-2 pl-11 pr-4 text-[13px] font-bold text-slate-800 outline-none focus:bg-white focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10 transition-all">
-                        <label for="nisn" class="absolute text-[11px] font-medium text-slate-500 duration-300 transform -translate-y-3 scale-90 top-4.5 z-10 origin-[0] left-11 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-4.5 peer-focus:scale-90 peer-focus:-translate-y-3 pointer-events-none">NISN (Nasional)</label>
-                    </div>
-                    <div class="relative group">
-                        <div class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-teal-500 transition-colors z-10"><i class="ti ti-user text-lg"></i></div>
-                        <input type="text" name="nama_lengkap" x-model="form.nama_lengkap" id="nama_lengkap" placeholder=" " class="peer w-full bg-slate-50 border border-slate-200 rounded-xl pt-6 pb-2 pl-11 pr-4 text-[13px] font-bold text-slate-800 outline-none focus:bg-white focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10 transition-all">
-                        <label for="nama_lengkap" class="absolute text-[11px] font-medium text-slate-500 duration-300 transform -translate-y-3 scale-90 top-4.5 z-10 origin-[0] left-11 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-4.5 peer-focus:scale-90 peer-focus:-translate-y-3 pointer-events-none">Nama Lengkap</label>
-                    </div>
-                    
-                    <!-- Gender Radio -->
-                    <div class="bg-slate-50 rounded-xl p-3 border border-slate-200">
-                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-tight mb-2 ml-1">Jenis Kelamin</p>
-                        <div class="flex gap-4">
-                            <label class="flex-1 flex items-center gap-2 bg-white px-3 py-2.5 rounded-lg border border-slate-100 shadow-sm cursor-pointer active:scale-95 transition-all">
-                                <input type="radio" name="jenis_kelamin" value="L" x-model="form.jenis_kelamin" class="w-4 h-4 accent-teal-600">
-                                <span class="text-[13px] font-bold text-slate-700">Laki-laki</span>
-                            </label>
-                            <label class="flex-1 flex items-center gap-2 bg-white px-3 py-2.5 rounded-lg border border-slate-100 shadow-sm cursor-pointer active:scale-95 transition-all">
-                                <input type="radio" name="jenis_kelamin" value="P" x-model="form.jenis_kelamin" class="w-4 h-4 accent-teal-600">
-                                <span class="text-[13px] font-bold text-slate-700">Perempuan</span>
-                            </label>
-                        </div>
-                    </div>
+        <div x-show="step === 1" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" class="space-y-4">
+            <div class="bg-white rounded-3xl p-5 shadow-sm border border-stone-200/80 space-y-4">
+                
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-bold text-[#062d27] font-montserrat">
+                        Nomor Kartu Keluarga (KK) <span class="text-rose-500">*</span>
+                    </label>
+                    <input type="text" name="no_kk" x-model="form.no_kk" maxlength="16"
+                           class="w-full px-4 py-3 rounded-2xl bg-[#faf9f6] text-xs font-bold text-stone-900 border border-stone-200/80 focus:border-[#062d27] focus:bg-white focus:ring-4 focus:ring-emerald-900/10 transition-all outline-none font-mono"
+                           placeholder="16 Digit Nomor KK">
+                </div>
 
-                    <div class="grid grid-cols-2 gap-3">
-                        <div class="relative group">
-                            <div class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-teal-500 transition-colors z-10"><i class="ti ti-map-pin text-base"></i></div>
-                            <input type="text" name="tempat_lahir" x-model="form.tempat_lahir" id="tempat_lahir" placeholder=" " class="peer w-full bg-slate-50 border border-slate-200 rounded-xl pt-6 pb-2 pl-9 pr-3 text-[13px] font-bold text-slate-800 outline-none focus:bg-white focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10 transition-all">
-                            <label for="tempat_lahir" class="absolute text-[11px] font-medium text-slate-500 duration-300 transform -translate-y-3 scale-90 top-4.5 z-10 origin-[0] left-9 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-4.5 peer-focus:scale-90 peer-focus:-translate-y-3 pointer-events-none">Tempat Lahir</label>
-                        </div>
-                        <div class="relative group">
-                            <input type="date" name="tanggal_lahir" x-model="form.tanggal_lahir" id="tanggal_lahir" class="peer w-full bg-slate-50 border border-slate-200 rounded-xl pt-6 pb-2 px-3 text-[13px] font-bold text-slate-800 outline-none focus:bg-white focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10 transition-all">
-                            <label for="tanggal_lahir" class="absolute text-[11px] font-medium text-slate-500 duration-300 transform -translate-y-3 scale-90 top-4.5 z-10 origin-[0] left-3 pointer-events-none" :class="form.tanggal_lahir ? '' : 'scale-100 -translate-y-1/2 top-1/2'">Tgl Lahir</label>
-                        </div>
-                    </div>
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-bold text-[#062d27] font-montserrat">
+                        NISN <span class="text-stone-400 font-normal text-[10px]">(Opsional)</span>
+                    </label>
+                    <input type="text" name="nisn" x-model="form.nisn" maxlength="10"
+                           class="w-full px-4 py-3 rounded-2xl bg-[#faf9f6] text-xs font-bold text-stone-900 border border-stone-200/80 focus:border-[#062d27] focus:bg-white focus:ring-4 focus:ring-emerald-900/10 transition-all outline-none font-mono"
+                           placeholder="10 Digit NISN">
+                </div>
 
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-bold text-[#062d27] font-montserrat">
+                        Nama Lengkap <span class="text-rose-500">*</span>
+                    </label>
+                    <input type="text" name="nama_lengkap" x-model="form.nama_lengkap"
+                           class="w-full px-4 py-3 rounded-2xl bg-[#faf9f6] text-xs font-bold text-stone-900 border border-stone-200/80 focus:border-[#062d27] focus:bg-white focus:ring-4 focus:ring-emerald-900/10 transition-all outline-none"
+                           placeholder="Sesuai akta kelahiran">
+                </div>
+
+                <!-- Gender Radio -->
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-bold text-[#062d27] font-montserrat">
+                        Jenis Kelamin <span class="text-rose-500">*</span>
+                    </label>
                     <div class="grid grid-cols-2 gap-3">
-                        <div class="relative group">
-                            <input type="number" name="anak_ke" x-model="form.anak_ke" id="anak_ke" placeholder=" " class="peer w-full bg-slate-50 border border-slate-200 rounded-xl pt-6 pb-2 px-4 text-[13px] font-bold text-slate-800 outline-none focus:bg-white focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10 transition-all">
-                            <label for="anak_ke" class="absolute text-[11px] font-medium text-slate-500 duration-300 transform -translate-y-3 scale-90 top-4.5 z-10 origin-[0] left-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-4.5 peer-focus:scale-90 peer-focus:-translate-y-3 pointer-events-none">Anak Ke</label>
-                        </div>
-                        <div class="relative group">
-                            <input type="number" name="jumlah_saudara" x-model="form.jumlah_saudara" id="jumlah_saudara" placeholder=" " class="peer w-full bg-slate-50 border border-slate-200 rounded-xl pt-6 pb-2 px-4 text-[13px] font-bold text-slate-800 outline-none focus:bg-white focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10 transition-all">
-                            <label for="jumlah_saudara" class="absolute text-[11px] font-medium text-slate-500 duration-300 transform -translate-y-3 scale-90 top-4.5 z-10 origin-[0] left-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-4.5 peer-focus:scale-90 peer-focus:-translate-y-3 pointer-events-none">Jumlah Saudara</label>
-                        </div>
+                        <label class="flex items-center gap-2.5 p-3 rounded-2xl border cursor-pointer transition-all"
+                               :class="form.jenis_kelamin === 'L' ? 'border-[#062d27] bg-emerald-50/50' : 'border-stone-200/80 bg-[#faf9f6]'">
+                            <input type="radio" name="jenis_kelamin" value="L" x-model="form.jenis_kelamin" class="w-4 h-4 text-[#062d27]">
+                            <span class="text-xs font-bold text-[#062d27] font-montserrat">Laki-laki</span>
+                        </label>
+                        <label class="flex items-center gap-2.5 p-3 rounded-2xl border cursor-pointer transition-all"
+                               :class="form.jenis_kelamin === 'P' ? 'border-[#062d27] bg-emerald-50/50' : 'border-stone-200/80 bg-[#faf9f6]'">
+                            <input type="radio" name="jenis_kelamin" value="P" x-model="form.jenis_kelamin" class="w-4 h-4 text-[#062d27]">
+                            <span class="text-xs font-bold text-[#062d27] font-montserrat">Perempuan</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="space-y-1.5">
+                        <label class="block text-xs font-bold text-[#062d27] font-montserrat">Tempat Lahir <span class="text-rose-500">*</span></label>
+                        <input type="text" name="tempat_lahir" x-model="form.tempat_lahir"
+                               class="w-full px-3.5 py-3 rounded-2xl bg-[#faf9f6] text-xs font-bold text-stone-900 border border-stone-200/80 focus:border-[#062d27] focus:bg-white transition-all outline-none"
+                               placeholder="Kota Lahir">
+                    </div>
+                    <div class="space-y-1.5">
+                        <label class="block text-xs font-bold text-[#062d27] font-montserrat">Tgl Lahir <span class="text-rose-500">*</span></label>
+                        <input type="date" name="tanggal_lahir" x-model="form.tanggal_lahir"
+                               class="w-full px-3 py-3 rounded-2xl bg-[#faf9f6] text-xs font-bold text-stone-900 border border-stone-200/80 focus:border-[#062d27] focus:bg-white transition-all outline-none">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="space-y-1.5">
+                        <label class="block text-xs font-bold text-[#062d27] font-montserrat">Anak Ke <span class="text-rose-500">*</span></label>
+                        <input type="number" name="anak_ke" x-model="form.anak_ke" min="1"
+                               class="w-full px-4 py-3 rounded-2xl bg-[#faf9f6] text-xs font-bold text-stone-900 border border-stone-200/80 focus:border-[#062d27] focus:bg-white transition-all outline-none text-center"
+                               placeholder="1">
+                    </div>
+                    <div class="space-y-1.5">
+                        <label class="block text-xs font-bold text-[#062d27] font-montserrat">Jml Saudara <span class="text-rose-500">*</span></label>
+                        <input type="number" name="jumlah_saudara" x-model="form.jumlah_saudara" min="0"
+                               class="w-full px-4 py-3 rounded-2xl bg-[#faf9f6] text-xs font-bold text-stone-900 border border-stone-200/80 focus:border-[#062d27] focus:bg-white transition-all outline-none text-center"
+                               placeholder="3">
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- STEP 2: Alamat -->
-        <div x-show="step === 2" style="display: none;" x-transition:enter="transition ease-out duration-300 delay-100" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" class="space-y-4">
-            <div class="bg-white rounded-xl p-5 shadow-xl shadow-teal-950/5 border border-slate-100">
-                <div class="space-y-4">
-                    <div class="relative group">
-                        <div class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-teal-500 transition-colors z-10"><i class="ti ti-map text-lg"></i></div>
-                        <select name="id_province" x-model="form.id_province" id="id_province" @change="loadRegencies" class="peer w-full bg-slate-50 border border-slate-200 rounded-xl pt-6 pb-2 pl-11 pr-10 text-[13px] font-bold text-slate-800 outline-none focus:bg-white focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10 transition-all appearance-none">
-                            <option value=""></option>
-                            @foreach($provinsi as $p)
-                                <option value="{{ $p->id }}">{{ $p->name }}</option>
-                            @endforeach
+        <div x-show="step === 2" style="display: none;" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" class="space-y-4">
+            <div class="bg-white rounded-3xl p-5 shadow-sm border border-stone-200/80 space-y-4">
+                
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-bold text-[#062d27] font-montserrat">Provinsi <span class="text-rose-500">*</span></label>
+                    <select name="id_province" x-model="form.id_province" id="id_province" @change="loadRegencies"
+                            class="w-full px-4 py-3 rounded-2xl bg-[#faf9f6] text-xs font-bold text-stone-900 border border-stone-200/80 focus:border-[#062d27] focus:bg-white transition-all outline-none">
+                        <option value="">-- Pilih Provinsi --</option>
+                        @foreach($provinsi as $p)
+                            <option value="{{ $p->id }}">{{ $p->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-bold text-[#062d27] font-montserrat">Kabupaten / Kota <span class="text-rose-500">*</span></label>
+                    <select name="id_regency" x-model="form.id_regency" id="id_regency" @change="loadDistricts" x-ref="regencySelect"
+                            class="w-full px-4 py-3 rounded-2xl bg-[#faf9f6] text-xs font-bold text-stone-900 border border-stone-200/80 focus:border-[#062d27] focus:bg-white transition-all outline-none">
+                        <option value="">-- Pilih Kabupaten / Kota --</option>
+                    </select>
+                </div>
+
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-bold text-[#062d27] font-montserrat">Kecamatan <span class="text-rose-500">*</span></label>
+                    <select name="id_district" x-model="form.id_district" id="id_district" @change="loadVillages" x-ref="districtSelect"
+                            class="w-full px-4 py-3 rounded-2xl bg-[#faf9f6] text-xs font-bold text-stone-900 border border-stone-200/80 focus:border-[#062d27] focus:bg-white transition-all outline-none">
+                        <option value="">-- Pilih Kecamatan --</option>
+                    </select>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="space-y-1.5">
+                        <label class="block text-xs font-bold text-[#062d27] font-montserrat">Desa / Kelurahan <span class="text-rose-500">*</span></label>
+                        <select name="id_village" x-model="form.id_village" id="id_village" x-ref="villageSelect"
+                                class="w-full px-3 py-3 rounded-2xl bg-[#faf9f6] text-xs font-bold text-stone-900 border border-stone-200/80 focus:border-[#062d27] focus:bg-white transition-all outline-none">
+                            <option value="">-- Desa --</option>
                         </select>
-                        <label for="id_province" class="absolute text-[11px] font-medium text-slate-500 duration-300 transform -translate-y-3 scale-90 top-4.5 z-10 origin-[0] left-11 pointer-events-none" :class="form.id_province ? '' : 'scale-100 -translate-y-1/2 top-1/2'">Provinsi</label>
-                        <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400"><i class="ti ti-chevron-down"></i></div>
                     </div>
-                    <div class="relative group">
-                        <div class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-teal-500 transition-colors z-10"><i class="ti ti-building-community text-lg"></i></div>
-                        <select name="id_regency" x-model="form.id_regency" id="id_regency" @change="loadDistricts" x-ref="regencySelect" class="peer w-full bg-slate-50 border border-slate-200 rounded-xl pt-6 pb-2 pl-11 pr-10 text-[13px] font-bold text-slate-800 outline-none focus:bg-white focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10 transition-all appearance-none">
-                            <option value=""></option>
-                        </select>
-                        <label for="id_regency" class="absolute text-[11px] font-medium text-slate-500 duration-300 transform -translate-y-3 scale-90 top-4.5 z-10 origin-[0] left-11 pointer-events-none" :class="form.id_regency ? '' : 'scale-100 -translate-y-1/2 top-1/2'">Kabupaten / Kota</label>
-                        <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400"><i class="ti ti-chevron-down"></i></div>
+                    <div class="space-y-1.5">
+                        <label class="block text-xs font-bold text-[#062d27] font-montserrat">Kode Pos <span class="text-rose-500">*</span></label>
+                        <input type="text" name="kode_pos" x-model="form.kode_pos" maxlength="5"
+                               class="w-full px-3 py-3 rounded-2xl bg-[#faf9f6] text-xs font-bold text-stone-900 border border-stone-200/80 focus:border-[#062d27] focus:bg-white transition-all outline-none text-center font-mono"
+                               placeholder="5 Digit">
                     </div>
-                    <div class="relative group">
-                        <div class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-teal-500 transition-colors z-10"><i class="ti ti-directions text-lg"></i></div>
-                        <select name="id_district" x-model="form.id_district" id="id_district" @change="loadVillages" x-ref="districtSelect" class="peer w-full bg-slate-50 border border-slate-200 rounded-xl pt-6 pb-2 pl-11 pr-10 text-[13px] font-bold text-slate-800 outline-none focus:bg-white focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10 transition-all appearance-none">
-                            <option value=""></option>
-                        </select>
-                        <label for="id_district" class="absolute text-[11px] font-medium text-slate-500 duration-300 transform -translate-y-3 scale-90 top-4.5 z-10 origin-[0] left-11 pointer-events-none" :class="form.id_district ? '' : 'scale-100 -translate-y-1/2 top-1/2'">Kecamatan</label>
-                        <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400"><i class="ti ti-chevron-down"></i></div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-3">
-                        <div class="relative group">
-                            <select name="id_village" x-model="form.id_village" id="id_village" x-ref="villageSelect" class="peer w-full bg-slate-50 border border-slate-200 rounded-xl pt-6 pb-2 px-4 text-[13px] font-bold text-slate-800 outline-none focus:bg-white focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10 transition-all appearance-none">
-                                <option value=""></option>
-                            </select>
-                            <label for="id_village" class="absolute text-[11px] font-medium text-slate-500 duration-300 transform -translate-y-3 scale-90 top-4.5 z-10 origin-[0] left-4 pointer-events-none" :class="form.id_village ? '' : 'scale-100 -translate-y-1/2 top-1/2'">Desa / Kelurahan</label>
-                            <div class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400"><i class="ti ti-chevron-down"></i></div>
-                        </div>
-                        <div class="relative group">
-                            <input type="text" name="kode_pos" x-model="form.kode_pos" id="kode_pos" placeholder=" " class="peer w-full bg-slate-50 border border-slate-200 rounded-xl pt-6 pb-2 px-4 text-[13px] font-bold text-slate-800 outline-none focus:bg-white focus:border-teal-500 transition-all">
-                            <label for="kode_pos" class="absolute text-[11px] font-medium text-slate-500 duration-300 transform -translate-y-3 scale-90 top-4.5 z-10 origin-[0] left-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-4.5 peer-focus:scale-90 peer-focus:-translate-y-3 pointer-events-none">Kode Pos</label>
-                        </div>
-                    </div>
-                    <div class="relative group">
-                        <textarea name="alamat" x-model="form.alamat" id="alamat" rows="2" placeholder=" " class="peer w-full bg-slate-50 border border-slate-200 rounded-xl pt-6 pb-2 px-4 text-[13px] font-bold text-slate-800 outline-none focus:bg-white focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10 transition-all"></textarea>
-                        <label for="alamat" class="absolute text-[11px] font-medium text-slate-500 duration-300 transform -translate-y-3 scale-90 top-5 z-10 origin-[0] left-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-5 peer-focus:top-5 peer-focus:scale-90 peer-focus:-translate-y-3 pointer-events-none">Alamat Lengkap (Jalan, RT/RW)</label>
-                    </div>
+                </div>
+
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-bold text-[#062d27] font-montserrat">Alamat Lengkap (RT/RW, Dusun) <span class="text-rose-500">*</span></label>
+                    <textarea name="alamat" x-model="form.alamat" rows="2"
+                              class="w-full px-4 py-3 rounded-2xl bg-[#faf9f6] text-xs font-bold text-stone-900 border border-stone-200/80 focus:border-[#062d27] focus:bg-white transition-all outline-none"
+                              placeholder="Jl. / Blok / Dusun RT 01 RW 02"></textarea>
                 </div>
             </div>
         </div>
 
         <!-- STEP 3: Orang Tua -->
-        <div x-show="step === 3" style="display: none;" x-transition:enter="transition ease-out duration-300 delay-100" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" class="space-y-4">
-            <div class="bg-white rounded-xl p-5 shadow-xl shadow-teal-950/5 border border-slate-100">
-                <div class="space-y-6">
-                    <div class="space-y-3">
-                        <div class="flex items-center gap-2 mb-1">
-                            <div class="w-6 h-6 bg-blue-50 text-blue-500 rounded-lg flex items-center justify-center"><i class="ti ti-man text-sm"></i></div>
-                            <p class="text-[12px] font-bold text-slate-700">Identitas Ayah Kandung</p>
-                        </div>
-                        <div class="relative group">
-                            <input type="text" name="nik_ayah" x-model="form.nik_ayah" id="nik_ayah" placeholder=" " class="peer w-full bg-slate-50 border border-slate-200 rounded-xl pt-6 pb-2 px-4 text-[13px] font-bold text-slate-800 outline-none focus:bg-white focus:border-teal-500 transition-all">
-                            <label for="nik_ayah" class="absolute text-[11px] font-medium text-slate-500 duration-300 transform -translate-y-3 scale-90 top-4.5 z-10 origin-[0] left-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-4.5 peer-focus:scale-90 peer-focus:-translate-y-3 pointer-events-none">NIK Ayah Kandung</label>
-                        </div>
-                        <div class="relative group">
-                            <input type="text" name="nama_ayah" x-model="form.nama_ayah" id="nama_ayah" placeholder=" " class="peer w-full bg-slate-50 border border-slate-200 rounded-xl pt-6 pb-2 px-4 text-[13px] font-bold text-slate-800 outline-none focus:bg-white focus:border-teal-500 transition-all">
-                            <label for="nama_ayah" class="absolute text-[11px] font-medium text-slate-500 duration-300 transform -translate-y-3 scale-90 top-4.5 z-10 origin-[0] left-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-4.5 peer-focus:scale-90 peer-focus:-translate-y-3 pointer-events-none">Nama Lengkap Ayah</label>
-                        </div>
-                        <div class="grid grid-cols-2 gap-3">
-                            <div class="relative group">
-                                <select name="pendidikan_ayah" x-model="form.pendidikan_ayah" id="pendidikan_ayah" class="peer w-full bg-slate-50 border border-slate-200 rounded-xl pt-6 pb-2 px-4 text-[13px] font-bold text-slate-800 outline-none focus:bg-white focus:border-teal-500 appearance-none transition-all">
-                                    <option value=""></option>
-                                    @foreach($pendidikan as $p)
-                                        <option value="{{ $p }}">{{ $p }}</option>
-                                    @endforeach
-                                </select>
-                                <label for="pendidikan_ayah" class="absolute text-[11px] font-medium text-slate-500 duration-300 transform -translate-y-3 scale-90 top-4.5 z-10 origin-[0] left-4 pointer-events-none" :class="form.pendidikan_ayah ? '' : 'scale-100 -translate-y-1/2 top-1/2'">Pendidikan</label>
-                            </div>
-                            <div class="relative group">
-                                <input type="text" name="pekerjaan_ayah" x-model="form.pekerjaan_ayah" id="pekerjaan_ayah" placeholder=" " class="peer w-full bg-slate-50 border border-slate-200 rounded-xl pt-6 pb-2 px-4 text-[13px] font-bold text-slate-800 outline-none focus:bg-white focus:border-teal-500 transition-all">
-                                <label for="pekerjaan_ayah" class="absolute text-[11px] font-medium text-slate-500 duration-300 transform -translate-y-3 scale-90 top-4.5 z-10 origin-[0] left-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-4.5 peer-focus:scale-90 peer-focus:-translate-y-3 pointer-events-none">Pekerjaan</label>
-                            </div>
+        <div x-show="step === 3" style="display: none;" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" class="space-y-4">
+            <div class="bg-white rounded-3xl p-5 shadow-sm border border-stone-200/80 space-y-5">
+                
+                <!-- Ayah -->
+                <div class="space-y-3 pb-4 border-b border-stone-100">
+                    <div class="flex items-center gap-2">
+                        <div class="w-6 h-6 rounded-lg bg-[#062d27] text-[#bef264] flex items-center justify-center text-xs"><i class="ti ti-user"></i></div>
+                        <h4 class="text-xs font-bold text-[#062d27] font-montserrat">Identitas Ayah Kandung</h4>
+                    </div>
+                    <div class="space-y-2">
+                        <input type="text" name="nik_ayah" x-model="form.nik_ayah" maxlength="16" placeholder="NIK Ayah (16 Digit)"
+                               class="w-full px-4 py-2.5 rounded-xl bg-[#faf9f6] text-xs font-bold text-stone-900 border border-stone-200/80 focus:border-[#062d27] focus:bg-white outline-none">
+                        <input type="text" name="nama_ayah" x-model="form.nama_ayah" placeholder="Nama Lengkap Ayah"
+                               class="w-full px-4 py-2.5 rounded-xl bg-[#faf9f6] text-xs font-bold text-stone-900 border border-stone-200/80 focus:border-[#062d27] focus:bg-white outline-none">
+                        <div class="grid grid-cols-2 gap-2">
+                            <select name="pendidikan_ayah" x-model="form.pendidikan_ayah"
+                                    class="w-full px-3 py-2.5 rounded-xl bg-[#faf9f6] text-xs font-bold text-stone-900 border border-stone-200/80 focus:border-[#062d27] outline-none">
+                                <option value="">Pendidikan</option>
+                                @foreach($pendidikan as $p)
+                                    <option value="{{ $p }}">{{ $p }}</option>
+                                @endforeach
+                            </select>
+                            <input type="text" name="pekerjaan_ayah" x-model="form.pekerjaan_ayah" placeholder="Pekerjaan"
+                                   class="w-full px-3 py-2.5 rounded-xl bg-[#faf9f6] text-xs font-bold text-stone-900 border border-stone-200/80 focus:border-[#062d27] outline-none">
                         </div>
                     </div>
+                </div>
 
-                    <div class="h-px bg-slate-100 w-full"></div>
-
-                    <div class="space-y-3">
-                        <div class="flex items-center gap-2 mb-1">
-                            <div class="w-6 h-6 bg-rose-50 text-rose-500 rounded-lg flex items-center justify-center"><i class="ti ti-woman text-sm"></i></div>
-                            <p class="text-[12px] font-bold text-slate-700">Identitas Ibu Kandung</p>
-                        </div>
-                        <div class="relative group">
-                            <input type="text" name="nik_ibu" x-model="form.nik_ibu" id="nik_ibu" placeholder=" " class="peer w-full bg-slate-50 border border-slate-200 rounded-xl pt-6 pb-2 px-4 text-[13px] font-bold text-slate-800 outline-none focus:bg-white focus:border-teal-500 transition-all">
-                            <label for="nik_ibu" class="absolute text-[11px] font-medium text-slate-500 duration-300 transform -translate-y-3 scale-90 top-4.5 z-10 origin-[0] left-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-4.5 peer-focus:scale-90 peer-focus:-translate-y-3 pointer-events-none">NIK Ibu Kandung</label>
-                        </div>
-                        <div class="relative group">
-                            <input type="text" name="nama_ibu" x-model="form.nama_ibu" id="nama_ibu" placeholder=" " class="peer w-full bg-slate-50 border border-slate-200 rounded-xl pt-6 pb-2 px-4 text-[13px] font-bold text-slate-800 outline-none focus:bg-white focus:border-teal-500 transition-all">
-                            <label for="nama_ibu" class="absolute text-[11px] font-medium text-slate-500 duration-300 transform -translate-y-3 scale-90 top-4.5 z-10 origin-[0] left-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-4.5 peer-focus:scale-90 peer-focus:-translate-y-3 pointer-events-none">Nama Lengkap Ibu</label>
-                        </div>
-                        <div class="grid grid-cols-2 gap-3">
-                            <div class="relative group">
-                                <select name="pendidikan_ibu" x-model="form.pendidikan_ibu" id="pendidikan_ibu" class="peer w-full bg-slate-50 border border-slate-200 rounded-xl pt-6 pb-2 px-4 text-[13px] font-bold text-slate-800 outline-none focus:bg-white focus:border-teal-500 appearance-none transition-all">
-                                    <option value=""></option>
-                                    @foreach($pendidikan as $p)
-                                        <option value="{{ $p }}">{{ $p }}</option>
-                                    @endforeach
-                                </select>
-                                <label for="pendidikan_ibu" class="absolute text-[11px] font-medium text-slate-500 duration-300 transform -translate-y-3 scale-90 top-4.5 z-10 origin-[0] left-4 pointer-events-none" :class="form.pendidikan_ibu ? '' : 'scale-100 -translate-y-1/2 top-1/2'">Pendidikan</label>
-                            </div>
-                            <div class="relative group">
-                                <input type="text" name="pekerjaan_ibu" x-model="form.pekerjaan_ibu" id="pekerjaan_ibu" placeholder=" " class="peer w-full bg-slate-50 border border-slate-200 rounded-xl pt-6 pb-2 px-4 text-[13px] font-bold text-slate-800 outline-none focus:bg-white focus:border-teal-500 transition-all">
-                                <label for="pekerjaan_ibu" class="absolute text-[11px] font-medium text-slate-500 duration-300 transform -translate-y-3 scale-90 top-4.5 z-10 origin-[0] left-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-4.5 peer-focus:scale-90 peer-focus:-translate-y-3 pointer-events-none">Pekerjaan</label>
-                            </div>
+                <!-- Ibu -->
+                <div class="space-y-3 pb-4 border-b border-stone-100">
+                    <div class="flex items-center gap-2">
+                        <div class="w-6 h-6 rounded-lg bg-[#062d27] text-[#bef264] flex items-center justify-center text-xs"><i class="ti ti-user-heart"></i></div>
+                        <h4 class="text-xs font-bold text-[#062d27] font-montserrat">Identitas Ibu Kandung</h4>
+                    </div>
+                    <div class="space-y-2">
+                        <input type="text" name="nik_ibu" x-model="form.nik_ibu" maxlength="16" placeholder="NIK Ibu (16 Digit)"
+                               class="w-full px-4 py-2.5 rounded-xl bg-[#faf9f6] text-xs font-bold text-stone-900 border border-stone-200/80 focus:border-[#062d27] focus:bg-white outline-none">
+                        <input type="text" name="nama_ibu" x-model="form.nama_ibu" placeholder="Nama Lengkap Ibu"
+                               class="w-full px-4 py-2.5 rounded-xl bg-[#faf9f6] text-xs font-bold text-stone-900 border border-stone-200/80 focus:border-[#062d27] focus:bg-white outline-none">
+                        <div class="grid grid-cols-2 gap-2">
+                            <select name="pendidikan_ibu" x-model="form.pendidikan_ibu"
+                                    class="w-full px-3 py-2.5 rounded-xl bg-[#faf9f6] text-xs font-bold text-stone-900 border border-stone-200/80 focus:border-[#062d27] outline-none">
+                                <option value="">Pendidikan</option>
+                                @foreach($pendidikan as $p)
+                                    <option value="{{ $p }}">{{ $p }}</option>
+                                @endforeach
+                            </select>
+                            <input type="text" name="pekerjaan_ibu" x-model="form.pekerjaan_ibu" placeholder="Pekerjaan"
+                                   class="w-full px-3 py-2.5 rounded-xl bg-[#faf9f6] text-xs font-bold text-stone-900 border border-stone-200/80 focus:border-[#062d27] outline-none">
                         </div>
                     </div>
+                </div>
 
-                    <div class="h-px bg-slate-100 w-full"></div>
-
-                    <div class="relative group">
-                        <div class="absolute left-4 top-1/2 -translate-y-1/2 text-emerald-500 z-10"><i class="ti ti-brand-whatsapp text-xl"></i></div>
-                        <input type="text" name="no_hp" x-model="form.no_hp" id="no_hp" placeholder=" " class="peer w-full bg-slate-50 border border-slate-200 rounded-xl pt-6 pb-2 pl-12 pr-4 text-[13px] font-bold text-slate-800 outline-none focus:bg-white focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 transition-all">
-                        <label for="no_hp" class="absolute text-[11px] font-medium text-slate-500 duration-300 transform -translate-y-3 scale-90 top-4.5 z-10 origin-[0] left-12 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-4.5 peer-focus:scale-90 peer-focus:-translate-y-3 pointer-events-none">No. WhatsApp Orang Tua</label>
+                <!-- WhatsApp -->
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-bold text-[#062d27] font-montserrat">No. WhatsApp Orang Tua <span class="text-rose-500">*</span></label>
+                    <div class="relative">
+                        <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs font-bold text-stone-400 font-mono">+62</span>
+                        <input type="text" name="no_hp" x-model="form.no_hp" placeholder="812345678xx"
+                               class="w-full pl-12 pr-4 py-3 rounded-2xl bg-[#faf9f6] text-xs font-bold text-stone-900 border border-stone-200/80 focus:border-[#062d27] focus:bg-white outline-none font-mono">
                     </div>
                 </div>
             </div>
         </div>
 
-
         <!-- STEP 4: Konfirmasi -->
-        <div x-show="step === 4" style="display: none;" x-transition:enter="transition ease-out duration-300 delay-100" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" class="space-y-6">
-            <div class="bg-white rounded-xl p-8 shadow-xl shadow-teal-950/5 border border-slate-100 text-center">
-                <div class="w-24 h-24 bg-teal-50 rounded-full flex items-center justify-center text-teal-500 mx-auto mb-6 relative">
-                    <div class="absolute inset-0 bg-teal-400 rounded-full animate-ping opacity-20"></div>
-                    <i class="ti ti-shield-check text-6xl relative z-10"></i>
+        <div x-show="step === 4" style="display: none;" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" class="space-y-4">
+            <div class="bg-white rounded-3xl p-6 shadow-sm border border-stone-200/80 text-center space-y-4">
+                <div class="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-800 mx-auto border border-emerald-200/60 shadow-xs">
+                    <i class="ti ti-shield-check text-3xl"></i>
                 </div>
-                <h3 class="text-slate-800 text-xl font-black mb-2 tracking-tight">Semua Sudah Benar?</h3>
-                <p class="text-slate-500 text-xs font-medium leading-relaxed mb-8 px-4">Pastikan data yang Anda masukkan sesuai dengan Kartu Keluarga dan dokumen resmi lainnya.</p>
+                <div>
+                    <h3 class="text-sm font-black text-[#062d27] font-montserrat">Periksa Kembali Data Anda</h3>
+                    <p class="text-xs text-stone-500 mt-1 leading-relaxed">Pastikan seluruh data yang Anda masukkan telah sesuai dengan dokumen asli yang sah.</p>
+                </div>
                 
-                <button type="submit" class="w-full bg-teal-600 text-white rounded-xl py-4 text-sm font-black shadow-lg shadow-teal-600/30 active:scale-95 transition-all flex items-center justify-center gap-2 group">
-                    <i class="ti ti-device-floppy text-lg group-hover:scale-110 transition-transform"></i>
-                    Simpan Perubahan
+                <button type="submit" class="w-full py-3.5 bg-[#bef264] hover:bg-[#a3e635] text-[#062d27] rounded-2xl text-xs font-black shadow-md shadow-lime-500/20 active:scale-95 transition-all flex items-center justify-center gap-2 font-montserrat">
+                    <i class="ti ti-device-floppy text-base"></i>
+                    <span>Simpan Seluruh Biodata</span>
                 </button>
             </div>
         </div>
     </form>
 
-    <!-- BOTTOM NAVIGATION (Glassmorphism) -->
-    <div class="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-2xl border-t border-slate-200/60 px-4 pt-3 pb-8 z-[60]">
-        <div class="flex gap-3">
-            <template x-if="step > 1">
-                <button type="button" @click="step--" class="w-14 h-14 bg-white text-slate-600 rounded-xl flex items-center justify-center border border-slate-200 shadow-sm active:scale-90 transition-all hover:bg-slate-50">
-                    <i class="ti ti-arrow-left text-xl"></i>
-                </button>
-            </template>
-            <template x-if="step < 4">
-                <button type="button" @click="step++" class="flex-1 h-14 bg-teal-600 text-white rounded-xl text-[13px] font-black shadow-lg shadow-teal-600/20 active:scale-95 transition-all flex items-center justify-center gap-2 hover:bg-teal-700">
-                    Lanjut Ke Langkah Berikutnya
-                    <i class="ti ti-arrow-right text-lg"></i>
-                </button>
-            </template>
-            <template x-if="step === 4">
-                <div class="flex-1 h-14 flex items-center justify-center text-[13px] font-bold text-slate-500">
-                    Langkah Terakhir
-                </div>
-            </template>
+    <!-- BOTTOM STEP ACTION BAR -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-2xl border-t border-stone-200/70 px-5 pt-3 pb-[env(safe-area-inset-bottom,16px)] z-50">
+        <div class="flex gap-3 max-w-lg mx-auto">
+            <button type="button" x-show="step > 1" @click="step--" class="w-12 h-12 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-2xl flex items-center justify-center transition-all active:scale-90 shrink-0 font-bold">
+                <i class="ti ti-arrow-left text-lg"></i>
+            </button>
+            <button type="button" x-show="step < 4" @click="step++" class="flex-1 h-12 bg-[#062d27] hover:bg-emerald-900 text-[#bef264] rounded-2xl text-xs font-black transition-all shadow-md active:scale-95 flex items-center justify-center gap-2 font-montserrat">
+                <span>Lanjut ke Langkah Berikutnya</span>
+                <i class="ti ti-arrow-right text-sm"></i>
+            </button>
         </div>
     </div>
 </div>
@@ -364,4 +367,3 @@ function biodataForm() {
 }
 </script>
 @endsection
-

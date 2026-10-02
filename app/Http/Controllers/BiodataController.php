@@ -77,6 +77,7 @@ class BiodataController extends Controller
             ->select(
                 'pendaftaran_online.*',
                 'nama_unit',
+                'unit.logo as logo_unit',
                 'tahun_ajaran',
                 'provinces.name as provinsi',
                 'regencies.name as kabupaten',
@@ -91,10 +92,25 @@ class BiodataController extends Controller
 
         $pengaturan = \App\Models\PengaturanUmum::first();
         
-        // Convert logo to base64
-        $logoPath = base_path('../siprenpas/public/storage/' . $pengaturan->logo);
+        // Prioritas logo: Logo unit masing-masing, fallback ke Logo Pesantren / Pengaturan Umum
         $logoBase64 = '';
-        if (file_exists($logoPath)) {
+        $logoPath = null;
+
+        if (!empty($pendaftaran->logo_unit)) {
+            $unitLogoPath = base_path('../siprenpas/public/storage/' . $pendaftaran->logo_unit);
+            if (file_exists($unitLogoPath)) {
+                $logoPath = $unitLogoPath;
+            }
+        }
+
+        if (!$logoPath && !empty($pengaturan->logo)) {
+            $genLogoPath = base_path('../siprenpas/public/storage/' . $pengaturan->logo);
+            if (file_exists($genLogoPath)) {
+                $logoPath = $genLogoPath;
+            }
+        }
+
+        if ($logoPath && file_exists($logoPath)) {
             $logoData = base64_encode(file_get_contents($logoPath));
             $logoBase64 = 'data:image/' . pathinfo($logoPath, PATHINFO_EXTENSION) . ';base64,' . $logoData;
         }

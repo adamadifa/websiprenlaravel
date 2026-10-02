@@ -1,233 +1,192 @@
-<section class="relative pt-32 pb-12 overflow-hidden dotted-background">
-    <!-- Grid Ornament Overlay -->
-    <div class="absolute inset-0 pointer-events-none z-0 opacity-75" style="
-        background-image: 
-            linear-gradient(to right, rgba(13, 148, 136, 0.08) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(13, 148, 136, 0.08) 1px, transparent 1px);
-        background-size: 40px 40px;
-        mask-image: radial-gradient(ellipse 60% 50% at 50% 50%, #000 70%, transparent 100%);
-        -webkit-mask-image: radial-gradient(ellipse 60% 50% at 50% 50%, #000 70%, transparent 100%);
-    "></div>
-    <div class="container mx-auto px-6 lg:px-12 relative z-10">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <!-- Left Model (Desktop) -->
-            <div class="hidden lg:block lg:col-span-3 relative">
-                <!-- Badges -->
-                @if(isset($pilar[0]))
-                <div class="absolute -top-4 left-0 animate-float-y z-10 bg-white/90 text-teal-700 text-[10px] font-bold px-3 py-1.5 rounded-lg shadow-md border border-teal-100 flex items-center gap-2">
-                    <div class="w-5 h-5 bg-teal-500 rounded flex items-center justify-center text-white">
-                        <i class="ti ti-book-2 text-xs"></i>
-                    </div> {{ $pilar[0]->nama_pilar }}
-                </div>
-                @endif
-
-                @if(isset($pilar[1]))
-                <div class="absolute top-10 -right-4 animate-float-y z-10 bg-white/90 text-yellow-700 text-[10px] font-bold px-3 py-1.5 rounded-lg shadow-md border border-yellow-100 flex items-center gap-2" style="animation-delay: 0.5s;">
-                    <div class="w-5 h-5 bg-yellow-500 rounded flex items-center justify-center text-white">
-                        <i class="ti ti-eye text-xs"></i>
-                    </div> {{ $pilar[1]->nama_pilar }}
-                </div>
-                @endif
-
-                @if(isset($pilar[2]))
-                <div class="absolute bottom-28 -left-6 animate-float-x z-10 bg-white/90 text-yellow-700 text-[10px] font-bold px-3 py-1.5 rounded-lg shadow-md border border-yellow-100 flex items-center gap-2">
-                    <div class="w-5 h-5 bg-yellow-500 rounded flex items-center justify-center text-white">
-                        <i class="ti ti-pencil text-xs"></i>
-                    </div> {{ $pilar[2]->nama_pilar }}
-                </div>
-                @endif
-
-                @if(isset($pilar[3]))
-                <div class="absolute bottom-16 -right-2 animate-float-badge z-10 bg-white/90 text-teal-700 text-[10px] font-bold px-3 py-1.5 rounded-lg shadow-md border border-teal-100 flex items-center gap-2">
-                    <div class="w-5 h-5 bg-teal-500 rounded flex items-center justify-center text-white">
-                        <i class="ti ti-leaf text-xs"></i>
-                    </div> {{ $pilar[3]->nama_pilar }}
-                </div>
-                @endif
-                <img src="{{ $pengaturan ? $pengaturan->getAdminImageUrl($pengaturan->model_1) : 'https://placehold.co/400x500?text=Model+1' }}" alt="Model 1" class="relative z-0 w-full h-auto drop-shadow-2xl" fetchpriority="high">
-            </div>
-
-            <!-- Center Content -->
-            <div class="lg:col-span-6 text-center">
-                <h1 class="text-4xl md:text-6xl font-extrabold text-teal-900 leading-[1.1] mb-6 font-poppins">
-                    {{ $pengaturan->nama_sekolah ?? 'Pesantren Persatuan Islam 80 Al Amin' }}
-                </h1>
-                <div class="mb-10 relative inline-block group" data-aos="fade-up" data-aos-delay="200">
-                    <p class="text-teal-700 text-lg md:text-2xl font-black font-poppins relative z-10 px-6 py-2">
-                        Berakhlak Mulia, Tafaqquh Fiddien, Berprestasi
-                    </p>
-                    <!-- Hand-drawn Circle SVG -->
-                    <svg class="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-visible" viewBox="0 0 100 100" preserveAspectRatio="none">
-                        <path 
-                            d="M 5,50 C 5,10 95,10 95,50 C 95,90 5,90 5,50 Z" 
-                            class="animate-draw-circle"
-                            fill="none" 
-                            stroke="#fbbf24" 
-                            stroke-width="12" 
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        />
-                    </svg>
-                </div>
-                <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-                    <a href="/register" class="w-full sm:w-auto bg-teal-700 text-white font-bold px-8 py-4 rounded-xl shadow-xl hover:bg-teal-800 transition-all transform hover:scale-105 flex items-center justify-center gap-2">
-                        Daftar Sekarang
-                        <i class="ti ti-arrow-right text-lg"></i>
-                    </a>
-                    <button class="w-full sm:w-auto flex items-center justify-center gap-3 text-teal-800 font-bold px-8 py-4 rounded-xl hover:bg-teal-50 transition-colors">
-                        <div class="w-10 h-10 bg-white shadow-md rounded-full flex items-center justify-center text-teal-600">
-                            <i class="ti ti-player-play-filled text-lg"></i>
-                        </div>
-                        Play Video
-                    </button>
-                </div>
-            </div>
-
-            <!-- Right Model (Desktop) -->
-            <div class="hidden lg:block lg:col-span-3 relative">
-                <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <div class="ripple-anim"></div>
-                </div>
-                <div class="absolute top-1/2 -right-8 -translate-y-1/2 animate-float-badge z-20">
-                    <div class="bg-white/95 backdrop-blur-sm rounded-2xl p-4 shadow-2xl border border-white flex items-center gap-3">
-                        <div class="w-10 h-10 bg-teal-500 rounded-xl flex items-center justify-center text-white">
-                            <i class="ti ti-check text-xl"></i>
-                        </div>
-                        <div>
-                            <div class="text-xs text-gray-500">Ayo Bergabung</div>
-                            <div class="text-sm font-bold text-gray-800">Bersama Kami!</div>
-                        </div>
-                    </div>
-                </div>
-                <img src="{{ $pengaturan ? $pengaturan->getAdminImageUrl($pengaturan->model_2) : 'https://placehold.co/400x500?text=Model+2' }}" alt="Model 2" class="w-full h-auto drop-shadow-2xl">
-            </div>
-
-            <!-- Mobile Models -->
-            <div class="lg:hidden grid grid-cols-2 gap-4 mt-8">
-                <img src="{{ $pengaturan ? $pengaturan->getAdminImageUrl($pengaturan->model_1) : 'https://placehold.co/200x250?text=Model+1' }}" alt="Model 1" class="w-full h-auto drop-shadow-lg" fetchpriority="high">
-                <img src="{{ $pengaturan ? $pengaturan->getAdminImageUrl($pengaturan->model_2) : 'https://placehold.co/200x250?text=Model+2' }}" alt="Model 2" class="w-full h-auto drop-shadow-lg">
-            </div>
+<section class="relative pt-32 pb-16 lg:pb-24 bg-[#062d27] text-white overflow-hidden">
+    <!-- Background Image from Pengaturan with Dark Emerald Overlay -->
+    @if($pengaturan && !empty($pengaturan->background_login))
+        <div class="absolute inset-0 z-0 pointer-events-none">
+            <img 
+                src="{{ $pengaturan->getAdminImageUrl($pengaturan->background_login) }}" 
+                alt="Pesantren Al Amin Background" 
+                class="w-full h-full object-cover object-center opacity-40 scale-105 transform"
+            >
+            <!-- Rich Gradient Overlays for High Legibility and Atmosphere -->
+            <div class="absolute inset-0 bg-gradient-to-r from-[#062d27]/95 via-[#062d27]/80 to-[#062d27]/55"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-[#062d27] via-transparent to-[#062d27]/70"></div>
         </div>
-    </div>
+    @endif
 
-    <!-- Alumni Slider Section -->
-    <div class="relative z-20 -mt-4 lg:-mt-8">
-        <div class="container mx-auto px-6 lg:px-12">
-            <div class="bg-white/80 backdrop-blur-md rounded-3xl shadow-2xl p-6 lg:p-8 border border-white/50">
-                <div class="flex flex-col lg:flex-row items-center gap-8">
-                    <div class="lg:w-1/4 text-center lg:text-left shrink-0">
-                        <h2 class="text-xl italic font-black text-teal-900 leading-tight">Sebaran Alumni</h2>
-                        <p class="text-gray-600 text-xs font-bold uppercase tracking-widest mt-1">{{ $pengaturan->nama_sekolah ?? 'Pesantren Al Amin' }}</p>
-                    </div>
-                    
-                    <div class="lg:w-3/4 w-full overflow-hidden relative">
-                        <div class="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-white/80 to-transparent z-10"></div>
-                        <div class="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-white/80 to-transparent z-10"></div>
-                        
-                        <div class="flex items-center animate-marquee">
-                            @foreach($alumni as $item)
-                                <div class="mx-8 grayscale hover:grayscale-0 transition-all duration-500 transform hover:scale-110">
-                                    <img src="{{ $item->getAdminImageUrl($item->logo) }}" alt="{{ $item->nama_universitas }}" class="h-12 w-auto object-contain">
-                                </div>
-                            @endforeach
-                            {{-- Duplicate for infinite effect --}}
-                            @foreach($alumni as $item)
-                                <div class="mx-8 grayscale hover:grayscale-0 transition-all duration-500 transform hover:scale-110">
-                                    <img src="{{ $item->getAdminImageUrl($item->logo) }}" alt="{{ $item->nama_universitas }}" class="h-12 w-auto object-contain">
-                                </div>
-                            @endforeach
+    <div class="container mx-auto px-6 lg:px-12 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
+            
+            <!-- Left Column: Hero Content & CTA -->
+            <div class="lg:col-span-6 flex flex-col items-start text-left" data-aos="fade-right">
 
-                            @if($alumni->isEmpty())
-                                <!-- Fallback Static Logos if no data -->
-                                <div class="flex gap-16 items-center">
-                                    <img src="https://upload.wikimedia.org/wikipedia/id/0/09/Logo_UPI.png" class="h-12 grayscale opacity-50" alt="UPI">
-                                    <img src="https://upload.wikimedia.org/wikipedia/id/thumb/0/01/Logo_Unsil.png/600px-Logo_Unsil.png" class="h-12 grayscale opacity-50" alt="Unsil">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Sakarya_University_logo.png/800px-Sakarya_University_logo.png" class="h-12 grayscale opacity-50" alt="Sakarya">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Al-Azhar_University_logo.png/600px-Al-Azhar_University_logo.png" class="h-12 grayscale opacity-50" alt="Al-Azhar">
-                                </div>
-                            @endif
-                        </div>
+                <!-- Main Title with Accent Color -->
+                <h1 class="text-3xl sm:text-4xl lg:text-[3.25rem] font-black font-poppins leading-[1.14] tracking-tight mb-6 text-white">
+                    Pendidikan Islam Terpadu, <span class="text-[#bef264]">Tafaqquh Fiddien</span> & Berprestasi
+                </h1>
+
+                <!-- Subtitle / Description -->
+                <p class="text-emerald-100/80 text-sm sm:text-base lg:text-lg leading-relaxed max-w-xl mb-8 font-normal">
+                    Membina santri dengan pemahaman dinul Islam yang mendalam, berkarakter akhlakul karimah, mandiri, serta berwawasan ilmu pengetahuan modern.
+                </p>
+
+                <!-- CTA Button -->
+                <div class="flex flex-wrap items-center gap-4 mb-10 w-full sm:w-auto">
+                    <a href="/register" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#bef264] hover:bg-[#a3e635] text-[#062d27] font-extrabold px-7 py-3.5 rounded-xl shadow-lg shadow-lime-500/20 hover:shadow-lime-500/30 hover:-translate-y-0.5 active:translate-y-0 transition-all text-xs sm:text-sm uppercase tracking-wider font-poppins">
+                        <span>Pendaftaran Santri Baru</span>
+                        <i class="ti ti-arrow-up-right text-base font-bold"></i>
+                    </a>
+                    <a href="#jenjang-pendidikan" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/15 text-white font-semibold px-6 py-3.5 rounded-xl border border-white/15 transition-all text-sm">
+                        <span>Program Pendidikan</span>
+                        <i class="ti ti-chevron-down text-base"></i>
+                    </a>
+                </div>
+
+                <!-- Unit Badges -->
+                <div class="w-full pt-6 border-t border-emerald-800/50">
+                    <p class="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-emerald-300/60 font-bold mb-4">
+                        Jenjang Pendidikan
+                    </p>
+                    <div class="flex flex-wrap items-center gap-5 sm:gap-6 text-emerald-200 text-xs sm:text-sm font-semibold opacity-90">
+                        <a href="/tk" class="flex items-center gap-2 hover:text-[#bef264] transition-colors">
+                            <i class="ti ti-school text-base text-[#bef264]"></i>
+                            <span>TK Calisa</span>
+                        </a>
+                        <a href="/sdit" class="flex items-center gap-2 hover:text-[#bef264] transition-colors">
+                            <i class="ti ti-building-arch text-base text-[#bef264]"></i>
+                            <span>SDIT Al Amin</span>
+                        </a>
+                        <a href="/mts" class="flex items-center gap-2 hover:text-[#bef264] transition-colors">
+                            <i class="ti ti-certificate text-base text-[#bef264]"></i>
+                            <span>MTs Persis 80</span>
+                        </a>
+                        <a href="/ma" class="flex items-center gap-2 hover:text-[#bef264] transition-colors">
+                            <i class="ti ti-award text-base text-[#bef264]"></i>
+                            <span>MA Persis 80</span>
+                        </a>
                     </div>
                 </div>
             </div>
+
+            <!-- Right Column: Dual Vertical Marquee Activity Photo Columns (Left marquee down, Right marquee up) -->
+            <div class="lg:col-span-6 w-full" data-aos="fade-left" data-aos-delay="150">
+                @php
+                    $defaultPhotosLeft = [
+                        'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80',
+                        'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=600&q=80',
+                        'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=600&q=80',
+                        'https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=600&q=80',
+                    ];
+
+                    $defaultPhotosRight = [
+                        'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80',
+                        'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=600&q=80',
+                        'https://images.unsplash.com/photo-1534644107580-3a4dbd494a95?auto=format&fit=crop&w=600&q=80',
+                        'https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=600&q=80',
+                    ];
+
+                    $dbHeroPhotos = isset($heroGalleryPhotos) && $heroGalleryPhotos->count() > 0
+                        ? $heroGalleryPhotos 
+                        : \App\Models\GalleryPhoto::where('is_hero', true)->latest()->get();
+
+                    if ($dbHeroPhotos->isEmpty()) {
+                        $dbHeroPhotos = \App\Models\GalleryPhoto::latest()->take(8)->get();
+                    }
+
+                    $customPhotoUrls = [];
+                    foreach ($dbHeroPhotos as $hp) {
+                        if (!empty($hp->path)) {
+                            $customPhotoUrls[] = $hp->getAdminImageUrl($hp->path);
+                        }
+                    }
+
+                    if (count($customPhotoUrls) > 0) {
+                        if (count($customPhotoUrls) === 1) {
+                            $photosLeft = [$customPhotoUrls[0], $customPhotoUrls[0], $customPhotoUrls[0]];
+                            $photosRight = [$customPhotoUrls[0], $customPhotoUrls[0], $customPhotoUrls[0]];
+                        } else {
+                            $half = (int) ceil(count($customPhotoUrls) / 2);
+                            $photosLeft = array_slice($customPhotoUrls, 0, $half);
+                            $photosRight = array_slice($customPhotoUrls, $half);
+
+                            while (count($photosLeft) < 3) {
+                                $photosLeft = array_merge($photosLeft, $photosLeft);
+                            }
+                            while (count($photosRight) < 3) {
+                                $photosRight = array_merge($photosRight, $photosRight);
+                            }
+                        }
+                    } else {
+                        $photosLeft = $defaultPhotosLeft;
+                        $photosRight = $defaultPhotosRight;
+                    }
+                @endphp
+
+                <div class="relative h-[480px] sm:h-[540px] overflow-hidden">
+                    
+                    <!-- Gradient Masks for Smooth Flow into Hero Background -->
+                    <div class="absolute inset-x-0 top-0 h-16 sm:h-20 bg-gradient-to-b from-[#062d27] via-[#062d27]/70 to-transparent z-20 pointer-events-none"></div>
+                    <div class="absolute inset-x-0 bottom-0 h-16 sm:h-20 bg-gradient-to-t from-[#062d27] via-[#062d27]/70 to-transparent z-20 pointer-events-none"></div>
+
+                    <div class="grid grid-cols-2 gap-3 sm:gap-4 h-full">
+                        
+                        <!-- Column 1: Marquee DOWN -->
+                        <div class="overflow-hidden relative h-full">
+                            <div class="animate-marquee-down space-y-3 sm:space-y-4">
+                                @foreach($photosLeft as $img)
+                                    <div class="relative rounded-2xl sm:rounded-3xl overflow-hidden bg-emerald-950/60 aspect-[4/5] shadow-lg shrink-0">
+                                        <img 
+                                            src="{{ $img }}" 
+                                            alt="Kegiatan Santri" 
+                                            class="w-full h-full object-cover"
+                                            loading="lazy"
+                                        >
+                                    </div>
+                                @endforeach
+
+                                @foreach($photosLeft as $img)
+                                    <div class="relative rounded-2xl sm:rounded-3xl overflow-hidden bg-emerald-950/60 aspect-[4/5] shadow-lg shrink-0">
+                                        <img 
+                                            src="{{ $img }}" 
+                                            alt="Kegiatan Santri" 
+                                            class="w-full h-full object-cover"
+                                            loading="lazy"
+                                        >
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+
+                        <!-- Column 2: Marquee UP -->
+                        <div class="overflow-hidden relative h-full">
+                            <div class="animate-marquee-up space-y-3 sm:space-y-4">
+                                @foreach($photosRight as $img)
+                                    <div class="relative rounded-2xl sm:rounded-3xl overflow-hidden bg-emerald-950/60 aspect-[4/5] shadow-lg shrink-0">
+                                        <img 
+                                            src="{{ $img }}" 
+                                            alt="Kegiatan Santri" 
+                                            class="w-full h-full object-cover"
+                                            loading="lazy"
+                                        >
+                                    </div>
+                                @endforeach
+
+                                @foreach($photosRight as $img)
+                                    <div class="relative rounded-2xl sm:rounded-3xl overflow-hidden bg-emerald-950/60 aspect-[4/5] shadow-lg shrink-0">
+                                        <img 
+                                            src="{{ $img }}" 
+                                            alt="Kegiatan Santri" 
+                                            class="w-full h-full object-cover"
+                                            loading="lazy"
+                                        >
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
-
-<style>
-    @keyframes marquee {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(-50%); }
-    }
-    .animate-marquee {
-        display: flex;
-        width: max-content;
-        animation: marquee 30s linear infinite;
-    }
-    .animate-marquee:hover {
-        animation-play-state: paused;
-    }
-
-    /* Ripple Animation */
-    .ripple-anim {
-        position: absolute;
-        z-index: 0;
-    }
-    .ripple-anim::before, .ripple-anim::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 100px;
-        height: 100px;
-        background: rgba(20, 184, 166, 0.15);
-        border-radius: 50%;
-        transform: translate(-50%, -50%);
-        animation: ripple 4s infinite;
-    }
-    .ripple-anim::after {
-        animation-delay: 2s;
-    }
-    @keyframes ripple {
-        0% { width: 0; height: 0; opacity: 1; }
-        100% { width: 600px; height: 600px; opacity: 0; }
-    }
-
-    /* Floating Animations */
-    @keyframes float-y {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-20px); }
-    }
-    .animate-float-y { animation: float-y 4s ease-in-out infinite; }
-    
-    @keyframes float-badge {
-        0%, 100% { transform: translateY(-50%) translateX(0); }
-        50% { transform: translateY(-60%) translateX(10px); }
-    }
-    .animate-float-badge { animation: float-badge 5s ease-in-out infinite; }
-
-    /* Tagline Animations */
-    @keyframes fade-in-up {
-        0% { transform: translateY(20px); opacity: 0; }
-        100% { transform: translateY(0); opacity: 1; }
-    }
-    @keyframes fade-in {
-        0% { opacity: 0; }
-        100% { opacity: 1; }
-    }
-    .animate-fade-in-up { animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-    .animate-fade-in { animation: fade-in 0.5s ease-in; }
-
-    /* Hand-drawn Circle Animation */
-    .animate-draw-circle {
-        stroke-dasharray: 400;
-        stroke-dashoffset: 400;
-        animation: draw-path 3s ease-in-out infinite alternate;
-        opacity: 0.4;
-        transform: rotate(-1deg);
-    }
-    @keyframes draw-path {
-        0% { stroke-dashoffset: 400; }
-        100% { stroke-dashoffset: 0; }
-    }
-</style>

@@ -30,6 +30,9 @@ Route::get('/mts', function () {
 Route::get('/ma', function () {
     return app(\App\Http\Controllers\UnitLandingController::class)->show(request(), 'ma');
 })->name('unit.ma.short');
+Route::get('/diniyah', function () {
+    return app(\App\Http\Controllers\UnitLandingController::class)->show(request(), 'diniyah');
+})->name('unit.diniyah.short');
 Route::get('/unit/{slug}', [UnitLandingController::class, 'show'])->name('unit.show');
 
 /*
@@ -46,6 +49,10 @@ Route::get('/guru-tendik', [StaffController::class, 'index'])->name('staff.index
 Route::get('/berita', [NewsController::class, 'index'])->name('news.index');
 Route::redirect('/news', '/berita');
 Route::get('/berita/{slug}', [NewsController::class, 'show'])->name('news.show');
+
+Route::get('/siportu', [HomeController::class, 'siportu'])->name('siportu');
+Route::get('/siportu-app', [HomeController::class, 'siportu'])->name('siportu.app');
+Route::redirect('/fintren', '/siportu');
 
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store']);

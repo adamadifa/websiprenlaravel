@@ -1,2 +1,8 @@
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /dashboard
+Disallow: /biodata
+Disallow: /pembayaran
+Disallow: /password
+
+Sitemap: https://persis80alamin.com/sitemap.xml
