@@ -9,6 +9,7 @@ use App\Models\Userpendaftar;
 use App\Models\Unit;
 use App\Models\PengaturanUmum;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
@@ -18,6 +19,10 @@ class RegisterController extends Controller
 {
     public function index()
     {
+        if (Auth::check()) {
+            return redirect()->route('dashboard');
+        }
+
         $agent = new Agent();
         $pengaturan = PengaturanUmum::first();
         $units = Unit::where('status', 1)->get();
@@ -94,8 +99,11 @@ class RegisterController extends Controller
 
             DB::commit();
 
-            // Auto login or redirect to login
-            return redirect('/login')->with('success', 'Registrasi berhasil! Silakan login dengan No. Register: ' . $no_register);
+            // Otomatis login akun yang baru terdaftar
+            Auth::login($user);
+            $request->session()->regenerate();
+
+            return redirect()->route('dashboard')->with('success', 'Alhamdulillah, pendaftaran akun berhasil! Selamat datang di Portal SPMB.');
         } catch (\Exception $e) {
             DB::rollBack();
             return back()->with('error', 'Registrasi gagal: ' . $e->getMessage());
