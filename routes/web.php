@@ -10,6 +10,20 @@ use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
+| Subdomain SPMB (spmb.persis80alamin.com)
+|--------------------------------------------------------------------------
+*/
+Route::domain('spmb.' . env('APP_DOMAIN', 'localhost'))->group(function () {
+    Route::get('/', [LoginController::class, 'index'])->name('spmb.root');
+    Route::get('/login', [LoginController::class, 'index'])->name('spmb.login');
+    Route::post('/login', [LoginController::class, 'login']);
+    Route::get('/register', [RegisterController::class, 'index'])->name('spmb.register');
+    Route::post('/register', [RegisterController::class, 'store']);
+    Route::post('/logout', [LoginController::class, 'logout'])->name('spmb.logout');
+});
+
+/*
+|--------------------------------------------------------------------------
 | Subdomain & Unit Landing Page Routes
 |--------------------------------------------------------------------------
 */
