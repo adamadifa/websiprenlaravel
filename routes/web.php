@@ -5,6 +5,11 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\BiodataController;
+use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\UnitLandingController;
 use Illuminate\Support\Facades\Route;
 
@@ -71,19 +76,13 @@ Route::redirect('/fintren', '/siportu');
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store']);
 
-use App\Http\Controllers\LoginController;
-
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-use App\Http\Controllers\DashboardController;
-
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
-
-use App\Http\Controllers\BiodataController;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/biodata', [BiodataController::class, 'index'])->name('biodata');
@@ -97,13 +96,11 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/biodata/cetak', [BiodataController::class, 'cetak'])->name('biodata.cetak');
 });
-use App\Http\Controllers\PembayaranController;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('pembayaran');
     Route::post('/pembayaran', [PembayaranController::class, 'store']);
 });
-use App\Http\Controllers\PasswordController;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/password', [PasswordController::class, 'index'])->name('password');
