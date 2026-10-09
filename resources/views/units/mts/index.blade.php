@@ -953,7 +953,7 @@
                         </p>
                     </div>
                     @php
-                        $totalAsrama = isset($biayaAsrama) && $biayaAsrama->count() > 0 ? $biayaAsrama->sum('jumlah') : 27020000;
+                        $totalAsrama = isset($biayaAsrama) && $biayaAsrama->count() > 0 ? $biayaAsrama->sum('jumlah') : 12600000;
                     @endphp
                     <div class="sm:text-right shrink-0 bg-stone-50 sm:bg-transparent p-3 sm:p-0 rounded-xl">
                         <span class="text-[11px] text-stone-400 font-semibold block">Total Biaya Masuk</span>
@@ -977,7 +977,7 @@
                         <div class="flex items-center justify-between py-2 border-b border-stone-100 text-xs sm:text-sm"><span class="text-stone-600">Pendaftaran & Seleksi</span><span class="font-bold text-[#3e2723]">Rp 300.000</span></div>
                         <div class="flex items-center justify-between py-2 border-b border-stone-100 text-xs sm:text-sm"><span class="text-stone-600">Infaq Bangunan</span><span class="font-bold text-[#3e2723]">Rp 4.550.000</span></div>
                         <div class="flex items-center justify-between py-2 border-b border-stone-100 text-xs sm:text-sm"><span class="text-stone-600">Sarana & Prasarana</span><span class="font-bold text-[#3e2723]">Rp 2.150.000</span></div>
-                        <div class="flex items-center justify-between py-2 border-b border-stone-100 text-xs sm:text-sm"><span class="text-stone-600">SPP & Pembinaan (Asrama)</span><span class="font-bold text-[#3e2723]">Rp 14.400.000</span></div>
+                        <div class="flex items-center justify-between py-2 border-b border-stone-100 text-xs sm:text-sm"><span class="text-stone-600">SPP & Pembinaan (Bulan Pertama)</span><span class="font-bold text-[#3e2723]">Rp 1.200.000</span></div>
                         <div class="flex items-center justify-between py-2 border-b border-stone-100 text-xs sm:text-sm"><span class="text-stone-600">Seragam Santri</span><span class="font-bold text-[#3e2723]">Rp 1.200.000</span></div>
                         <div class="flex items-center justify-between py-2 border-b border-stone-100 text-xs sm:text-sm"><span class="text-stone-600">Kegiatan Santri Baru</span><span class="font-bold text-[#3e2723]">Rp 1.550.000</span></div>
                     @endif
@@ -1009,7 +1009,7 @@
                         </p>
                     </div>
                     @php
-                        $totalNonAsrama = isset($biayaNonAsrama) && $biayaNonAsrama->count() > 0 ? $biayaNonAsrama->sum('jumlah') : 12220000;
+                        $totalNonAsrama = isset($biayaNonAsrama) && $biayaNonAsrama->count() > 0 ? $biayaNonAsrama->sum('jumlah') : 6950000;
                     @endphp
                     <div class="sm:text-right shrink-0 bg-stone-50 sm:bg-transparent p-3 sm:p-0 rounded-xl">
                         <span class="text-[11px] text-stone-400 font-semibold block">Total Biaya Masuk</span>
@@ -1033,7 +1033,7 @@
                         <div class="flex items-center justify-between py-2 border-b border-stone-100 text-xs sm:text-sm"><span class="text-stone-600">Pendaftaran & Seleksi</span><span class="font-bold text-[#3e2723]">Rp 300.000</span></div>
                         <div class="flex items-center justify-between py-2 border-b border-stone-100 text-xs sm:text-sm"><span class="text-stone-600">Infaq Bangunan</span><span class="font-bold text-[#3e2723]">Rp 3.050.000</span></div>
                         <div class="flex items-center justify-between py-2 border-b border-stone-100 text-xs sm:text-sm"><span class="text-stone-600">Sarana & Prasarana</span><span class="font-bold text-[#3e2723]">Rp 1.000.000</span></div>
-                        <div class="flex items-center justify-between py-2 border-b border-stone-100 text-xs sm:text-sm"><span class="text-stone-600">SPP Madrasah</span><span class="font-bold text-[#3e2723]">Rp 3.600.000</span></div>
+                        <div class="flex items-center justify-between py-2 border-b border-stone-100 text-xs sm:text-sm"><span class="text-stone-600">SPP Madrasah (Bulan Pertama)</span><span class="font-bold text-[#3e2723]">Rp 300.000</span></div>
                         <div class="flex items-center justify-between py-2 border-b border-stone-100 text-xs sm:text-sm"><span class="text-stone-600">Seragam Santri</span><span class="font-bold text-[#3e2723]">Rp 1.000.000</span></div>
                         <div class="flex items-center justify-between py-2 border-b border-stone-100 text-xs sm:text-sm"><span class="text-stone-600">Kegiatan Santri Baru</span><span class="font-bold text-[#3e2723]">Rp 1.300.000</span></div>
                     @endif

@@ -11,18 +11,37 @@ use Jenssegers\Agent\Agent;
 
 class NewsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $agent = new Agent();
         $pengaturan = PengaturanUmum::first();
         $units = Unit::where('status', 1)->get();
-        $posts = Post::latest()->paginate(9);
+        $categories = \App\Models\Category::withCount('posts')->get();
 
-        if ($agent->isMobile()) {
-            return view('mobile.news.index', compact('pengaturan', 'units', 'posts'));
+        $query = Post::with('category')->latest();
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                  ->orWhere('content', 'like', "%{$search}%");
+            });
         }
 
-        return view('pages.news.index', compact('pengaturan', 'units', 'posts'));
+        if ($request->filled('category')) {
+            $categorySlug = $request->category;
+            $query->whereHas('category', function($q) use ($categorySlug) {
+                $q->where('slug', $categorySlug);
+            });
+        }
+
+        $posts = $query->paginate(9)->withQueryString();
+
+        if ($agent->isMobile()) {
+            return view('mobile.news.index', compact('pengaturan', 'units', 'posts', 'categories'));
+        }
+
+        return view('pages.news.index', compact('pengaturan', 'units', 'posts', 'categories'));
     }
 
     public function show($slug)

@@ -139,11 +139,32 @@ class UnitLandingController extends Controller
         $biayaNonAsrama = collect();
         $biayaAsrama = collect();
         if ($activePPDB) {
+            $checkExists = \Illuminate\Support\Facades\DB::table('konfigurasi_biaya')
+                ->where('kode_unit', $kodeUnit)
+                ->where('kode_ta', $activePPDB->kode_ta)
+                ->where('tingkat', 1)
+                ->where('is_pindahan', 0)
+                ->exists();
+
+            $targetKodeTa = $activePPDB->kode_ta;
+            if (!$checkExists) {
+                // Cari tahun ajaran terakhir yang memiliki data konfigurasi biaya untuk unit ini
+                $latestConfiguredTa = \Illuminate\Support\Facades\DB::table('konfigurasi_biaya')
+                    ->where('kode_unit', $kodeUnit)
+                    ->where('tingkat', 1)
+                    ->where('is_pindahan', 0)
+                    ->orderBy('kode_ta', 'desc')
+                    ->value('kode_ta');
+                if ($latestConfiguredTa) {
+                    $targetKodeTa = $latestConfiguredTa;
+                }
+            }
+
             $rawBiayaList = \Illuminate\Support\Facades\DB::table('konfigurasi_biaya')
                 ->join('konfigurasi_biaya_detail', 'konfigurasi_biaya.kode_biaya', '=', 'konfigurasi_biaya_detail.kode_biaya')
                 ->join('jenis_biaya', 'konfigurasi_biaya_detail.kode_jenis_biaya', '=', 'jenis_biaya.kode_jenis_biaya')
                 ->where('konfigurasi_biaya.kode_unit', $kodeUnit)
-                ->where('konfigurasi_biaya.kode_ta', $activePPDB->kode_ta)
+                ->where('konfigurasi_biaya.kode_ta', $targetKodeTa)
                 ->where('konfigurasi_biaya.tingkat', 1)
                 ->where('konfigurasi_biaya.is_pindahan', 0)
                 ->where('jenis_biaya.tampilkan_di_landing', 1)
