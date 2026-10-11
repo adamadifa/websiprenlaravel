@@ -47,9 +47,30 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
+        $user = Auth::user();
+        $isAgt = false;
+
+        if ($user) {
+            $isAgt = \App\Models\PendaftaranGotTalent::where('nomor_register', $user->username)
+                ->orWhere('email', $user->email)
+                ->exists();
+        }
+
+        $host = $request->getHost();
+        $isAgtSubdomain = str_starts_with($host, 'agt.');
+
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
+        if ($isAgtSubdomain) {
+            return redirect()->route('agt.root');
+        }
+
+        if ($isAgt) {
+            return redirect()->route('agt.direct');
+        }
+
         return redirect('/');
     }
 }

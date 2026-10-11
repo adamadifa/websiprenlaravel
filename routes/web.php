@@ -11,7 +11,33 @@ use App\Http\Controllers\BiodataController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\UnitLandingController;
+use App\Http\Controllers\AgtLandingController;
 use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| Subdomain AGT (agt.persis80alamin.com) & Direct Route Access
+|--------------------------------------------------------------------------
+*/
+Route::domain('agt.' . env('APP_DOMAIN', 'localhost'))->group(function () {
+    Route::get('/', [AgtLandingController::class, 'index'])->name('agt.root');
+    Route::get('/daftar', [AgtLandingController::class, 'register'])->name('agt.register');
+    Route::post('/daftar', [AgtLandingController::class, 'storeRegister'])->name('agt.register.store');
+    Route::get('/login', [AgtLandingController::class, 'login'])->name('agt.login');
+    Route::post('/login', [AgtLandingController::class, 'authLogin'])->name('agt.login.post');
+    Route::post('/logout', [AgtLandingController::class, 'logout'])->name('agt.logout');
+    Route::get('/pendaftaran/sukses/{nomor}', [AgtLandingController::class, 'successRegistration'])->name('agt.success');
+});
+Route::get('/agt', [AgtLandingController::class, 'index'])->name('agt.direct');
+Route::get('/alamingottalent', [AgtLandingController::class, 'index'])->name('agt.full');
+Route::get('/agt/daftar', [AgtLandingController::class, 'register'])->name('agt.register.direct');
+Route::post('/agt/daftar', [AgtLandingController::class, 'storeRegister'])->name('agt.register.direct.store');
+Route::get('/agt/login', [AgtLandingController::class, 'login'])->name('agt.login.direct');
+Route::post('/agt/login', [AgtLandingController::class, 'authLogin'])->name('agt.login.direct.post');
+Route::post('/agt/logout', [AgtLandingController::class, 'logout'])->name('agt.logout.direct');
+Route::get('/agt/pendaftaran/sukses/{nomor}', [AgtLandingController::class, 'successRegistration'])->name('agt.success.direct');
+Route::get('/pendaftaran/sukses/{nomor}', [AgtLandingController::class, 'successRegistration'])->name('agt.success.global');
+
 
 /*
 |--------------------------------------------------------------------------

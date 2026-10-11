@@ -47,11 +47,11 @@
             <!-- User Greeting -->
             <div class="flex items-center gap-3.5 mb-5">
                 <div class="w-12 h-12 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-1 shrink-0">
-                    @if($pendaftaran->foto)
+                    @if(!empty($pendaftaran->foto))
                         <img src="{{ asset('storage/' . $pendaftaran->foto) }}" class="w-full h-full object-cover rounded-xl shadow-md">
                     @else
                         <div class="w-full h-full bg-[#062d27] rounded-xl flex items-center justify-center text-[#bef264] font-bold text-sm font-montserrat">
-                            {{ substr($pendaftaran->nama_lengkap, 0, 2) }}
+                            {{ substr($pendaftaran->nama_lengkap ?? 'GT', 0, 2) }}
                         </div>
                     @endif
                 </div>
@@ -83,6 +83,40 @@
                     </div>
                     <div class="h-2 bg-stone-100 rounded-full overflow-hidden p-0.5">
                         <div class="h-full bg-[#062d27] rounded-full transition-all duration-1000" style="width: {{ $progress }}%"></div>
+                    </div>
+                </div>
+
+                <!-- Info Kredensial Login Mobile -->
+                <div class="mt-3.5 pt-3 border-t border-stone-100 space-y-2 text-xs" x-data="{ showPass: false, copiedUser: false, copiedPass: false }">
+                    <div class="flex items-center justify-between">
+                        <span class="text-[10px] font-bold text-stone-400 uppercase tracking-wider font-montserrat">Username</span>
+                        <div class="flex items-center gap-1.5">
+                            <span class="font-mono font-bold text-[#062d27] text-xs select-all">{{ $user->username }}</span>
+                            <button type="button" 
+                                    @click="navigator.clipboard.writeText('{{ $user->username }}'); copiedUser = true; setTimeout(() => copiedUser = false, 2000)" 
+                                    class="p-1 rounded bg-stone-100 text-stone-600 text-[10px]">
+                                <i class="ti" :class="copiedUser ? 'ti-check text-emerald-600' : 'ti-copy'"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-[10px] font-bold text-stone-400 uppercase tracking-wider font-montserrat">Password</span>
+                        <div class="flex items-center gap-1.5">
+                            @if(session('spmb_reg_password'))
+                                <span class="font-mono font-bold text-emerald-900 text-xs select-all" x-text="showPass ? '{{ session('spmb_reg_password') }}' : '••••••••'"></span>
+                                <button type="button" @click="showPass = !showPass" class="text-stone-400 p-0.5">
+                                    <i class="ti text-xs" :class="showPass ? 'ti-eye-off' : 'ti-eye'"></i>
+                                </button>
+                                <button type="button" 
+                                        @click="navigator.clipboard.writeText('{{ session('spmb_reg_password') }}'); copiedPass = true; setTimeout(() => copiedPass = false, 2000)" 
+                                        class="p-1 rounded bg-emerald-50 text-emerald-800 text-[10px]">
+                                    <i class="ti" :class="copiedPass ? 'ti-check text-emerald-600' : 'ti-copy'"></i>
+                                </button>
+                            @else
+                                <span class="font-mono text-stone-500 text-[11px]">Tersimpan</span>
+                                <a href="{{ route('password') }}" class="text-[10px] text-emerald-800 font-bold underline ml-1">Ubah</a>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>

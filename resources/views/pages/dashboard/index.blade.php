@@ -78,7 +78,7 @@
                 <div class="p-6">
                     <div class="flex items-center gap-4 mb-6 pb-6 border-b border-stone-100">
                         <div class="w-16 h-16 bg-[#062d27] rounded-2xl flex items-center justify-center text-[#bef264] border border-emerald-900/30 overflow-hidden shrink-0 shadow-xs">
-                            @if($pendaftaran->foto)
+                            @if(!empty($pendaftaran->foto))
                                 <img src="{{ asset('storage/' . $pendaftaran->foto) }}" class="w-full h-full object-cover">
                             @else
                                 <i class="ti ti-user text-2xl"></i>
@@ -113,7 +113,55 @@
                         </div>
                     </div>
 
-                    <div class="mt-7 pt-5 border-t border-stone-100">
+                    <div class="mt-7 pt-5 border-t border-stone-100 space-y-3">
+                        <!-- Info Akun Login -->
+                        <div class="p-4 rounded-2xl bg-[#062d27]/5 border border-emerald-900/10 space-y-2.5 text-xs" x-data="{ showPass: false, copiedUser: false, copiedPass: false }">
+                            <div class="flex items-center gap-2 text-emerald-900 font-bold font-montserrat text-[11px]">
+                                <i class="ti ti-key text-emerald-800 text-sm"></i>
+                                <span>Informasi Akun Login</span>
+                            </div>
+                            
+                            <div>
+                                <span class="text-[10px] font-bold text-stone-400 uppercase tracking-wider block font-montserrat">Username (No. Registrasi)</span>
+                                <div class="flex items-center justify-between mt-0.5">
+                                    <span class="font-mono font-bold text-[#062d27] text-xs sm:text-sm select-all">{{ $user->username }}</span>
+                                    <button type="button" 
+                                            @click="navigator.clipboard.writeText('{{ $user->username }}'); copiedUser = true; setTimeout(() => copiedUser = false, 2000)" 
+                                            class="px-2 py-0.5 rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-600 text-[10px] font-mono flex items-center gap-1 transition">
+                                        <i class="ti" :class="copiedUser ? 'ti-check text-emerald-600' : 'ti-copy'"></i>
+                                        <span x-text="copiedUser ? 'Disalin' : 'Salin'"></span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="pt-2 border-t border-stone-200/60">
+                                <span class="text-[10px] font-bold text-stone-400 uppercase tracking-wider block font-montserrat">Password Akun</span>
+                                <div class="flex items-center justify-between mt-0.5">
+                                    @if(session('spmb_reg_password'))
+                                        <div class="flex items-center gap-2">
+                                            <span class="font-mono font-bold text-emerald-900 text-xs sm:text-sm select-all" 
+                                                  x-text="showPass ? '{{ session('spmb_reg_password') }}' : '••••••••'"></span>
+                                            <button type="button" @click="showPass = !showPass" class="text-stone-400 hover:text-emerald-800 transition">
+                                                <i class="ti text-sm" :class="showPass ? 'ti-eye-off' : 'ti-eye'"></i>
+                                            </button>
+                                        </div>
+                                        <button type="button" 
+                                                @click="navigator.clipboard.writeText('{{ session('spmb_reg_password') }}'); copiedPass = true; setTimeout(() => copiedPass = false, 2000)" 
+                                                class="px-2 py-0.5 rounded-lg bg-emerald-100 text-emerald-900 text-[10px] font-mono flex items-center gap-1 transition">
+                                            <i class="ti" :class="copiedPass ? 'ti-check text-emerald-600' : 'ti-copy'"></i>
+                                            <span x-text="copiedPass ? 'Disalin' : 'Salin'"></span>
+                                        </button>
+                                    @else
+                                        <span class="font-mono text-stone-500 text-xs font-semibold">Tersimpan aman</span>
+                                        <a href="{{ route('password') }}" class="px-2 py-0.5 rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-600 text-[10px] font-mono flex items-center gap-1 transition">
+                                            <i class="ti ti-edit text-xs"></i>
+                                            <span>Ubah</span>
+                                        </a>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+
                         <a href="/biodata" class="flex items-center justify-center gap-2 w-full px-4 py-3 bg-[#062d27] hover:bg-emerald-900 text-white rounded-2xl text-xs font-bold transition-all shadow-xs font-montserrat">
                             <i class="ti ti-edit text-sm text-[#bef264]"></i>
                             <span>Lengkapi Biodata Lengkap</span>

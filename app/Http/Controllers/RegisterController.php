@@ -102,6 +102,8 @@ class RegisterController extends Controller
             // Otomatis login akun yang baru terdaftar
             Auth::login($user);
             $request->session()->regenerate();
+            $request->session()->flash('spmb_reg_username', $no_register);
+            $request->session()->flash('spmb_reg_password', $request->password);
 
             return redirect()->route('dashboard')->with('success', 'Alhamdulillah, pendaftaran akun berhasil! Selamat datang di Portal SPMB.');
         } catch (\Exception $e) {
