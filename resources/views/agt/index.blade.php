@@ -494,6 +494,8 @@
     showRegisterModal: false,
     showPosterModal: false,
     selectedPoster: null,
+    posterLoaded: false,
+    posterError: false,
     selectedCompForReg: null,
     regData: {
         nama_peserta: '',
@@ -537,6 +539,8 @@
     },
     openPoster(comp) {
         this.selectedPoster = comp;
+        this.posterLoaded = false;
+        this.posterError = false;
         this.showPosterModal = true;
     },
     openJuknis(comp) {
@@ -954,22 +958,22 @@
                          class="group rounded-2xl glass-panel overflow-hidden transition-all duration-300 flex flex-col justify-between hover:-translate-y-1 hover:border-amber-500/40 relative shadow-xl"
                          data-aos="fade-up">
                         
-                        <!-- Poster Preview Section (Header Card) -->
-                        <div class="relative w-full h-44 sm:h-48 overflow-hidden bg-gradient-to-br from-[#2a060d] via-[#150205] to-black cursor-pointer group/poster"
+                        <!-- Poster Preview Section (Header Card - Format 16:9 Full View) -->
+                        <div class="relative w-full aspect-video overflow-hidden bg-gradient-to-br from-[#1c0307] via-black to-[#140306] cursor-pointer group/poster flex items-center justify-center"
                              @click="openPoster({{ json_encode($comp) }})">
                             
-                            <!-- Poster Backdrop / Graphic -->
+                            <!-- Poster Graphic (Tampil Penuh 16:9) -->
                             <img src="{{ $comp['poster'] }}" 
                                  alt="Poster {{ $comp['title'] }}"
                                  onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.classList.remove('hidden');"
-                                 class="w-full h-full object-cover object-center group-hover/poster:scale-105 transition-transform duration-500">
+                                 class="w-full h-full object-contain group-hover/poster:scale-105 transition-transform duration-500">
                             
                             <!-- Fallback Theatrical Artwork Banner (Jika File Gambar Poster Belum Diupload) -->
                             <div class="hidden absolute inset-0 w-full h-full flex flex-col items-center justify-center p-4 text-center bg-gradient-to-b from-[#3a0812] via-[#1c0307] to-[#0a0103] group-hover/poster:scale-105 transition-transform duration-500">
-                                <div class="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-400/30 flex items-center justify-center text-amber-300 text-2xl mb-2 shadow-lg">
+                                <div class="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-400/30 flex items-center justify-center text-amber-300 text-xl mb-1.5 shadow-lg">
                                     <i class="ti {{ $comp['icon'] }}"></i>
                                 </div>
-                                <span class="text-[11px] font-bold text-amber-200/90 tracking-widest uppercase font-cinzel line-clamp-1">POSTER RESMI</span>
+                                <span class="text-[10px] font-bold text-amber-200/90 tracking-widest uppercase font-cinzel line-clamp-1">POSTER RESMI</span>
                                 <span class="text-[9px] text-stone-400">Klik untuk melihat detail & juknis</span>
                             </div>
 
@@ -1360,29 +1364,38 @@
                 </button>
             </div>
 
-            <!-- Poster Display Container -->
+            <!-- Poster Display Container (Full View 16:9) -->
             <div class="py-4 flex flex-col items-center justify-center">
-                <div class="relative w-full max-h-[62vh] rounded-2xl overflow-hidden border border-amber-500/30 bg-black/60 shadow-inner flex items-center justify-center">
+                <div class="relative w-full aspect-video rounded-2xl overflow-hidden border border-amber-500/30 bg-black/80 shadow-inner flex items-center justify-center">
                     
+                    <!-- Loading Spinner saat poster sedang di-load -->
+                    <div x-show="!posterLoaded && !posterError" class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-8 h-8 border-2 border-amber-400/20 border-t-amber-400 rounded-full animate-spin"></div>
+                    </div>
+
+                    <!-- Gambar Poster Penuh (16:9 Object Contain - Tidak Terpotong) -->
                     <img :src="selectedPoster ? selectedPoster.poster : ''" 
                          :alt="selectedPoster ? selectedPoster.title : 'Poster'"
-                         onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.classList.remove('hidden');"
-                         class="w-full max-h-[62vh] object-contain mx-auto">
+                         x-show="!posterError"
+                         @load="posterLoaded = true"
+                         @error="posterError = true; posterLoaded = false"
+                         class="w-full h-full object-contain mx-auto transition-opacity duration-300"
+                         :class="posterLoaded ? 'opacity-100' : 'opacity-0'">
                     
-                    <!-- Fallback Poster Theatrical Art (Jika Gambar Belum Diupload ke Storage) -->
-                    <div class="hidden w-full py-16 px-6 text-center flex flex-col items-center justify-center bg-gradient-to-b from-[#2a060d] via-[#150205] to-[#080102]">
-                        <div class="w-20 h-20 rounded-3xl bg-amber-500/10 border-2 border-amber-400/40 flex items-center justify-center text-amber-300 text-4xl mb-3 shadow-[0_0_30px_rgba(245,158,11,0.2)]">
+                    <!-- Fallback Poster Theatrical Art (Jika Gambar Gagal Dimuat / Belum Diupload) -->
+                    <div x-show="posterError" class="w-full h-full p-6 text-center flex flex-col items-center justify-center bg-gradient-to-b from-[#2a060d] via-[#150205] to-[#080102]">
+                        <div class="w-16 h-16 rounded-3xl bg-amber-500/10 border-2 border-amber-400/40 flex items-center justify-center text-amber-300 text-3xl mb-2 shadow-[0_0_30px_rgba(245,158,11,0.2)]">
                             <i class="ti" :class="selectedPoster ? selectedPoster.icon : 'ti-award'"></i>
                         </div>
-                        <span class="text-xs font-bold text-amber-400 tracking-[0.25em] uppercase font-cinzel mb-1">
+                        <span class="text-[11px] font-bold text-amber-400 tracking-[0.25em] uppercase font-cinzel mb-1">
                             POSTER RESMI CABANG LOMBA
                         </span>
-                        <h4 class="font-bold text-lg sm:text-xl text-white max-w-md mb-2" x-text="selectedPoster ? selectedPoster.title : ''"></h4>
-                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/25 text-amber-300 text-xs font-medium">
+                        <h4 class="font-bold text-base sm:text-lg text-white max-w-md mb-1" x-text="selectedPoster ? selectedPoster.title : ''"></h4>
+                        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/25 text-amber-300 text-[11px] font-medium">
                             <i class="ti ti-calendar-event"></i>
                             <span>16 – 17 Januari 2027</span>
                         </div>
-                        <p class="text-[11px] text-stone-400 max-w-sm mt-3" x-text="selectedPoster ? selectedPoster.description : ''"></p>
+                        <p class="text-[11px] text-stone-400 max-w-sm mt-2 line-clamp-2" x-text="selectedPoster ? selectedPoster.description : ''"></p>
                     </div>
 
                 </div>
