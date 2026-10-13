@@ -1377,8 +1377,8 @@
                     <img :src="selectedPoster ? selectedPoster.poster : ''" 
                          :alt="selectedPoster ? selectedPoster.title : 'Poster'"
                          x-show="!posterError"
-                         @load="posterLoaded = true"
-                         @error="posterError = true; posterLoaded = false"
+                         x-on:load="posterLoaded = true"
+                         x-on:error="posterError = true; posterLoaded = false"
                          class="w-full h-full object-contain mx-auto transition-opacity duration-300"
                          :class="posterLoaded ? 'opacity-100' : 'opacity-0'">
                     
