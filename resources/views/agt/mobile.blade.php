@@ -431,7 +431,7 @@
                     <i class="ti ti-arrow-left"></i>
                     <span>Portal Al-Amin</span>
                 </a>
-                <a href="https://wa.me/6281234567890" target="_blank" class="text-emerald-400 font-semibold flex items-center gap-1">
+                <a href="https://wa.me/6285284693063" target="_blank" class="text-emerald-400 font-semibold flex items-center gap-1">
                     <i class="ti ti-brand-whatsapp text-sm"></i>
                     <span>Hotline WA</span>
                 </a>
@@ -924,7 +924,7 @@
             <i class="ti ti-calendar text-base"></i>
             <span>Agenda</span>
         </a>
-        <a href="https://wa.me/6281234567890?text={{ urlencode('Halo Panitia AGT 2026, saya ingin bertanya seputar lomba.') }}" target="_blank" class="flex flex-col items-center gap-0.5 text-stone-400 hover:text-emerald-400">
+        <a href="https://wa.me/6285284693063?text={{ urlencode('Halo Panitia AGT 2026, saya ingin bertanya seputar lomba.') }}" target="_blank" class="flex flex-col items-center gap-0.5 text-stone-400 hover:text-emerald-400">
             <i class="ti ti-brand-whatsapp text-base"></i>
             <span>Bantuan</span>
         </a>

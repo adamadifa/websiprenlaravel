@@ -572,7 +572,7 @@
             `==============================\n` +
             `Mohon konfirmasi pendaftaran dan instruksi selanjutnya. Terima kasih!`
         );
-        window.open(`https://wa.me/6281234567890?text=${text}`, '_blank');
+        window.open(`https://wa.me/6285284693063?text=${text}`, '_blank');
         this.showRegisterModal = false;
     }
 }" x-init="initApp()">
@@ -671,7 +671,7 @@
                     <i class="ti ti-arrow-left"></i>
                     <span>Portal Al-Amin</span>
                 </a>
-                <a href="https://wa.me/6281234567890" target="_blank" class="text-emerald-400 hover:text-emerald-300 font-semibold flex items-center gap-1">
+                <a href="https://wa.me/6285284693063" target="_blank" class="text-emerald-400 hover:text-emerald-300 font-semibold flex items-center gap-1">
                     <i class="ti ti-brand-whatsapp text-sm"></i>
                     <span>Hotline WA</span>
                 </a>
@@ -1302,7 +1302,7 @@
                         <span class="text-stone-400 block text-[11px]">Narahubung Lomba:</span>
                         <span class="font-semibold text-amber-300" x-text="selectedComp ? selectedComp.cp : '-'"></span>
                     </div>
-                    <a :href="'https://wa.me/6281234567890?text=' + encodeURIComponent('Halo Panitia AGT, ingin tanya teknis lomba ' + (selectedComp ? selectedComp.title : ''))" target="_blank" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs flex items-center gap-1">
+                    <a :href="'https://wa.me/6285284693063?text=' + encodeURIComponent('Halo Panitia AGT, ingin tanya teknis lomba ' + (selectedComp ? selectedComp.title : ''))" target="_blank" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs flex items-center gap-1">
                         <i class="ti ti-brand-whatsapp text-sm"></i>
                         <span>Chat WA</span>
                     </a>
@@ -1522,7 +1522,7 @@
     </div>
 
     <!-- Floating WhatsApp Hotline Button -->
-    <a href="https://wa.me/6281234567890?text={{ urlencode('Halo Panitia Al Amin Got Talent (AGT 2026), saya ingin konsultasi pendaftaran lomba.') }}" target="_blank" class="fixed bottom-6 right-6 z-40 w-12 h-12 bg-emerald-600 hover:bg-emerald-500 text-white rounded-full flex items-center justify-center shadow-xl hover:scale-105 active:scale-95 transition-all" title="Hotline WhatsApp AGT">
+    <a href="https://wa.me/6285284693063?text={{ urlencode('Halo Panitia Al Amin Got Talent (AGT 2026), saya ingin konsultasi pendaftaran lomba.') }}" target="_blank" class="fixed bottom-6 right-6 z-40 w-12 h-12 bg-emerald-600 hover:bg-emerald-500 text-white rounded-full flex items-center justify-center shadow-xl hover:scale-105 active:scale-95 transition-all" title="Hotline WhatsApp AGT">
         <i class="ti ti-brand-whatsapp text-2xl"></i>
     </a>
 

@@ -155,7 +155,7 @@
                          "- Cabang Lomba: {$daftarLombaText}\n" .
                          "- Total Biaya: " . ($totalBiaya > 0 ? 'Rp ' . number_format($totalBiaya, 0, ',', '.') : 'Gratis') . "\n\n" .
                          "Mohon instruksi selanjutnya. Terima kasih!";
-            $waUrl = "https://wa.me/6281234567890?text=" . urlencode($waMessage);
+            $waUrl = "https://wa.me/6285284693063?text=" . urlencode($waMessage);
         @endphp
 
         <div class="space-y-3">

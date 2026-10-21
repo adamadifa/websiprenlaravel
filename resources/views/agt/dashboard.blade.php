@@ -319,7 +319,7 @@
                                  "- Nama: {$pendaftaranAgt->nama_lengkap}\n" .
                                  "- Cabang Lomba: {$daftarLombaText}\n\n" .
                                  "Ingin konfirmasi pendaftaran. Terima kasih!";
-                    $waUrl = "https://wa.me/6281234567890?text=" . urlencode($waMessage);
+                    $waUrl = "https://wa.me/6285284693063?text=" . urlencode($waMessage);
                 @endphp
                 <div class="pt-3 space-y-2">
                     <a href="{{ $waUrl }}" target="_blank" class="w-full btn-luxury-gold py-3 px-4 rounded-2xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-lg active:scale-95">
