@@ -306,6 +306,17 @@ class AgtLandingController extends Controller
      */
     public function storeRegister(Request $request)
     {
+        // Hitung total biaya pendaftaran dari cabang perlombaan yang dipilih
+        $totalBiaya = 0;
+        if ($request->has('lomba_ids') && is_array($request->lomba_ids)) {
+            $totalBiaya = \App\Models\Perlombaan::whereIn('id', $request->lomba_ids)->sum('biaya_pendaftaran') ?? 0;
+        }
+
+        // Jika perlombaan yang dipilih ada biaya pendaftaran (> 0), bukti pembayaran wajib dilampirkan
+        $buktiRule = ($totalBiaya > 0)
+            ? 'required|file|mimes:jpg,jpeg,png,webp,pdf|max:5120'
+            : 'nullable|file|mimes:jpg,jpeg,png,webp,pdf|max:5120';
+
         $request->validate([
             'nama_lengkap' => 'required|string|max:255',
             'id_jenjang' => 'required|exists:jenjang_pendidikan,id',
@@ -314,7 +325,7 @@ class AgtLandingController extends Controller
             'password' => 'required|string|min:6|confirmed',
             'alamat_sekolah' => 'nullable|string',
             'alamat_rumah' => 'nullable|string',
-            'bukti_pembayaran' => 'nullable|file|mimes:jpg,jpeg,png,webp,pdf|max:5120',
+            'bukti_pembayaran' => $buktiRule,
             'lomba_ids' => 'required|array|min:1',
             'lomba_ids.*' => 'exists:perlombaan,id'
         ], [
@@ -325,6 +336,8 @@ class AgtLandingController extends Controller
             'password.required' => 'Password wajib diisi untuk akun login Anda.',
             'password.min' => 'Password minimal terdiri dari 6 karakter.',
             'password.confirmed' => 'Konfirmasi password tidak cocok.',
+            'bukti_pembayaran.required' => 'Perlombaan yang Anda pilih memiliki biaya pendaftaran. Bukti transfer / pembayaran wajib dilampirkan dan tidak boleh dikosongkan.',
+            'bukti_pembayaran.file' => 'Bukti pembayaran harus berupa file yang valid.',
             'bukti_pembayaran.mimes' => 'Format file bukti pembayaran harus JPG, PNG, WEBP, atau PDF.',
             'bukti_pembayaran.max' => 'Ukuran file bukti pembayaran maksimal 5MB.',
             'lomba_ids.required' => 'Pilih minimal 1 cabang perlombaan yang diikuti.',

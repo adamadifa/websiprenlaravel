@@ -154,6 +154,14 @@
                   document.getElementById('step-2')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
                   return;
               }
+              if (this.totalBiaya > 0) {
+                  const fileInput = document.querySelector('input[name="bukti_pembayaran"]');
+                  if (!fileInput || !fileInput.files || fileInput.files.length === 0) {
+                      this.validationError = 'Perlombaan yang Anda pilih memiliki biaya pendaftaran (' + this.formatRupiah(this.totalBiaya) + '). Bukti transfer / pembayaran wajib dilampirkan dan tidak boleh dikosongkan.';
+                      document.getElementById('section-bukti-pembayaran')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                      return;
+                  }
+              }
               this.validationError = '';
               event.target.closest('form').submit();
           }
@@ -447,21 +455,43 @@
                                   class="w-full py-2.5 px-3.5 rounded-xl bg-[#1a0206]/80 border border-amber-500/20 text-white placeholder-stone-500 focus:border-amber-400 focus:ring-1 focus:ring-amber-400 outline-none transition text-xs">{{ old('alamat_rumah') }}</textarea>
                     </div>
 
-                    <!-- Upload Bukti Pembayaran (Opsional) -->
-                    <div class="space-y-2 sm:col-span-2 pt-3 border-t border-white/10" x-data="{ fileName: '' }">
+                    <!-- Upload Bukti Pembayaran -->
+                    <div id="section-bukti-pembayaran" 
+                         class="space-y-2 sm:col-span-2 pt-3 border-t border-white/10" 
+                         x-data="{ fileName: '' }">
                         <div class="flex items-center justify-between">
                             <label class="font-semibold text-stone-200 flex items-center gap-1.5">
                                 <i class="ti ti-receipt text-amber-400 text-sm"></i>
                                 <span>Bukti Transfer / Pembayaran Pendaftaran</span>
-                                <span class="text-stone-400 font-normal text-[11px]">(Opsional)</span>
+                                <template x-if="totalBiaya > 0">
+                                    <span class="text-rose-400 font-bold text-[11px]">* (Wajib Dilampirkan)</span>
+                                </template>
+                                <template x-if="totalBiaya <= 0">
+                                    <span class="text-stone-400 font-normal text-[11px]">(Opsional - Lomba Gratis)</span>
+                                </template>
                             </label>
                             <span class="text-[10px] text-amber-400/80">JPG, PNG, JPEG, PDF maks 5MB</span>
                         </div>
-                        <div class="relative border-2 border-dashed border-amber-500/30 hover:border-amber-400/60 rounded-2xl p-4 bg-black/40 hover:bg-black/60 transition text-center group cursor-pointer">
+
+                        <!-- Callout info jika lomba berbayar -->
+                        <div x-show="totalBiaya > 0" 
+                             class="p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-200 text-xs flex items-start gap-2.5">
+                            <i class="ti ti-info-circle text-amber-400 text-base flex-shrink-0 mt-0.5"></i>
+                            <div>
+                                <p class="font-bold text-amber-300">Biaya Pendaftaran: <span x-text="formatRupiah(totalBiaya)"></span></p>
+                                <p class="text-[11px] text-stone-300 mt-0.5">
+                                    Perlombaan yang Anda pilih memiliki biaya pendaftaran. Mohon lampirkan foto struk atau tangkapan layar bukti transfer pembayaran sebelum mengirim formulir pendaftaran.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="relative border-2 border-dashed rounded-2xl p-4 bg-black/40 hover:bg-black/60 transition text-center group cursor-pointer"
+                             :class="totalBiaya > 0 && !fileName ? 'border-amber-400/60 hover:border-amber-400' : 'border-amber-500/30 hover:border-amber-400/60'">
                             <input type="file" 
                                    name="bukti_pembayaran" 
                                    accept="image/*,.pdf" 
-                                   @change="fileName = $event.target.files.length ? $event.target.files[0].name : ''"
+                                   :required="totalBiaya > 0"
+                                   @change="fileName = $event.target.files.length ? $event.target.files[0].name : ''; if(fileName) validationError = ''"
                                    class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
                             <div class="flex flex-col items-center justify-center gap-1.5 pointer-events-none">
                                 <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-300 flex items-center justify-center text-lg group-hover:scale-110 transition">
@@ -472,7 +502,8 @@
                                     <span x-show="!fileName">Pilih atau seret file struk / transfer pembayaran ke sini</span>
                                     <span x-show="fileName" class="text-amber-300 font-semibold" style="display: none;" x-text="fileName"></span>
                                 </div>
-                                <p class="text-[10px] text-stone-500" x-show="!fileName">Bisa diunggah sekarang atau menyusul melalui konfirmasi WhatsApp</p>
+                                <p class="text-[10px] text-stone-500" x-show="!fileName && totalBiaya <= 0">Bisa diunggah sekarang atau menyusul melalui konfirmasi WhatsApp</p>
+                                <p class="text-[10px] text-amber-400/90 font-medium" x-show="!fileName && totalBiaya > 0">* Wajib dilampirkan sebelum mengirimkan formulir pendaftaran</p>
                             </div>
                         </div>
                     </div>
