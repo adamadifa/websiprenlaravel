@@ -89,6 +89,8 @@
           allPerlombaan: {{ json_encode($perlombaanList) }},
           selectedJenjang: '{{ $preselectedJenjang ?? '' }}',
           selectedLombaIds: {{ json_encode($preselectedLomba ? [(int)$preselectedLomba] : []) }},
+          fileName: '',
+          hasBuktiFile: false,
           
           init() {
               if (this.selectedLombaIds.length > 0 && !this.selectedJenjang) {
@@ -116,6 +118,7 @@
               } else {
                   this.selectedLombaIds.push(numId);
               }
+              this.validationError = '';
           },
 
           // Saat user mengganti jenjang
@@ -125,6 +128,7 @@
                   const p = this.allPerlombaan.find(item => item.id == id);
                   return p && p.id_jenjang == this.selectedJenjang;
               });
+              this.validationError = '';
           },
 
           // Hitung total biaya pendaftaran dari lomba yang dipilih
@@ -154,13 +158,10 @@
                   document.getElementById('step-2')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
                   return;
               }
-              if (this.totalBiaya > 0) {
-                  const fileInput = document.querySelector('input[name="bukti_pembayaran"]');
-                  if (!fileInput || !fileInput.files || fileInput.files.length === 0) {
-                      this.validationError = 'Perlombaan yang Anda pilih memiliki biaya pendaftaran (' + this.formatRupiah(this.totalBiaya) + '). Bukti transfer / pembayaran wajib dilampirkan dan tidak boleh dikosongkan.';
-                      document.getElementById('section-bukti-pembayaran')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                      return;
-                  }
+              if (this.totalBiaya > 0 && !this.hasBuktiFile) {
+                  this.validationError = 'Perlombaan yang Anda pilih memiliki biaya pendaftaran (' + this.formatRupiah(this.totalBiaya) + '). Bukti transfer / pembayaran wajib dilampirkan dan tidak boleh dikosongkan.';
+                  document.getElementById('section-bukti-pembayaran')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                  return;
               }
               this.validationError = '';
               event.target.closest('form').submit();
@@ -457,8 +458,7 @@
 
                     <!-- Upload Bukti Pembayaran -->
                     <div id="section-bukti-pembayaran" 
-                         class="space-y-2 sm:col-span-2 pt-3 border-t border-white/10" 
-                         x-data="{ fileName: '' }">
+                         class="space-y-2 sm:col-span-2 pt-3 border-t border-white/10">
                         <div class="flex items-center justify-between">
                             <label class="font-semibold text-stone-200 flex items-center gap-1.5">
                                 <i class="ti ti-receipt text-amber-400 text-sm"></i>
@@ -491,7 +491,7 @@
                                    name="bukti_pembayaran" 
                                    accept="image/*,.pdf" 
                                    :required="totalBiaya > 0"
-                                   @change="fileName = $event.target.files.length ? $event.target.files[0].name : ''; if(fileName) validationError = ''"
+                                   @change="hasBuktiFile = $event.target.files.length > 0; fileName = hasBuktiFile ? $event.target.files[0].name : ''; if(hasBuktiFile) validationError = ''"
                                    class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
                             <div class="flex flex-col items-center justify-center gap-1.5 pointer-events-none">
                                 <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-300 flex items-center justify-center text-lg group-hover:scale-110 transition">
