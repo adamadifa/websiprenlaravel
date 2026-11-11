@@ -879,18 +879,15 @@
                         <div class="flex justify-between text-[11px]"><span class="text-stone-400">Hadiah:</span> <span class="text-white" x-text="selectedComp.hadiah"></span></div>
                     </div>
 
-                    <div>
-                        <span class="font-bold text-amber-300 text-[11px] block mb-1">Ketentuan Pokok:</span>
-                        <ul class="space-y-1 text-[11px] text-stone-300 list-disc pl-4">
-                            <template x-for="(j, i) in selectedComp.juknis" :key="i">
-                                <li x-text="j"></li>
-                            </template>
-                        </ul>
+                    <div class="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-center space-y-1.5">
+                        <div class="text-[11px] text-stone-300 leading-relaxed">
+                            Seluruh ketentuan umum, aturan teknis, dan kriteria penilaian dewan juri tercantum lengkap pada dokumen Juknis resmi.
+                        </div>
                     </div>
 
                     <template x-if="selectedComp.juknis_url">
-                        <a :href="selectedComp.juknis_url" target="_blank" class="block w-full py-2 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-center text-xs font-semibold">
-                            <i class="ti ti-download"></i> Unduh Dokumen PDF
+                        <a :href="selectedComp.juknis_url" target="_blank" class="block w-full py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-amber-950 text-center text-xs font-bold shadow-sm transition">
+                            <i class="ti ti-download mr-1"></i> Unduh Juknis Resmi (PDF)
                         </a>
                     </template>
                 </div>

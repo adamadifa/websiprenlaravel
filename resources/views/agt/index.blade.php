@@ -1283,18 +1283,25 @@
                     </div>
                 </div>
 
-                <div>
-                    <h4 class="font-semibold text-amber-400 text-xs uppercase tracking-wider mb-2">
-                        Ketentuan & Kriteria Penilaian:
-                    </h4>
-                    <ul class="space-y-1.5 text-stone-300">
-                        <template x-for="(item, i) in (selectedComp ? selectedComp.juknis : [])" :key="i">
-                            <li class="flex items-start gap-2 bg-black/20 p-2 rounded-lg border border-white/5">
-                                <i class="ti ti-circle-check text-amber-400 text-xs mt-0.5 shrink-0"></i>
-                                <span x-text="item"></span>
-                            </li>
-                        </template>
-                    </ul>
+                <!-- Info Dokumen Juknis Resmi -->
+                <div class="p-4 rounded-xl bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-transparent border border-amber-500/25 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+                    <div class="flex items-start gap-3">
+                        <div class="w-9 h-9 rounded-xl bg-amber-500/15 text-amber-400 flex items-center justify-center text-lg border border-amber-500/30 shrink-0 mt-0.5">
+                            <i class="ti ti-file-text"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white text-xs mb-0.5">Petunjuk Teknis & Kriteria Penilaian</h4>
+                            <p class="text-[11px] text-stone-300/90 leading-relaxed">
+                                Seluruh ketentuan umum, aturan teknis perlombaan, dan kriteria penilaian dewan juri tercantum lengkap pada dokumen Juknis resmi.
+                            </p>
+                        </div>
+                    </div>
+                    <template x-if="selectedComp && selectedComp.juknis_url">
+                        <a :href="selectedComp.juknis_url" target="_blank" download class="px-3.5 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-amber-950 font-bold text-xs transition flex items-center justify-center gap-1.5 shrink-0 shadow-sm whitespace-nowrap">
+                            <i class="ti ti-file-download text-sm"></i>
+                            <span>Unduh Juknis (PDF)</span>
+                        </a>
+                    </template>
                 </div>
 
                 <div class="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-between gap-3 text-xs">
