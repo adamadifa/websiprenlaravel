@@ -1283,6 +1283,18 @@
                     </div>
                 </div>
 
+                <div>
+                    <h4 class="font-semibold text-amber-400 text-xs uppercase tracking-wider mb-2">
+                        Ketentuan & Kriteria Penilaian:
+                    </h4>
+                    <ul class="space-y-1.5 text-stone-300">
+                        <template x-for="(item, i) in (selectedComp ? selectedComp.juknis : [])" :key="i">
+                            <li class="flex items-start gap-2 bg-black/20 p-2 rounded-lg border border-white/5">
+                                <i class="ti ti-circle-check text-amber-400 text-xs mt-0.5 shrink-0"></i>
+                                <span x-text="item"></span>
+                            </li>
+                        </template>
+                    </ul>
                 <!-- Info Dokumen Juknis Resmi -->
                 <div class="p-4 rounded-xl bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-transparent border border-amber-500/25 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
                     <div class="flex items-start gap-3">

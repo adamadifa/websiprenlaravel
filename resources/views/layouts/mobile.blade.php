@@ -47,6 +47,9 @@
         @include('layouts.partials.bottom-nav-mobile')
     @endif
 
+    {{-- Aisah Live Chat Widget (Mobile) --}}
+    @include('layouts.partials.aisah-chat')
+
     <!-- AOS (Animate On Scroll) -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
     <script>

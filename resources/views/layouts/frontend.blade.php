@@ -39,10 +39,8 @@
         @include('layouts.partials.footer')
     </div>
 
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/{{ $pengaturan->telepon ?? '' }}" target="_blank" class="fixed bottom-8 right-8 z-50 w-14 h-14 bg-[#25D366] text-white rounded-2xl flex items-center justify-center shadow-xl shadow-[#25D366]/30 hover:-translate-y-1.5 active:scale-95 transition-all duration-300" aria-label="Hubungi Kami melalui WhatsApp">
-        <i class="ti ti-brand-whatsapp text-3xl"></i>
-    </a>
+    {{-- Aisah Live Chat Widget (menggantikan tombol WhatsApp) --}}
+    @include('layouts.partials.aisah-chat')
 
     <!-- AOS (Animate On Scroll) -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>

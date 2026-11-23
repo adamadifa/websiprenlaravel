@@ -300,13 +300,8 @@
         </div>
     </footer>
 
-    <!-- Floating WhatsApp Action (Identical to TK layout for fast contact on mobile) -->
-    @php
-        $unitWaNum = ($setting && $setting->unit_whatsapp) ? preg_replace('/^0/', '62', preg_replace('/[^0-9]/', '', $setting->unit_whatsapp)) : ($pengaturan->telepon ?? '081223344556');
-    @endphp
-    <a href="https://wa.me/{{ $unitWaNum }}?text=Halo%20Admin%20SDIT%20Al-Amin,%20saya%20ingin%20tanya%20seputar%20pendaftaran%20santri%20baru" target="_blank" class="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 w-12 h-12 sm:w-14 sm:h-14 bg-[#25D366] hover:bg-[#1ebd59] text-white rounded-full flex items-center justify-center shadow-xl hover:scale-110 active:scale-95 transition-all" aria-label="WhatsApp Admin">
-        <i class="ti ti-brand-whatsapp text-2xl sm:text-3xl"></i>
-    </a>
+    {{-- Aisah Live Chat Widget (menggantikan tombol WhatsApp) --}}
+    @include('layouts.partials.aisah-chat')
 
     <!-- AOS Animation Script -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>

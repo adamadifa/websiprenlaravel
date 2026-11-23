@@ -11,7 +11,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        // Exempt Aisah chat API dari CSRF (widget publik, keamanan via session token)
+        $middleware->validateCsrfTokens(except: [
+            'aisah/chat',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

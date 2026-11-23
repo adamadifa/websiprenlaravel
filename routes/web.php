@@ -12,6 +12,7 @@ use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\UnitLandingController;
 use App\Http\Controllers\AgtLandingController;
+use App\Http\Controllers\AisahChatController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -141,5 +142,19 @@ Route::get('/sitemap.xml', function() {
     
     return response($content)
         ->header('Content-Type', 'text/xml');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Aisah Live Chat (Full-Screen Page & API Proxy)
+|--------------------------------------------------------------------------
+*/
+Route::get('/aisah', [AisahChatController::class, 'page'])->name('aisah.page');
+Route::get('/chat', [AisahChatController::class, 'page'])->name('aisah.chat.page');
+
+Route::prefix('aisah')->name('aisah.')->group(function () {
+    Route::post('/chat', [AisahChatController::class, 'chat'])->name('chat');
+    Route::get('/status', [AisahChatController::class, 'status'])->name('status');
+    Route::get('/history', [AisahChatController::class, 'history'])->name('history');
 });
 
