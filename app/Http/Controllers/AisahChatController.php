@@ -81,7 +81,7 @@ class AisahChatController extends Controller
 
         // 3. Kirim ke Aisah Bot
         $aisahUrl     = rtrim(env('AISAH_BOT_URL', 'http://localhost:3000'), '/');
-        $timeout      = (int) env('AISAH_TIMEOUT', 15);
+        $timeout      = (int) env('AISAH_TIMEOUT', 60);
         $startTime    = microtime(true);
 
         try {
@@ -126,21 +126,12 @@ class AisahChatController extends Controller
         } catch (\Exception $e) {
             Log::error('[AisahChat] Gagal menghubungi Aisah Bot: ' . $e->getMessage());
 
-            // Tetap simpan kegagalan sebagai log message
-            ChatMessage::create([
-                'chat_session_id'  => $session->id,
-                'role'             => 'aisah',
-                'message'          => '[ERROR] Aisah tidak dapat dihubungi: ' . $e->getMessage(),
-                'response_time_ms' => (int) ((microtime(true) - $startTime) * 1000),
-                'created_at'       => now(),
-            ]);
-
             $session->increment('message_count', 1);
             $session->update(['last_active_at' => now()]);
 
             return response()->json([
                 'success' => false,
-                'error'   => 'Aisah sedang tidak dapat dihubungi. Silakan coba lagi atau hubungi kami via WhatsApp.',
+                'error'   => 'Mohon maaf, Aisah sedang membutuhkan waktu sedikit lebih lama untuk merespons. Silakan coba kirim ulang pertanyaan Anda ya Bapak/Ibu.',
                 'session_token' => $sessionToken,
             ], 503);
         }
