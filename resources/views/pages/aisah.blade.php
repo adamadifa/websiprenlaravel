@@ -726,6 +726,15 @@
             html = html.replace(/\*(.*?)\*/g, '<strong>$1</strong>');
             // Bullet points
             html = html.replace(/^• (.*?)$/gm, '<div style="display:flex;gap:6px;margin:2px 0;"><span style="color:#16a34a;">•</span><span>$1</span></div>');
+            // Gambar / Brosur URL (jpg, jpeg, png, webp)
+            html = html.replace(/(https?:\/\/[^\s<]+\.(?:jpg|jpeg|png|webp))/gi, function(url) {
+                return '<div style="margin:12px 0;">' +
+                    '<a href="' + url + '" target="_blank" rel="noopener noreferrer">' +
+                    '<img src="' + url + '" alt="Brosur Rincian Biaya" style="max-width:100%;max-height:300px;border-radius:14px;box-shadow:0 6px 18px rgba(0,0,0,0.12);display:block;cursor:pointer;border:1px solid #e2e8f0;transition:transform 0.2s ease;" onmouseover="this.style.transform=\'scale(1.02)\'" onmouseout="this.style.transform=\'scale(1)\'" loading="lazy">' +
+                    '</a>' +
+                    '<span style="display:inline-flex;align-items:center;gap:4px;font-size:0.75rem;color:#16a34a;margin-top:6px;font-weight:600;"><i class="ti ti-zoom-in"></i> Klik gambar untuk memperbesar</span>' +
+                    '</div>';
+            });
             return html;
         }
 

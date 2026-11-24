@@ -312,9 +312,29 @@
             ? '<div class="text-xs text-gray-400 mt-1 mr-1 text-right">Kamu · ' + time + '</div>'
             : '<div class="text-xs text-gray-400 mt-1 ml-1">Aisah' + (provider ? ' · ' + provider : '') + ' · ' + time + '</div>';
 
-        wrap.innerHTML = avatar + '<div class="max-w-[82%]"><div class="' + bubbleClass + '" ' + bubbleStyle + '>' + esc(text) + '</div>' + meta + '</div>';
+        wrap.innerHTML = avatar + '<div class="max-w-[82%]"><div class="' + bubbleClass + '" ' + bubbleStyle + '>' + formatBubbleText(text, isUser) + '</div>' + meta + '</div>';
         container.appendChild(wrap);
         scrollToBottom();
+    }
+
+    function formatBubbleText(text, isUser) {
+        var html = esc(text);
+        if (isUser) return html;
+
+        // Bold *text*
+        html = html.replace(/\*(.*?)\*/g, '<strong>$1</strong>');
+        // Bullet points
+        html = html.replace(/^• (.*?)$/gm, '<div style="display:flex;gap:5px;margin:2px 0;"><span style="color:#16a34a;">•</span><span>$1</span></div>');
+        // Images (jpg, jpeg, png, webp)
+        html = html.replace(/(https?:\/\/[^\s<]+\.(?:jpg|jpeg|png|webp))/gi, function(url) {
+            return '<div style="margin:8px 0;">' +
+                '<a href="' + url + '" target="_blank" rel="noopener noreferrer">' +
+                '<img src="' + url + '" alt="Brosur Rincian Biaya" style="max-width:100%;max-height:220px;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,0.12);display:block;cursor:pointer;border:1px solid #e2e8f0;" loading="lazy">' +
+                '</a>' +
+                '<span style="display:inline-block;font-size:0.7rem;color:#16a34a;margin-top:4px;font-weight:600;">🔍 Klik gambar untuk memperbesar</span>' +
+                '</div>';
+        });
+        return html;
     }
 
     // ─── Typing indicator ──────────────────────────────────────
