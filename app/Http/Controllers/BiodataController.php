@@ -93,32 +93,47 @@ class BiodataController extends Controller
         $pengaturan = \App\Models\PengaturanUmum::first();
         
         // Prioritas logo: Logo unit masing-masing, fallback ke Logo Pesantren / Pengaturan Umum
-        $logoBase64 = '';
-        $logoPath = null;
-
-        if (!empty($pendaftaran->logo_unit)) {
-            $unitLogoPath = base_path('../siprenpas/public/storage/' . $pendaftaran->logo_unit);
-            if (file_exists($unitLogoPath)) {
-                $logoPath = $unitLogoPath;
-            }
-        }
-
-        if (!$logoPath && !empty($pengaturan->logo)) {
-            $genLogoPath = base_path('../siprenpas/public/storage/' . $pengaturan->logo);
-            if (file_exists($genLogoPath)) {
-                $logoPath = $genLogoPath;
-            }
-        }
-
-        if ($logoPath && file_exists($logoPath)) {
-            $logoData = base64_encode(file_get_contents($logoPath));
-            $logoBase64 = 'data:image/' . pathinfo($logoPath, PATHINFO_EXTENSION) . ';base64,' . $logoData;
-        }
+        $logoBase64 = $this->resolveLogoBase64($pendaftaran, $pengaturan);
 
         $pdf = Pdf::loadView('pages.dashboard.cetak_biodata', compact('pendaftaran', 'pengaturan', 'logoBase64'));
         $pdf->setPaper('a4', 'portrait');
 
         return $pdf->stream('formulir-pendaftaran-' . $pendaftaran->no_register . '.pdf');
+    }
+
+    /**
+     * Mengambil file logo dari URL admin (ADMIN_URL di .env) dan mengonversinya menjadi base64 untuk DomPDF.
+     */
+    private function resolveLogoBase64($pendaftaran, $pengaturan)
+    {
+        $logoCandidates = array_filter([
+            $pendaftaran->logo_unit ?? null,
+            $pengaturan->logo ?? null,
+        ]);
+
+        $adminUrl = rtrim(config('app.admin_url', ''), '/');
+
+        foreach ($logoCandidates as $rawPath) {
+            $imageUrl = filter_var($rawPath, FILTER_VALIDATE_URL)
+                ? $rawPath
+                : ($adminUrl ? "{$adminUrl}/storage/" . ltrim(preg_replace('#^/?storage/#', '', $rawPath), '/') : '');
+
+            if (empty($imageUrl)) {
+                continue;
+            }
+
+            try {
+                $response = \Illuminate\Support\Facades\Http::timeout(5)->withoutVerifying()->get($imageUrl);
+                if ($response->successful()) {
+                    $mime = $response->header('Content-Type') ?: 'image/png';
+                    return 'data:' . $mime . ';base64,' . base64_encode($response->body());
+                }
+            } catch (\Throwable $e) {
+                continue;
+            }
+        }
+
+        return '';
     }
 
     public function getRegency(Request $request)
