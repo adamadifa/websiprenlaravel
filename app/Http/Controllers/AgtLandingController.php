@@ -52,7 +52,7 @@ class AgtLandingController extends Controller
                 $tNama = strtolower($item->jenis_perlombaan);
                 if ((float) $item->biaya_pendaftaran > 0) {
                     if (str_contains($tNama, 'matematika')) {
-                        $feeText .= ' / group (3 orang)';
+                        $feeText .= ' / group (4 orang)';
                     } elseif (str_contains($tNama, 'archery') || str_contains($tNama, 'panah')) {
                         $feeText .= ' / orang';
                     }
@@ -68,7 +68,7 @@ class AgtLandingController extends Controller
                     'color' => 'amber',
                     'poster' => $item->poster_url,
                     'description' => 'Kompetisi ' . $item->jenis_perlombaan . ' untuk jenjang ' . $jenjangLabel . ' dalam ajang Al Amin Got Talent 2026.',
-                    'target_peserta' => str_contains($tNama, 'matematika') ? $jenjangLabel . ' (Group 3 Orang)' : $jenjangLabel . ' (Putra/Putri)',
+                    'target_peserta' => str_contains($tNama, 'matematika') ? $jenjangLabel . ' (Group 4 Orang)' : $jenjangLabel . ' (Putra/Putri)',
                     'fee' => $feeText,
                     'quota' => 'Tersedia',
                     'hadiah' => 'Trophy + Uang Pembinaan + Golden Ticket Beasiswa',
